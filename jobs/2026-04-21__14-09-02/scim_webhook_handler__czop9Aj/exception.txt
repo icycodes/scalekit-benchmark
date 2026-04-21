@@ -1,0 +1,63 @@
+Traceback (most recent call last):
+  File "/mnt/E/Icy/data/run-harbor/.venv/lib/python3.12/site-packages/harbor/trial/trial.py", line 547, in run
+    await self._execute_agent()
+  File "/mnt/E/Icy/data/run-harbor/.venv/lib/python3.12/site-packages/harbor/trial/trial.py", line 285, in _execute_agent
+    await asyncio.wait_for(
+  File "/home/icy/snap/code/234/.local/share/uv/python/cpython-3.12.10-linux-x86_64-gnu/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/mnt/E/Icy/data/run-harbor/.venv/lib/python3.12/site-packages/harbor/agents/installed/base.py", line 41, in wrapper
+    return await fn(self, instruction, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/E/Icy/data/run-harbor/agents/pochi.py", line 241, in run
+    await self.exec_as_agent(
+  File "/mnt/E/Icy/data/run-harbor/.venv/lib/python3.12/site-packages/harbor/agents/installed/base.py", line 379, in exec_as_agent
+    return await self._exec(
+           ^^^^^^^^^^^^^^^^^
+  File "/mnt/E/Icy/data/run-harbor/.venv/lib/python3.12/site-packages/harbor/agents/installed/base.py", line 342, in _exec
+    raise NonZeroAgentExitCodeError(
+harbor.agents.installed.base.NonZeroAgentExitCodeError: Command failed (exit 143): export PATH="$HOME/.pochi/bin:$PATH"; pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement SCIM Webhook Handler with Signature Verification
+
+## Background
+Scalekit sends webhooks for SCIM events (e.g., user created, updated, or deleted). To ensure these requests are authentic, you must verify the webhook signature using your webhook secret.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-webhook`.
+- Implement a POST `/webhook` endpoint.
+- The endpoint should:
+    - Receive the raw request body.
+    - Extract the `X-Scalekit-Signature` header.
+    - Use the Scalekit SDK's `scalekit.webhooks.verifySignature()` method to verify the payload.
+    - The webhook secret is provided via the `SCALEKIT_WEBHOOK_SECRET` environment variable.
+    - If verification succeeds, log the event type to `/home/user/scalekit-webhook/events.log`.
+    - Return a 200 status code on success, and 401 on verification failure.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-webhook`.
+2. Initialize a Node.js project and install `express`, `body-parser`, and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Sets up Express with `body-parser.raw({ type: 'application/json' })` to get the raw body.
+    - Initializes the `Scalekit` client.
+    - Implements the `/webhook` route.
+    - Uses `scalekit.webhooks.verifySignature(rawBody, signature, process.env.SCALEKIT_WEBHOOK_SECRET)`.
+    - Appends the event type (e.g., `user.created`) to `/home/user/scalekit-webhook/events.log`.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-webhook
+- Events log: /home/user/scalekit-webhook/events.log
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+stdout: [37m2026-04-21 06:13:50.981[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37mnative:1[39m[0m[0m[1m[37m	Pochi[39m[22m[0m[0m	pochi v0.6.8
+[37m2026-04-21 06:13:51.171[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:519633[39m[0m[0m[1m[37m	loadAgents[39m[22m[0m[0m	Loaded 6 custom agents (6 valid, 0 invalid)
+[37m2026-04-21 06:13:51.172[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:519634[39m[0m[0m[1m[37m	loadSkills[39m[22m[0m[0m	Loaded 2 skills (2 valid, 0 invalid)
+[37m2026-04-21 06:13:51.195[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:444677[39m[0m[0m[1m[37m	PochiVendor[39m[22m[0m[0m	JWT is expiring or missing, fetching a new one
+[37m2026-04-21 06:13:54.569[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:416517[39m[0m[0m[1m[37m	MCPHub[39m[22m[0m[0m	MCP servers configuration changed via signal:
+[37m2026-04-21 06:13:54.569[39m[0m[0m	[32m[1mDEBUG ... [truncated]
+stderr: None

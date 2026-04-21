@@ -1,0 +1,402 @@
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 5ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 2 items
+
+tests/test_final_state.py .F                                             [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_verify_org_via_sdk ____________________________
+
+    def test_verify_org_via_sdk():
+        with open(ORG_ID_FILE, "r") as f:
+            org_id = f.read().strip()
+    
+        # Create a small verification script to fetch org details
+        verify_script = f"""
+    const {{ Scalekit }} = require('@scalekit-sdk/node');
+    const scalekit = new Scalekit(
+      process.env.SCALEKIT_ENVIRONMENT_URL,
+      process.env.SCALEKIT_CLIENT_ID,
+      process.env.SCALEKIT_CLIENT_SECRET
+    );
+    
+    async function verify() {{
+      try {{
+        const org = await scalekit.organization.getOrganization('{org_id}');
+        console.log(JSON.stringify(org));
+      }} catch (err) {{
+        console.error(err);
+        process.exit(1);
+      }}
+    }}
+    verify();
+    """
+        verify_script_path = os.path.join(PROJECT_DIR, "verify_org.js")
+        with open(verify_script_path, "w") as f:
+            f.write(verify_script)
+    
+        result = subprocess.run(["node", "verify_org.js"], capture_output=True, text=True, cwd=PROJECT_DIR)
+>       assert result.returncode == 0, f"Verification script failed: {result.stderr}"
+E       AssertionError: Verification script failed: AxiosError: Request failed with status code 503
+E             at settle (/home/user/scalekit-orgs/node_modules/axios/dist/node/axios.cjs:1969:12)
+E             at IncomingMessage.handleStreamEnd (/home/user/scalekit-orgs/node_modules/axios/dist/node/axios.cjs:3352:11)
+E             at IncomingMessage.emit (node:events:520:35)
+E             at endReadableNT (node:internal/streams/readable:1729:12)
+E             at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+E           isAxiosError: true,
+E           code: 'ERR_BAD_RESPONSE',
+E           config: {
+E             transitional: {
+E               silentJSONParsing: true,
+E               forcedJSONParsing: true,
+E               clarifyTimeoutError: false,
+E               legacyInterceptorReqResOrdering: true
+E             },
+E             adapter: [ 'xhr', 'http', 'fetch' ],
+E             transformRequest: [ [Function: transformRequest] ],
+E             transformResponse: [ [Function: transformResponse] ],
+E             timeout: 0,
+E             xsrfCookieName: 'XSRF-TOKEN',
+E             xsrfHeaderName: 'X-XSRF-TOKEN',
+E             maxContentLength: -1,
+E             maxBodyLength: -1,
+E             env: { FormData: [Function], Blob: [class Blob] },
+E             validateStatus: [Function: validateStatus],
+E             headers: Object [AxiosHeaders] {
+E               Accept: 'application/json, text/plain, */*',
+E               'Content-Type': 'application/x-www-form-urlencoded',
+E               'user-agent': 'Scalekit-Node/2.5.1 Node/v24.14.1 (linux; x64)',
+E               'x-sdk-version': 'Scalekit-Node/2.5.1',
+E               'x-api-version': '20260402',
+E               'Content-Length': '146',
+E               'Accept-Encoding': 'gzip, compress, deflate, br'
+E             },
+E             baseURL: 'https://tabbyml.scalekit.dev',
+E             skipAuth: true,
+E             method: 'post',
+E             url: 'oauth/token',
+E             data: 'grant_type=client_credentials&client_id=skc_121384796071921418&client_secret=(*****SECRET_LEAK_DETECTED*****)',
+E             allowAbsoluteUrls: true
+E           },
+E           request: <ref *1> ClientRequest {
+E             _events: [Object: null prototype] {
+E               abort: [Function (anonymous)],
+E               aborted: [Function (anonymous)],
+E               connect: [Function (anonymous)],
+E               error: [Function (anonymous)],
+E               socket: [Function (anonymous)],
+E               timeout: [Function (anonymous)],
+E               finish: [Function: requestOnFinish]
+E             },
+E             _eventsCount: 7,
+E             _maxListeners: undefined,
+E             outputData: [],
+E             outputSize: 0,
+E             writable: true,
+E             destroyed: false,
+E             _last: false,
+E             chunkedEncoding: false,
+E             shouldKeepAlive: false,
+E             maxRequestsOnConnectionReached: false,
+E             _defaultKeepAlive: true,
+E             useChunkedEncodingByDefault: true,
+E             sendDate: false,
+E             _removedConnection: false,
+E             _removedContLen: false,
+E             _removedTE: false,
+E             strictContentLength: false,
+E             _contentLength: 146,
+E             _hasBody: true,
+E             _trailer: '',
+E             finished: true,
+E             _headerSent: true,
+E             _closed: false,
+E             _header: 'POST https://tabbyml.scalekit.dev/oauth/token HTTP/1.1\r\n' +
+E               'Accept: application/json, text/plain, */*\r\n' +
+E               'Content-Type: application/x-www-form-urlencoded\r\n' +
+E               'user-agent: Scalekit-Node/2.5.1 Node/v24.14.1 (linux; x64)\r\n' +
+E               'x-sdk-version: Scalekit-Node/2.5.1\r\n' +
+E               'x-api-version: 20260402\r\n' +
+E               'Content-Length: 146\r\n' +
+E               'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+E               'host: tabbyml.scalekit.dev\r\n' +
+E               'Connection: keep-alive\r\n' +
+E               '\r\n',
+E             _keepAliveTimeout: 0,
+E             _onPendingData: [Function: nop],
+E             agent: Agent {
+E               _events: [Object: null prototype],
+E               _eventsCount: 2,
+E               _maxListeners: undefined,
+E               options: [Object: null prototype],
+E               defaultPort: 80,
+E               protocol: 'http:',
+E               requests: [Object: null prototype] {},
+E               sockets: [Object: null prototype],
+E               freeSockets: [Object: null prototype] {},
+E               keepAliveMsecs: 1000,
+E               keepAlive: true,
+E               maxSockets: Infinity,
+E               maxFreeSockets: 256,
+E               scheduling: 'lifo',
+E               maxTotalSockets: Infinity,
+E               totalSocketCount: 1,
+E               agentKeepAliveTimeoutBuffer: 1000,
+E               Symbol(shapeMode): false,
+E               Symbol(kCapture): false
+E             },
+E             socketPath: undefined,
+E             method: 'POST',
+E             maxHeaderSize: undefined,
+E             insecureHTTPParser: undefined,
+E             joinDuplicateHeaders: undefined,
+E             path: 'https://tabbyml.scalekit.dev/oauth/token',
+E             _ended: true,
+E             res: IncomingMessage {
+E               _events: [Object],
+E               _readableState: [ReadableState],
+E               _maxListeners: undefined,
+E               socket: [Socket],
+E               httpVersionMajor: 1,
+E               httpVersionMinor: 1,
+E               httpVersion: '1.1',
+E               complete: true,
+E               rawHeaders: [Array],
+E               rawTrailers: [],
+E               joinDuplicateHeaders: undefined,
+E               aborted: false,
+E               upgrade: false,
+E               url: '',
+E               method: null,
+E               statusCode: 503,
+E               statusMessage: 'Service Unavailable',
+E               client: [Socket],
+E               _consuming: false,
+E               _dumped: false,
+E               req: [Circular *1],
+E               _eventsCount: 4,
+E               responseUrl: 'https://tabbyml.scalekit.dev/oauth/token',
+E               redirects: [],
+E               Symbol(shapeMode): true,
+E               Symbol(kCapture): false,
+E               Symbol(kHeaders): [Object],
+E               Symbol(kHeadersCount): 6,
+E               Symbol(kTrailers): null,
+E               Symbol(kTrailersCount): 0
+E             },
+E             aborted: false,
+E             timeoutCb: [Function: emitRequestTimeout],
+E             upgradeOrConnect: false,
+E             parser: null,
+E             maxHeadersCount: null,
+E             reusedSocket: false,
+E             host: '172.17.0.1',
+E             protocol: 'http:',
+E             _redirectable: Writable {
+E               _events: [Object],
+E               _writableState: [WritableState],
+E               _maxListeners: undefined,
+E               _options: [Object],
+E               _ended: true,
+E               _ending: true,
+E               _redirectCount: 0,
+E               _redirects: [],
+E               _requestBodyLength: 146,
+E               _requestBodyBuffers: [],
+E               _eventsCount: 4,
+E               _onNativeResponse: [Function (anonymous)],
+E               _headerFilter: /^(?:Authorization|Proxy-Authorization|Cookie)$/i,
+E               _currentRequest: [Circular *1],
+E               _currentUrl: 'https://tabbyml.scalekit.dev/oauth/token',
+E               _timeout: null,
+E               Symbol(shapeMode): true,
+E               Symbol(kCapture): false
+E             },
+E             Symbol(shapeMode): false,
+E             Symbol(kCapture): false,
+E             Symbol(kBytesWritten): 0,
+E             Symbol(kNeedDrain): false,
+E             Symbol(corked): 0,
+E             Symbol(kChunkedBuffer): [],
+E             Symbol(kChunkedLength): 0,
+E             Symbol(kSocket): Socket {
+E               connecting: false,
+E               _hadError: false,
+E               _parent: null,
+E               _host: null,
+E               _closeAfterHandlingError: false,
+E               _events: [Object],
+E               _readableState: [ReadableState],
+E               _writableState: [WritableState],
+E               allowHalfOpen: false,
+E               _maxListeners: undefined,
+E               _eventsCount: 7,
+E               _sockname: null,
+E               _pendingData: null,
+E               _pendingEncoding: '',
+E               server: null,
+E               _server: null,
+E               timeout: 0,
+E               parser: null,
+E               _httpMessage: [Circular *1],
+E               Symbol(async_id_symbol): 29,
+E               Symbol(kHandle): [TCP],
+E               Symbol(lastWriteQueueSize): 0,
+E               Symbol(timeout): Timeout {
+E                 _idleTimeout: -1,
+E                 _idlePrev: null,
+E                 _idleNext: null,
+E                 _idleStart: 1887,
+E                 _onTimeout: null,
+E                 _timerArgs: undefined,
+E                 _repeat: null,
+E                 _destroyed: true,
+E                 Symbol(refed): false,
+E                 Symbol(kHasPrimitive): false,
+E                 Symbol(asyncId): 28,
+E                 Symbol(triggerId): 0,
+E                 Symbol(kAsyncContextFrame): undefined
+E               },
+E               Symbol(kBuffer): null,
+E               Symbol(kBufferCb): null,
+E               Symbol(kBufferGen): null,
+E               Symbol(shapeMode): true,
+E               Symbol(kCapture): false,
+E               Symbol(kSetNoDelay): true,
+E               Symbol(kSetKeepAlive): true,
+E               Symbol(kSetKeepAliveInitialDelay): 60,
+E               Symbol(kBytesRead): 0,
+E               Symbol(kBytesWritten): 0
+E             },
+E             Symbol(kOutHeaders): [Object: null prototype] {
+E               accept: [Array],
+E               'content-type': [Array],
+E               'user-agent': [Array],
+E               'x-sdk-version': [Array],
+E               'x-api-version': [Array],
+E               'content-length': [Array],
+E               'accept-encoding': [Array],
+E               host: [Array]
+E             },
+E             Symbol(errored): null,
+E             Symbol(kHighWaterMark): 65536,
+E             Symbol(kRejectNonStandardBodyWrites): false,
+E             Symbol(kUniqueHeaders): null
+E           },
+E           response: {
+E             status: 503,
+E             statusText: 'Service Unavailable',
+E             headers: Object [AxiosHeaders] {
+E               connection: 'close',
+E               'proxy-connection': 'close',
+E               'content-length': '0'
+E             },
+E             config: {
+E               transitional: [Object],
+E               adapter: [Array],
+E               transformRequest: [Array],
+E               transformResponse: [Array],
+E               timeout: 0,
+E               xsrfCookieName: 'XSRF-TOKEN',
+E               xsrfHeaderName: 'X-XSRF-TOKEN',
+E               maxContentLength: -1,
+E               maxBodyLength: -1,
+E               env: [Object],
+E               validateStatus: [Function: validateStatus],
+E               headers: [Object [AxiosHeaders]],
+E               baseURL: 'https://tabbyml.scalekit.dev',
+E               skipAuth: true,
+E               method: 'post',
+E               url: 'oauth/token',
+E               data: 'grant_type=client_credentials&client_id=skc_121384796071921418&client_secret=(*****SECRET_LEAK_DETECTED*****)',
+E               allowAbsoluteUrls: true
+E             },
+E             request: <ref *1> ClientRequest {
+E               _events: [Object: null prototype],
+E               _eventsCount: 7,
+E               _maxListeners: undefined,
+E               outputData: [],
+E               outputSize: 0,
+E               writable: true,
+E               destroyed: false,
+E               _last: false,
+E               chunkedEncoding: false,
+E               shouldKeepAlive: false,
+E               maxRequestsOnConnectionReached: false,
+E               _defaultKeepAlive: true,
+E               useChunkedEncodingByDefault: true,
+E               sendDate: false,
+E               _removedConnection: false,
+E               _removedContLen: false,
+E               _removedTE: false,
+E               strictContentLength: false,
+E               _contentLength: 146,
+E               _hasBody: true,
+E               _trailer: '',
+E               finished: true,
+E               _headerSent: true,
+E               _closed: false,
+E               _header: 'POST https://tabbyml.scalekit.dev/oauth/token HTTP/1.1\r\n' +
+E                 'Accept: application/json, text/plain, */*\r\n' +
+E                 'Content-Type: application/x-www-form-urlencoded\r\n' +
+E                 'user-agent: Scalekit-Node/2.5.1 Node/v24.14.1 (linux; x64)\r\n' +
+E                 'x-sdk-version: Scalekit-Node/2.5.1\r\n' +
+E                 'x-api-version: 20260402\r\n' +
+E                 'Content-Length: 146\r\n' +
+E                 'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+E                 'host: tabbyml.scalekit.dev\r\n' +
+E                 'Connection: keep-alive\r\n' +
+E                 '\r\n',
+E               _keepAliveTimeout: 0,
+E               _onPendingData: [Function: nop],
+E               agent: [Agent],
+E               socketPath: undefined,
+E               method: 'POST',
+E               maxHeaderSize: undefined,
+E               insecureHTTPParser: undefined,
+E               joinDuplicateHeaders: undefined,
+E               path: 'https://tabbyml.scalekit.dev/oauth/token',
+E               _ended: true,
+E               res: [IncomingMessage],
+E               aborted: false,
+E               timeoutCb: [Function: emitRequestTimeout],
+E               upgradeOrConnect: false,
+E               parser: null,
+E               maxHeadersCount: null,
+E               reusedSocket: false,
+E               host: '172.17.0.1',
+E               protocol: 'http:',
+E               _redirectable: [Writable],
+E               Symbol(shapeMode): false,
+E               Symbol(kCapture): false,
+E               Symbol(kBytesWritten): 0,
+E               Symbol(kNeedDrain): false,
+E               Symbol(corked): 0,
+E               Symbol(kChunkedBuffer): [],
+E               Symbol(kChunkedLength): 0,
+E               Symbol(kSocket): [Socket],
+E               Symbol(kOutHeaders): [Object: null prototype],
+E               Symbol(errored): null,
+E               Symbol(kHighWaterMark): 65536,
+E               Symbol(kRejectNonStandardBodyWrites): false,
+E               Symbol(kUniqueHeaders): null
+E             },
+E             data: ''
+E           },
+E           status: 503
+E         }
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['node', 'verify_org.js'], returncode=1, stdout='', stderr="AxiosError: Request failed with stat...ectNonStandardBodyWrites): false,\n      Symbol(kUniqueHeaders): null\n    },\n    data: ''\n  },\n  status: 503\n}\n").returncode
+
+tests/test_final_state.py:41: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_org_id_file_exists
+FAILED tests/test_final_state.py::test_verify_org_via_sdk - AssertionError: V...
+========================= 1 failed, 1 passed in 1.98s ==========================

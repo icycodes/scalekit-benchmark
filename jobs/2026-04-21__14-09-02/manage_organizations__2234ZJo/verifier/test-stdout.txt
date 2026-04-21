@@ -1,0 +1,35 @@
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 3ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 2 items
+
+tests/test_final_state.py FF                                             [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_org_id_file_exists ____________________________
+
+    def test_org_id_file_exists():
+>       assert os.path.isfile(ORG_ID_FILE), f"Org ID file {ORG_ID_FILE} does not exist."
+E       AssertionError: Org ID file /home/user/scalekit-orgs/org_id.txt does not exist.
+E       assert False
+E        +  where False = <function isfile at 0x7f756a230220>('/home/user/scalekit-orgs/org_id.txt')
+E        +    where <function isfile at 0x7f756a230220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:10: AssertionError
+___________________________ test_verify_org_via_sdk ____________________________
+
+    def test_verify_org_via_sdk():
+>       with open(ORG_ID_FILE, "r") as f:
+             ^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/user/scalekit-orgs/org_id.txt'
+
+tests/test_final_state.py:13: FileNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_final_state.py::test_org_id_file_exists - AssertionError: O...
+FAILED tests/test_final_state.py::test_verify_org_via_sdk - FileNotFoundError...
+============================== 2 failed in 0.01s ===============================

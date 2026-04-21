@@ -1,0 +1,44 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 0,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1776753009.040138,
+            "stop": 1776753009.0505273
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_portal_link_file_exists",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0002964870036521461,
+                "start": 1776753009.0441208,
+                "stop": 1776753009.0494967,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_portal_link_file_exists():\n>       assert os.path.isfile(LINK_FILE), f\"Portal link file {LINK_FILE} does not exist.\"\nE       AssertionError: Portal link file /home/user/scalekit-admin/portal_link.txt does not exist.\nE       assert False\nE        +  where False = <function isfile at 0x7fab98a0c220>('/home/user/scalekit-admin/portal_link.txt')\nE        +    where <function isfile at 0x7fab98a0c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:8: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_portal_link_content",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.00019592399621615186,
+                "start": 1776753009.0496063,
+                "stop": 1776753009.0504494,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_portal_link_content():\n>       with open(LINK_FILE, \"r\") as f:\n             ^^^^^^^^^^^^^^^^^^^^\nE       FileNotFoundError: [Errno 2] No such file or directory: '/home/user/scalekit-admin/portal_link.txt'\n\ntests/test_final_state.py:11: FileNotFoundError",
+                "message": "The test failed in the call phase"
+            }
+        ]
+    }
+}

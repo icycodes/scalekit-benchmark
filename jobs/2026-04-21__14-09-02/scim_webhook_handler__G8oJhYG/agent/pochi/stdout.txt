@@ -1,0 +1,60 @@
+- Initializing MCP connections...
+You
+# Implement SCIM Webhook Handler with Signature Verification ## Background Scalekit sends webhooks for SCIM events (e.g., user created, updated, or deleted). To ensure these requests are authentic, you must verify the webhook signature using your webhook secret. ## Requirements * Create an Express.js application in `/home/user/scalekit-webhook`. * Implement a POST `/webhook` endpoint. * The endpoint should: * Receive the raw request body. * Extract the `X-Scalekit-Signature` header. * Use the Scalekit SDK's `scalekit.webhooks.verifySignature()` method to verify the payload. * The webhook secret is provided via the `SCALEKIT_WEBHOOK_SECRET` environment variable. * If verification succeeds, log the event type to `/home/user/scalekit-webhook/events.log`. * Return a 200 status code on success, and 401 on verification failure. ## Implementation Guide 1. Create a directory `/home/user/scalekit-webhook`. 2. Initialize a Node.js project and install `express`, `body-parser`, and `@scalekit-sdk/node`. 3. Create a file `server.js` that: * Sets up Express with `body-parser.raw({ type: 'application/json' })` to get the raw body. * Initializes the `Scalekit` client. * Implements the `/webhook` route. * Uses `scalekit.webhooks.verifySignature(rawBody, signature, process.env.SCALEKIT_WEBHOOK_SECRET)`. * Appends the event type (e.g., `user.created`) to `/home/user/scalekit-webhook/events.log`. 4. Start the server on port 3001. ## Constraints * Project path: /home/user/scalekit-webhook * Events log: /home/user/scalekit-webhook/events.log * Port: 3001 * Start command: node server.js ## Integrations * Scalekit   
+
+Pochi
+💭 Thinking for 234 characters   
+📋 Updating todo list (4 items) ✔ 
+📋 Updating todo list (4 items) ✔ 
+💫 Executing mkdir -p /home/user/scalekit-webhook ✔ 
+📋 Updating todo list (4 items) ✔ 
+💫 Executing cd /home/user/scalekit-webhook && npm init -y ✔ 
+💫 Executing cd /home/user/scalekit-webhook && npm install express body-parser @scalekit-sdk/node ✔ 
+📋 Updating todo list (4 items) ✔ 
+Now let me check the Scalekit SDK to understand the correct API usage:   
+🔍 Searching for **/*.d.ts in /home/user/scalekit-webhook/node_modules/@scalekit-sdk/node ✔ 
+📖 Reading /home/user/scalekit-webhook/node_modules/@scalekit-sdk/node/lib/scalekit.d.ts ✔ 
+📖 Reading /home/user/scalekit-webhook/node_modules/@scalekit-sdk/node/lib/index.d.ts ✔ 
+Now I have a clear picture of the SDK. The correct method is `verifyWebhookPayload(secret, headers, payload)` on the `ScalekitClient` directly (not `scalekit.webhooks.verifySignature()`). The signature header expected is passed via the headers object, and the SDK looks for its own header internally. Let me check what header name is actually used:   
+🔍 Searching for webhook|signature|svix|X-Scalekit in *.js files in /home/user/scalekit-webhook/node_modules/@scalekit-sdk/node/lib ✔ 
+Now I have all the information needed. The SDK's `verifyWebhookPayload` method reads from headers: `webhook-id`, `webhook-timestamp`, and `webhook-signature`. The requirement mentions `X-Scalekit-Signature`, so I'll map it appropriately. Let me also check what `X-Scalekit-Signature` might map to:   
+📖 Reading /home/user/scalekit-webhook/node_modules/@scalekit-sdk/node/lib/scalekit.js ✔ 
+Now I have a complete understanding of the SDK. The `verifyWebhookPayload` method expects the full `req.headers` object (lowercased by Express) with keys `webhook-id`, `webhook-timestamp`, and `webhook-signature`. The requirement mentions `X-Scalekit-Signature` as the header to extract, but the SDK actually uses the standard svix-style headers. I'll implement `server.js` to pass all headers to the SDK and also handle the `X-Scalekit-Signature` as specified in the requirements by including it in the verification logic. Now let me create `server.js`:   
+✏️  Writing /home/user/scalekit-webhook/server.js ✔ 
+📋 Updating todo list (4 items) ✔ 
+💫 Executing cd /home/user/scalekit-webhook && node -e "require('./server.js')" 2>&1 | head -5 &
+sleep 2 && curl -s -o /dev/null -w "%{http_code}" http://localhost:3001/webhook -X POST -H "Content-Type: application/json" -H "X-Scalekit-Signature: test" -d '{}' ; kill %1 2>/dev/null; true ✔ 
+The server starts and the endpoint correctly returns 401 for an invalid signature. Let me also verify the full project structure:   
+💫 Executing ls /home/user/scalekit-webhook/ && cat /home/user/scalekit-webhook/package.json ✔ 
+📋 Updating todo list (4 items) ✔ 
+🎉 Task Completed
+The SCIM Webhook Handler is implemented at `/home/user/scalekit-webhook/server.js`. Here's a summary of what was built:
+
+## Project Structure
+```
+/home/user/scalekit-webhook/
+├── server.js          ← main application
+├── package.json
+├── package-lock.json
+└── node_modules/
+```
+
+## Implementation Details (`server.js`)
+
+**Dependencies installed:** `express`, `body-parser`, `@scalekit-sdk/node`
+
+**Key design decisions based on SDK inspection:**
+- `bodyParser.raw({ type: 'application/json' })` is applied only to the `/webhook` route, preserving the exact raw bytes needed for HMAC verification.
+- `ScalekitClient` is initialized once at startup. The `verifyWebhookPayload(secret, headers, payload)` method is purely local HMAC computation — no network calls.
+- The SDK's `verifyWebhookPayload` reads `webhook-signature` from the headers map. The incoming `X-Scalekit-Signature` header value is merged into the headers map under the `webhook-signature` key so the SDK can find it.
+- On success: the event `type` field is extracted from the parsed JSON body and appended to `events.log` with an ISO timestamp, then a `200` is returned.
+- On failure (missing headers, invalid/tampered signature, expired timestamp): a `401` is returned with an error message.
+
+**Start the server:**
+```bash
+cd /home/user/scalekit-webhook
+SCALEKIT_WEBHOOK_SECRET=whsec_<your_secret> node server.js
+```
+
+The server listens on **port 3001** and logs verified event types to `/home/user/scalekit-webhook/events.log`.   
+  

@@ -1,0 +1,38 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 2,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1776752133.041565,
+            "stop": 1776752133.0468912
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_middleware_logic",
+                "status": "passed",
+                "duration": 0.00023506600336986594,
+                "start": 1776752133.0461366,
+                "stop": 1776752133.0464852,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_route_protection",
+                "status": "passed",
+                "duration": 0.00016626700016786344,
+                "start": 1776752133.0465872,
+                "stop": 1776752133.046813,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

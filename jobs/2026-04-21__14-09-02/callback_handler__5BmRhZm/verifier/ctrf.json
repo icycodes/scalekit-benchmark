@@ -1,0 +1,38 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 2,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1776752366.553171,
+            "stop": 1776752366.558421
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_callback_route_implemented",
+                "status": "passed",
+                "duration": 0.00022632000036537647,
+                "start": 1776752366.5576909,
+                "stop": 1776752366.5580268,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_package_json_dependencies",
+                "status": "passed",
+                "duration": 0.00016210000103455968,
+                "start": 1776752366.5581286,
+                "stop": 1776752366.5583506,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

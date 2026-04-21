@@ -1,0 +1,165 @@
+{
+    "id": "5ad0d7ef-5b44-4629-bc45-5a18f707d680",
+    "started_at": "2026-04-21T14:09:02.297518",
+    "finished_at": "2026-04-21T14:39:04.563737",
+    "n_total_trials": 50,
+    "stats": {
+        "n_trials": 50,
+        "n_errors": 2,
+        "evals": {
+            "pochi__gemini-3.1-pro__tasks": {
+                "n_trials": 10,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.4
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "complete_mcp_auth__4mDCUFZ",
+                            "scim_webhook_handler__hB9nns5",
+                            "mcp_metadata_endpoint__c6UQjik",
+                            "login_redirect_flow__c2w3u4x",
+                            "admin_portal_link__Kp3UuVU",
+                            "manage_organizations__v4upfVn"
+                        ],
+                        "1.0": [
+                            "scope_validation_middleware__nwkaCj6",
+                            "callback_handler__ZN4e7X8",
+                            "generate_auth_url__7qR2986",
+                            "initialize_scalekit__N3af9kY"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            },
+            "pochi__gemini-3-flash__tasks": {
+                "n_trials": 10,
+                "n_errors": 1,
+                "metrics": [
+                    {
+                        "mean": 0.4
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "complete_mcp_auth__iWnyjvd",
+                            "scim_webhook_handler__L7eniwk",
+                            "mcp_metadata_endpoint__mHWH2fn",
+                            "login_redirect_flow__hkTgvWK",
+                            "admin_portal_link__M5Vfckt",
+                            "manage_organizations__rfQKoTG"
+                        ],
+                        "1.0": [
+                            "scope_validation_middleware__jBmQpbv",
+                            "callback_handler__5BmRhZm",
+                            "generate_auth_url__2WoM94Q",
+                            "initialize_scalekit__CikVPno"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "admin_portal_link__M5Vfckt"
+                    ]
+                }
+            },
+            "pochi__gpt-5.2-codex__tasks": {
+                "n_trials": 10,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.3
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "complete_mcp_auth__9zsM2FU",
+                            "scim_webhook_handler__GibHZBQ",
+                            "mcp_metadata_endpoint__uy5mHro",
+                            "login_redirect_flow__Cm7rgU7",
+                            "admin_portal_link__AMLZwWX",
+                            "manage_organizations__2234ZJo",
+                            "initialize_scalekit__Wub8TCH"
+                        ],
+                        "1.0": [
+                            "scope_validation_middleware__JZh2d3H",
+                            "callback_handler__HnRgLj6",
+                            "generate_auth_url__xCAkUcg"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            },
+            "pochi__claude-4-6-sonnet__tasks": {
+                "n_trials": 10,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.4
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "complete_mcp_auth__ZjherJX",
+                            "scim_webhook_handler__G8oJhYG",
+                            "mcp_metadata_endpoint__qojVwWD",
+                            "login_redirect_flow__7NHzeg4",
+                            "admin_portal_link__q42SPhf",
+                            "manage_organizations__GbAzCwz"
+                        ],
+                        "1.0": [
+                            "scope_validation_middleware__QmNrHqE",
+                            "callback_handler__zeHHyQK",
+                            "generate_auth_url__sT8uVqU",
+                            "initialize_scalekit__Q38GwZC"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            },
+            "pochi__glm-4.7__tasks": {
+                "n_trials": 10,
+                "n_errors": 1,
+                "metrics": [
+                    {
+                        "mean": 0.3
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "complete_mcp_auth__AAbAvts",
+                            "scim_webhook_handler__czop9Aj",
+                            "mcp_metadata_endpoint__RxcPaYe",
+                            "login_redirect_flow__ZquGMBb",
+                            "admin_portal_link__heJGkXa",
+                            "manage_organizations__qTZVzLK",
+                            "initialize_scalekit__qDc9wcb"
+                        ],
+                        "1.0": [
+                            "scope_validation_middleware__iJS7T85",
+                            "callback_handler__RxpcjAF",
+                            "generate_auth_url__bvW39eA"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "NonZeroAgentExitCodeError": [
+                        "scim_webhook_handler__czop9Aj"
+                    ]
+                }
+            }
+        }
+    }
+}

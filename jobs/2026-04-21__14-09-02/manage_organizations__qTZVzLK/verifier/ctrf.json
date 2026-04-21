@@ -1,0 +1,41 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1776753382.7949896,
+            "stop": 1776753382.8208559
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_org_id_file_exists",
+                "status": "passed",
+                "duration": 0.00020381799549795687,
+                "start": 1776753382.7991056,
+                "stop": 1776753382.7994118,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_verify_org_via_sdk",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.015565343001071597,
+                "start": 1776753382.79951,
+                "stop": 1776753382.8207648,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_verify_org_via_sdk():\n        with open(ORG_ID_FILE, \"r\") as f:\n            org_id = f.read().strip()\n    \n        # Create a small verification script to fetch org details\n        verify_script = f\"\"\"\n    const {{ Scalekit }} = require('@scalekit-sdk/node');\n    const scalekit = new Scalekit(\n      process.env.SCALEKIT_ENVIRONMENT_URL,\n      process.env.SCALEKIT_CLIENT_ID,\n      process.env.SCALEKIT_CLIENT_SECRET\n    );\n    \n    async function verify() {{\n      try {{\n        const org = await scalekit.organization.getOrganization('{org_id}');\n        console.log(JSON.stringify(org));\n      }} catch (err) {{\n        console.error(err);\n        process.exit(1);\n      }}\n    }}\n    verify();\n    \"\"\"\n        verify_script_path = os.path.join(PROJECT_DIR, \"verify_org.js\")\n        with open(verify_script_path, \"w\") as f:\n            f.write(verify_script)\n    \n        result = subprocess.run([\"node\", \"verify_org.js\"], capture_output=True, text=True, cwd=PROJECT_DIR)\n>       assert result.returncode == 0, f\"Verification script failed: {result.stderr}\"\nE       AssertionError: Verification script failed: file:///home/user/scalekit-orgs/verify_org.js:2\nE         const { Scalekit } = require('@scalekit-sdk/node');\nE                              ^\nE         \nE         ReferenceError: require is not defined in ES module scope, you can use import instead\nE         This file is being treated as an ES module because it has a '.js' file extension and '/home/user/scalekit-orgs/package.json' contains \"type\": \"module\". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.\nE             at file:///home/user/scalekit-orgs/verify_org.js:2:22\nE             at ModuleJob.run (node:internal/modules/esm/module_job:430:25)\nE             at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:661:26)\nE             at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\nE         \nE         Node.js v24.14.1\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['node', 'verify_org.js'], returncode=1, stdout='', stderr='file:///home/user/scalekit-orgs/veri...er:661:26)\\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\\n\\nNode.js v24.14.1\\n').returncode\n\ntests/test_final_state.py:41: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

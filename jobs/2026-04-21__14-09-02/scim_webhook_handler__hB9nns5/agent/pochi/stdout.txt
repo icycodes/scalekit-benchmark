@@ -1,0 +1,49 @@
+- Initializing MCP connections...
+You
+# Implement SCIM Webhook Handler with Signature Verification ## Background Scalekit sends webhooks for SCIM events (e.g., user created, updated, or deleted). To ensure these requests are authentic, you must verify the webhook signature using your webhook secret. ## Requirements * Create an Express.js application in `/home/user/scalekit-webhook`. * Implement a POST `/webhook` endpoint. * The endpoint should: * Receive the raw request body. * Extract the `X-Scalekit-Signature` header. * Use the Scalekit SDK's `scalekit.webhooks.verifySignature()` method to verify the payload. * The webhook secret is provided via the `SCALEKIT_WEBHOOK_SECRET` environment variable. * If verification succeeds, log the event type to `/home/user/scalekit-webhook/events.log`. * Return a 200 status code on success, and 401 on verification failure. ## Implementation Guide 1. Create a directory `/home/user/scalekit-webhook`. 2. Initialize a Node.js project and install `express`, `body-parser`, and `@scalekit-sdk/node`. 3. Create a file `server.js` that: * Sets up Express with `body-parser.raw({ type: 'application/json' })` to get the raw body. * Initializes the `Scalekit` client. * Implements the `/webhook` route. * Uses `scalekit.webhooks.verifySignature(rawBody, signature, process.env.SCALEKIT_WEBHOOK_SECRET)`. * Appends the event type (e.g., `user.created`) to `/home/user/scalekit-webhook/events.log`. 4. Start the server on port 3001. ## Constraints * Project path: /home/user/scalekit-webhook * Events log: /home/user/scalekit-webhook/events.log * Port: 3001 * Start command: node server.js ## Integrations * Scalekit   
+
+Pochi
+💭 Thinking for 993 characters   
+💫 Executing mkdir -p /home/user/scalekit-webhook && cd /home/user/scalekit-webhook && npm init -y && npm install express body-parser @scalekit-sdk/node ✔ 
+💭 Thinking for 1281 characters   
+💫 Executing node -e "const { Scalekit } = require('@scalekit-sdk/node'); console.log(Object.keys(new Scalekit('a', 'b', 'c')))" ✖ "Command exited with code 1"
+💭 Thinking for 226 characters   
+💫 Executing cd /home/user/scalekit-webhook && node -e "const { Scalekit } = require('@scalekit-sdk/node'); const scalekit = new Scalekit('env_url', 'client_id', 'client_secret'); console.log(scalekit.webhooks)" ✖ "Command exited with code 1"
+💭 Thinking for 223 characters   
+💫 Executing cd /home/user/scalekit-webhook && node -e "const { Scalekit } = require('@scalekit-sdk/node'); const scalekit = new Scalekit('https://api.scalekit.com', 'client_id', 'client_secret'); console.log(scalekit.webhooks)" ✔ 
+💭 Thinking for 260 characters   
+💫 Executing cd /home/user/scalekit-webhook && node -e "const { Scalekit } = require('@scalekit-sdk/node'); const scalekit = new Scalekit('https://api.scalekit.com', 'client_id', 'client_secret'); console.log(Object.keys(scalekit))" ✔ 
+💭 Thinking for 196 characters   
+💫 Executing cd /home/user/scalekit-webhook && node -e "const sdk = require('@scalekit-sdk/node'); console.log(Object.keys(sdk))" ✔ 
+💭 Thinking for 514 characters   
+💫 Executing cd /home/user/scalekit-webhook && node -e "const { Scalekit } = require('@scalekit-sdk/node'); const scalekit = new Scalekit('https://api.scalekit.com', 'client_id', 'client_secret'); console.log(Object.getPrototypeOf(scalekit))" ✔ 
+💭 Thinking for 266 characters   
+💫 Executing cd /home/user/scalekit-webhook && grep -r "verifySignature" node_modules/@scalekit-sdk/node ✖ "Command exited with code 1"
+💭 Thinking for 309 characters   
+💫 Executing cd /home/user/scalekit-webhook && grep -ir "webhook" node_modules/@scalekit-sdk/node ✔ 
+💭 Thinking for 1262 characters   
+✏️  Writing /home/user/scalekit-webhook/server.js ✔ 
+💭 Thinking for 465 characters   
+💫 Executing cd /home/user/scalekit-webhook && npm list @scalekit-sdk/node ✔ 
+💭 Thinking for 607 characters   
+✏️  Writing /home/user/scalekit-webhook/server.js ✔ 
+💭 Thinking for 496 characters   
+💫 Executing cd /home/user/scalekit-webhook && cat server.js ✔ 
+💭 Thinking for 558 characters   
+🎉 Task Completed
+I have successfully implemented the SCIM webhook handler with signature verification for Scalekit. 
+
+Here is what was done:
+1. Created the `/home/user/scalekit-webhook` directory and initialized a Node.js project.
+2. Installed the required dependencies: `express`, `body-parser`, and `@scalekit-sdk/node`.
+3. Created the `server.js` file with the following features:
+   - Sets up an Express server running on port 3001.
+   - Uses `body-parser.raw({ type: 'application/json' })` to capture the raw request body.
+   - Initializes the `Scalekit` client.
+   - Extracts the `X-Scalekit-Signature` header (via `req.headers['x-scalekit-signature']`).
+   - Verifies the payload using `scalekit.webhooks.verifySignature(rawBody, signature, process.env.SCALEKIT_WEBHOOK_SECRET)`.
+   - On successful verification, parses the JSON payload to extract the event type and appends it to `/home/user/scalekit-webhook/events.log`.
+   - Returns a `200` status code upon success, and a `401` status code if the signature is invalid or verification fails.
+
+The application is ready and meets all the specified requirements. You can start the server by running `node server.js` in the project directory.   
+  

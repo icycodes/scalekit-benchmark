@@ -1,0 +1,41 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1776753509.4206052,
+            "stop": 1776753509.4301212
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_output_log_exists",
+                "status": "passed",
+                "duration": 0.00019499800328048877,
+                "start": 1776753509.4241943,
+                "stop": 1776753509.4244883,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_output_log_content",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.00031905100695439614,
+                "start": 1776753509.4245825,
+                "stop": 1776753509.4300396,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_output_log_content():\n        expected_url = os.environ.get(\"SCALEKIT_ENVIRONMENT_URL\")\n        with open(LOG_FILE, \"r\") as f:\n            content = f.read().strip()\n>       assert content == expected_url, f\"Expected {expected_url}, got {content}\"\nE       AssertionError: Expected https://tabbyml.scalekit.dev, got https://example.com\nE       assert 'https://example.com' == 'https://tabbyml.scalekit.dev'\nE         \nE         - https://tabbyml.scalekit.dev\nE         + https://example.com\n\ntests/test_final_state.py:14: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

@@ -1,0 +1,4292 @@
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo complete_mcp_auth__4mDCUFZ > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Secure your MCP Server with Scalekit
+
+## Background
+Your goal is to secure a Model Context Protocol (MCP) server using Scalekit's OAuth 2.1 authorization. This ensures that only authorized users can access your tools through AI hosts.
+
+## Requirements
+- Implement the MCP OAuth discovery endpoint: `/.well-known/oauth-protected-resource`.
+- Implement an authentication middleware that validates the Bearer token in all incoming requests (except discovery).
+- Implement a tool execution endpoint `/tools/execute` that checks for the `todo:write` scope before allowing execution.
+- Use the Scalekit SDK for all validation logic.
+
+## Implementation Guide
+Follow the instructions in `/home/user/mcp-auth/instruction.md` to complete the task.
+
+## Constraints
+- Project path: /home/user/mcp-auth
+- Port: 8080
+- Start command: python3 main.py
+
+## Integrations
+- Scalekit
+
+EOF
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo complete_mcp_auth__iWnyjvd > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Secure your MCP Server with Scalekit
+
+## Background
+Your goal is to secure a Model Context Protocol (MCP) server using Scalekit's OAuth 2.1 authorization. This ensures that only authorized users can access your tools through AI hosts.
+
+## Requirements
+- Implement the MCP OAuth discovery endpoint: `/.well-known/oauth-protected-resource`.
+- Implement an authentication middleware that validates the Bearer token in all incoming requests (except discovery).
+- Implement a tool execution endpoint `/tools/execute` that checks for the `todo:write` scope before allowing execution.
+- Use the Scalekit SDK for all validation logic.
+
+## Implementation Guide
+Follow the instructions in `/home/user/mcp-auth/instruction.md` to complete the task.
+
+## Constraints
+- Project path: /home/user/mcp-auth
+- Port: 8080
+- Start command: python3 main.py
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo complete_mcp_auth__9zsM2FU > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Secure your MCP Server with Scalekit
+
+## Background
+Your goal is to secure a Model Context Protocol (MCP) server using Scalekit's OAuth 2.1 authorization. This ensures that only authorized users can access your tools through AI hosts.
+
+## Requirements
+- Implement the MCP OAuth discovery endpoint: `/.well-known/oauth-protected-resource`.
+- Implement an authentication middleware that validates the Bearer token in all incoming requests (except discovery).
+- Implement a tool execution endpoint `/tools/execute` that checks for the `todo:write` scope before allowing execution.
+- Use the Scalekit SDK for all validation logic.
+
+## Implementation Guide
+Follow the instructions in `/home/user/mcp-auth/instruction.md` to complete the task.
+
+## Constraints
+- Project path: /home/user/mcp-auth
+- Port: 8080
+- Start command: python3 main.py
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo complete_mcp_auth__ZjherJX > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Secure your MCP Server with Scalekit
+
+## Background
+Your goal is to secure a Model Context Protocol (MCP) server using Scalekit's OAuth 2.1 authorization. This ensures that only authorized users can access your tools through AI hosts.
+
+## Requirements
+- Implement the MCP OAuth discovery endpoint: `/.well-known/oauth-protected-resource`.
+- Implement an authentication middleware that validates the Bearer token in all incoming requests (except discovery).
+- Implement a tool execution endpoint `/tools/execute` that checks for the `todo:write` scope before allowing execution.
+- Use the Scalekit SDK for all validation logic.
+
+## Implementation Guide
+Follow the instructions in `/home/user/mcp-auth/instruction.md` to complete the task.
+
+## Constraints
+- Project path: /home/user/mcp-auth
+- Port: 8080
+- Start command: python3 main.py
+
+## Integrations
+- Scalekit
+
+EOF
+Running command: echo complete_mcp_auth__AAbAvts > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Secure your MCP Server with Scalekit
+
+## Background
+Your goal is to secure a Model Context Protocol (MCP) server using Scalekit's OAuth 2.1 authorization. This ensures that only authorized users can access your tools through AI hosts.
+
+## Requirements
+- Implement the MCP OAuth discovery endpoint: `/.well-known/oauth-protected-resource`.
+- Implement an authentication middleware that validates the Bearer token in all incoming requests (except discovery).
+- Implement a tool execution endpoint `/tools/execute` that checks for the `todo:write` scope before allowing execution.
+- Use the Scalekit SDK for all validation logic.
+
+## Implementation Guide
+Follow the instructions in `/home/user/mcp-auth/instruction.md` to complete the task.
+
+## Constraints
+- Project path: /home/user/mcp-auth
+- Port: 8080
+- Start command: python3 main.py
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo scope_validation_middleware__nwkaCj6 > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scope-Based Validation Middleware
+
+## Background
+To secure your API endpoints, you must validate the access tokens sent by clients. Scalekit provides a `validateToken` method that can check the token's validity and ensure it has the required scopes.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-middleware`.
+- Implement an authentication middleware `authMiddleware` that:
+    - Extracts the Bearer token from the `Authorization` header.
+    - Uses `scalekit.validateToken()` to validate the token.
+    - Checks if the token has the `todo:read` scope.
+    - If valid, calls `next()`.
+    - If invalid or missing scope, returns a 401 or 403 status code.
+- Apply this middleware to a GET `/todos` endpoint that returns a list of todos.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-middleware`.
+2. Initialize a Node.js project and install `express` and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Initializes the `Scalekit` client.
+    - Defines the `authMiddleware` using `scalekit.validateToken(token, { requiredScopes: ['todo:read'] })`.
+    - Implements the `/todos` route protected by the middleware.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-middleware
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo scope_validation_middleware__jBmQpbv > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scope-Based Validation Middleware
+
+## Background
+To secure your API endpoints, you must validate the access tokens sent by clients. Scalekit provides a `validateToken` method that can check the token's validity and ensure it has the required scopes.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-middleware`.
+- Implement an authentication middleware `authMiddleware` that:
+    - Extracts the Bearer token from the `Authorization` header.
+    - Uses `scalekit.validateToken()` to validate the token.
+    - Checks if the token has the `todo:read` scope.
+    - If valid, calls `next()`.
+    - If invalid or missing scope, returns a 401 or 403 status code.
+- Apply this middleware to a GET `/todos` endpoint that returns a list of todos.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-middleware`.
+2. Initialize a Node.js project and install `express` and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Initializes the `Scalekit` client.
+    - Defines the `authMiddleware` using `scalekit.validateToken(token, { requiredScopes: ['todo:read'] })`.
+    - Implements the `/todos` route protected by the middleware.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-middleware
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo scope_validation_middleware__JZh2d3H > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scope-Based Validation Middleware
+
+## Background
+To secure your API endpoints, you must validate the access tokens sent by clients. Scalekit provides a `validateToken` method that can check the token's validity and ensure it has the required scopes.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-middleware`.
+- Implement an authentication middleware `authMiddleware` that:
+    - Extracts the Bearer token from the `Authorization` header.
+    - Uses `scalekit.validateToken()` to validate the token.
+    - Checks if the token has the `todo:read` scope.
+    - If valid, calls `next()`.
+    - If invalid or missing scope, returns a 401 or 403 status code.
+- Apply this middleware to a GET `/todos` endpoint that returns a list of todos.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-middleware`.
+2. Initialize a Node.js project and install `express` and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Initializes the `Scalekit` client.
+    - Defines the `authMiddleware` using `scalekit.validateToken(token, { requiredScopes: ['todo:read'] })`.
+    - Implements the `/todos` route protected by the middleware.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-middleware
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo scope_validation_middleware__QmNrHqE > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scope-Based Validation Middleware
+
+## Background
+To secure your API endpoints, you must validate the access tokens sent by clients. Scalekit provides a `validateToken` method that can check the token's validity and ensure it has the required scopes.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-middleware`.
+- Implement an authentication middleware `authMiddleware` that:
+    - Extracts the Bearer token from the `Authorization` header.
+    - Uses `scalekit.validateToken()` to validate the token.
+    - Checks if the token has the `todo:read` scope.
+    - If valid, calls `next()`.
+    - If invalid or missing scope, returns a 401 or 403 status code.
+- Apply this middleware to a GET `/todos` endpoint that returns a list of todos.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-middleware`.
+2. Initialize a Node.js project and install `express` and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Initializes the `Scalekit` client.
+    - Defines the `authMiddleware` using `scalekit.validateToken(token, { requiredScopes: ['todo:read'] })`.
+    - Implements the `/todos` route protected by the middleware.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-middleware
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: echo scope_validation_middleware__iJS7T85 > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scope-Based Validation Middleware
+
+## Background
+To secure your API endpoints, you must validate the access tokens sent by clients. Scalekit provides a `validateToken` method that can check the token's validity and ensure it has the required scopes.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-middleware`.
+- Implement an authentication middleware `authMiddleware` that:
+    - Extracts the Bearer token from the `Authorization` header.
+    - Uses `scalekit.validateToken()` to validate the token.
+    - Checks if the token has the `todo:read` scope.
+    - If valid, calls `next()`.
+    - If invalid or missing scope, returns a 401 or 403 status code.
+- Apply this middleware to a GET `/todos` endpoint that returns a list of todos.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-middleware`.
+2. Initialize a Node.js project and install `express` and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Initializes the `Scalekit` client.
+    - Defines the `authMiddleware` using `scalekit.validateToken(token, { requiredScopes: ['todo:read'] })`.
+    - Implements the `/todos` route protected by the middleware.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-middleware
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo scim_webhook_handler__hB9nns5 > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement SCIM Webhook Handler with Signature Verification
+
+## Background
+Scalekit sends webhooks for SCIM events (e.g., user created, updated, or deleted). To ensure these requests are authentic, you must verify the webhook signature using your webhook secret.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-webhook`.
+- Implement a POST `/webhook` endpoint.
+- The endpoint should:
+    - Receive the raw request body.
+    - Extract the `X-Scalekit-Signature` header.
+    - Use the Scalekit SDK's `scalekit.webhooks.verifySignature()` method to verify the payload.
+    - The webhook secret is provided via the `SCALEKIT_WEBHOOK_SECRET` environment variable.
+    - If verification succeeds, log the event type to `/home/user/scalekit-webhook/events.log`.
+    - Return a 200 status code on success, and 401 on verification failure.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-webhook`.
+2. Initialize a Node.js project and install `express`, `body-parser`, and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Sets up Express with `body-parser.raw({ type: 'application/json' })` to get the raw body.
+    - Initializes the `Scalekit` client.
+    - Implements the `/webhook` route.
+    - Uses `scalekit.webhooks.verifySignature(rawBody, signature, process.env.SCALEKIT_WEBHOOK_SECRET)`.
+    - Appends the event type (e.g., `user.created`) to `/home/user/scalekit-webhook/events.log`.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-webhook
+- Events log: /home/user/scalekit-webhook/events.log
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo scim_webhook_handler__L7eniwk > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement SCIM Webhook Handler with Signature Verification
+
+## Background
+Scalekit sends webhooks for SCIM events (e.g., user created, updated, or deleted). To ensure these requests are authentic, you must verify the webhook signature using your webhook secret.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-webhook`.
+- Implement a POST `/webhook` endpoint.
+- The endpoint should:
+    - Receive the raw request body.
+    - Extract the `X-Scalekit-Signature` header.
+    - Use the Scalekit SDK's `scalekit.webhooks.verifySignature()` method to verify the payload.
+    - The webhook secret is provided via the `SCALEKIT_WEBHOOK_SECRET` environment variable.
+    - If verification succeeds, log the event type to `/home/user/scalekit-webhook/events.log`.
+    - Return a 200 status code on success, and 401 on verification failure.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-webhook`.
+2. Initialize a Node.js project and install `express`, `body-parser`, and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Sets up Express with `body-parser.raw({ type: 'application/json' })` to get the raw body.
+    - Initializes the `Scalekit` client.
+    - Implements the `/webhook` route.
+    - Uses `scalekit.webhooks.verifySignature(rawBody, signature, process.env.SCALEKIT_WEBHOOK_SECRET)`.
+    - Appends the event type (e.g., `user.created`) to `/home/user/scalekit-webhook/events.log`.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-webhook
+- Events log: /home/user/scalekit-webhook/events.log
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo scim_webhook_handler__GibHZBQ > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement SCIM Webhook Handler with Signature Verification
+
+## Background
+Scalekit sends webhooks for SCIM events (e.g., user created, updated, or deleted). To ensure these requests are authentic, you must verify the webhook signature using your webhook secret.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-webhook`.
+- Implement a POST `/webhook` endpoint.
+- The endpoint should:
+    - Receive the raw request body.
+    - Extract the `X-Scalekit-Signature` header.
+    - Use the Scalekit SDK's `scalekit.webhooks.verifySignature()` method to verify the payload.
+    - The webhook secret is provided via the `SCALEKIT_WEBHOOK_SECRET` environment variable.
+    - If verification succeeds, log the event type to `/home/user/scalekit-webhook/events.log`.
+    - Return a 200 status code on success, and 401 on verification failure.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-webhook`.
+2. Initialize a Node.js project and install `express`, `body-parser`, and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Sets up Express with `body-parser.raw({ type: 'application/json' })` to get the raw body.
+    - Initializes the `Scalekit` client.
+    - Implements the `/webhook` route.
+    - Uses `scalekit.webhooks.verifySignature(rawBody, signature, process.env.SCALEKIT_WEBHOOK_SECRET)`.
+    - Appends the event type (e.g., `user.created`) to `/home/user/scalekit-webhook/events.log`.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-webhook
+- Events log: /home/user/scalekit-webhook/events.log
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo scim_webhook_handler__G8oJhYG > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement SCIM Webhook Handler with Signature Verification
+
+## Background
+Scalekit sends webhooks for SCIM events (e.g., user created, updated, or deleted). To ensure these requests are authentic, you must verify the webhook signature using your webhook secret.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-webhook`.
+- Implement a POST `/webhook` endpoint.
+- The endpoint should:
+    - Receive the raw request body.
+    - Extract the `X-Scalekit-Signature` header.
+    - Use the Scalekit SDK's `scalekit.webhooks.verifySignature()` method to verify the payload.
+    - The webhook secret is provided via the `SCALEKIT_WEBHOOK_SECRET` environment variable.
+    - If verification succeeds, log the event type to `/home/user/scalekit-webhook/events.log`.
+    - Return a 200 status code on success, and 401 on verification failure.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-webhook`.
+2. Initialize a Node.js project and install `express`, `body-parser`, and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Sets up Express with `body-parser.raw({ type: 'application/json' })` to get the raw body.
+    - Initializes the `Scalekit` client.
+    - Implements the `/webhook` route.
+    - Uses `scalekit.webhooks.verifySignature(rawBody, signature, process.env.SCALEKIT_WEBHOOK_SECRET)`.
+    - Appends the event type (e.g., `user.created`) to `/home/user/scalekit-webhook/events.log`.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-webhook
+- Events log: /home/user/scalekit-webhook/events.log
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo scim_webhook_handler__czop9Aj > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement SCIM Webhook Handler with Signature Verification
+
+## Background
+Scalekit sends webhooks for SCIM events (e.g., user created, updated, or deleted). To ensure these requests are authentic, you must verify the webhook signature using your webhook secret.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-webhook`.
+- Implement a POST `/webhook` endpoint.
+- The endpoint should:
+    - Receive the raw request body.
+    - Extract the `X-Scalekit-Signature` header.
+    - Use the Scalekit SDK's `scalekit.webhooks.verifySignature()` method to verify the payload.
+    - The webhook secret is provided via the `SCALEKIT_WEBHOOK_SECRET` environment variable.
+    - If verification succeeds, log the event type to `/home/user/scalekit-webhook/events.log`.
+    - Return a 200 status code on success, and 401 on verification failure.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-webhook`.
+2. Initialize a Node.js project and install `express`, `body-parser`, and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Sets up Express with `body-parser.raw({ type: 'application/json' })` to get the raw body.
+    - Initializes the `Scalekit` client.
+    - Implements the `/webhook` route.
+    - Uses `scalekit.webhooks.verifySignature(rawBody, signature, process.env.SCALEKIT_WEBHOOK_SECRET)`.
+    - Appends the event type (e.g., `user.created`) to `/home/user/scalekit-webhook/events.log`.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-webhook
+- Events log: /home/user/scalekit-webhook/events.log
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo mcp_metadata_endpoint__c6UQjik > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement MCP OAuth Metadata Endpoint
+
+## Background
+In the Model Context Protocol (MCP), clients discover the OAuth 2.1 authorization server by calling `.well-known/oauth-protected-resource`. You need to implement this endpoint in a web server.
+
+## Requirements
+- Create a FastAPI application in `/home/user/mcp-server`.
+- Implement a GET endpoint at `/.well-known/oauth-protected-resource`.
+- The endpoint must return a JSON object with the following fields:
+    - `authorization_servers`: `["https://auth.example.com/resources/res_123"]`
+    - `bearer_methods_supported`: `["header"]`
+    - `resource`: `"https://mcp.example.com"`
+    - `scopes_supported`: `["todo:read", "todo:write"]`
+
+## Implementation Guide
+1. Create a directory `/home/user/mcp-server`.
+2. Create a virtual environment and install `fastapi` and `uvicorn`.
+3. Create a file `main.py` that:
+    - Initializes a FastAPI app.
+    - Defines the `@app.get("/.well-known/oauth-protected-resource")` route.
+    - Returns the specified JSON object.
+4. Start the server on port 8000.
+
+## Constraints
+- Project path: /home/user/mcp-server
+- Port: 8000
+- Start command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo mcp_metadata_endpoint__mHWH2fn > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement MCP OAuth Metadata Endpoint
+
+## Background
+In the Model Context Protocol (MCP), clients discover the OAuth 2.1 authorization server by calling `.well-known/oauth-protected-resource`. You need to implement this endpoint in a web server.
+
+## Requirements
+- Create a FastAPI application in `/home/user/mcp-server`.
+- Implement a GET endpoint at `/.well-known/oauth-protected-resource`.
+- The endpoint must return a JSON object with the following fields:
+    - `authorization_servers`: `["https://auth.example.com/resources/res_123"]`
+    - `bearer_methods_supported`: `["header"]`
+    - `resource`: `"https://mcp.example.com"`
+    - `scopes_supported`: `["todo:read", "todo:write"]`
+
+## Implementation Guide
+1. Create a directory `/home/user/mcp-server`.
+2. Create a virtual environment and install `fastapi` and `uvicorn`.
+3. Create a file `main.py` that:
+    - Initializes a FastAPI app.
+    - Defines the `@app.get("/.well-known/oauth-protected-resource")` route.
+    - Returns the specified JSON object.
+4. Start the server on port 8000.
+
+## Constraints
+- Project path: /home/user/mcp-server
+- Port: 8000
+- Start command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo mcp_metadata_endpoint__uy5mHro > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement MCP OAuth Metadata Endpoint
+
+## Background
+In the Model Context Protocol (MCP), clients discover the OAuth 2.1 authorization server by calling `.well-known/oauth-protected-resource`. You need to implement this endpoint in a web server.
+
+## Requirements
+- Create a FastAPI application in `/home/user/mcp-server`.
+- Implement a GET endpoint at `/.well-known/oauth-protected-resource`.
+- The endpoint must return a JSON object with the following fields:
+    - `authorization_servers`: `["https://auth.example.com/resources/res_123"]`
+    - `bearer_methods_supported`: `["header"]`
+    - `resource`: `"https://mcp.example.com"`
+    - `scopes_supported`: `["todo:read", "todo:write"]`
+
+## Implementation Guide
+1. Create a directory `/home/user/mcp-server`.
+2. Create a virtual environment and install `fastapi` and `uvicorn`.
+3. Create a file `main.py` that:
+    - Initializes a FastAPI app.
+    - Defines the `@app.get("/.well-known/oauth-protected-resource")` route.
+    - Returns the specified JSON object.
+4. Start the server on port 8000.
+
+## Constraints
+- Project path: /home/user/mcp-server
+- Port: 8000
+- Start command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo mcp_metadata_endpoint__qojVwWD > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement MCP OAuth Metadata Endpoint
+
+## Background
+In the Model Context Protocol (MCP), clients discover the OAuth 2.1 authorization server by calling `.well-known/oauth-protected-resource`. You need to implement this endpoint in a web server.
+
+## Requirements
+- Create a FastAPI application in `/home/user/mcp-server`.
+- Implement a GET endpoint at `/.well-known/oauth-protected-resource`.
+- The endpoint must return a JSON object with the following fields:
+    - `authorization_servers`: `["https://auth.example.com/resources/res_123"]`
+    - `bearer_methods_supported`: `["header"]`
+    - `resource`: `"https://mcp.example.com"`
+    - `scopes_supported`: `["todo:read", "todo:write"]`
+
+## Implementation Guide
+1. Create a directory `/home/user/mcp-server`.
+2. Create a virtual environment and install `fastapi` and `uvicorn`.
+3. Create a file `main.py` that:
+    - Initializes a FastAPI app.
+    - Defines the `@app.get("/.well-known/oauth-protected-resource")` route.
+    - Returns the specified JSON object.
+4. Start the server on port 8000.
+
+## Constraints
+- Project path: /home/user/mcp-server
+- Port: 8000
+- Start command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo mcp_metadata_endpoint__RxcPaYe > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement MCP OAuth Metadata Endpoint
+
+## Background
+In the Model Context Protocol (MCP), clients discover the OAuth 2.1 authorization server by calling `.well-known/oauth-protected-resource`. You need to implement this endpoint in a web server.
+
+## Requirements
+- Create a FastAPI application in `/home/user/mcp-server`.
+- Implement a GET endpoint at `/.well-known/oauth-protected-resource`.
+- The endpoint must return a JSON object with the following fields:
+    - `authorization_servers`: `["https://auth.example.com/resources/res_123"]`
+    - `bearer_methods_supported`: `["header"]`
+    - `resource`: `"https://mcp.example.com"`
+    - `scopes_supported`: `["todo:read", "todo:write"]`
+
+## Implementation Guide
+1. Create a directory `/home/user/mcp-server`.
+2. Create a virtual environment and install `fastapi` and `uvicorn`.
+3. Create a file `main.py` that:
+    - Initializes a FastAPI app.
+    - Defines the `@app.get("/.well-known/oauth-protected-resource")` route.
+    - Returns the specified JSON object.
+4. Start the server on port 8000.
+
+## Constraints
+- Project path: /home/user/mcp-server
+- Port: 8000
+- Start command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo callback_handler__ZN4e7X8 > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scalekit Callback Handler
+
+## Background
+After a user authenticates with Scalekit, they are redirected back to your application with an authorization code. Your application must exchange this code for tokens and user details.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-callback`.
+- Implement a GET `/callback` endpoint.
+- The endpoint should:
+    - Extract `code` and `state` from query parameters.
+    - Use `scalekit.authenticateWithCode()` to exchange the code for tokens.
+    - Decode the `idToken` using a library like `jsonwebtoken`.
+    - Return a JSON response containing the user's email and name from the decoded token.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-callback`.
+2. Initialize a Node.js project and install `express`, `@scalekit-sdk/node`, and `jsonwebtoken`.
+3. Create a file `server.js` that:
+    - Initializes the `Scalekit` client.
+    - Implements the `/callback` route.
+    - Uses `scalekit.authenticateWithCode(code, 'http://localhost:3001/callback')`.
+    - Decodes the `idToken` and extracts `email` and `name`.
+    - Sends these details back as JSON.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-callback
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo callback_handler__5BmRhZm > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scalekit Callback Handler
+
+## Background
+After a user authenticates with Scalekit, they are redirected back to your application with an authorization code. Your application must exchange this code for tokens and user details.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-callback`.
+- Implement a GET `/callback` endpoint.
+- The endpoint should:
+    - Extract `code` and `state` from query parameters.
+    - Use `scalekit.authenticateWithCode()` to exchange the code for tokens.
+    - Decode the `idToken` using a library like `jsonwebtoken`.
+    - Return a JSON response containing the user's email and name from the decoded token.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-callback`.
+2. Initialize a Node.js project and install `express`, `@scalekit-sdk/node`, and `jsonwebtoken`.
+3. Create a file `server.js` that:
+    - Initializes the `Scalekit` client.
+    - Implements the `/callback` route.
+    - Uses `scalekit.authenticateWithCode(code, 'http://localhost:3001/callback')`.
+    - Decodes the `idToken` and extracts `email` and `name`.
+    - Sends these details back as JSON.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-callback
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo callback_handler__HnRgLj6 > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scalekit Callback Handler
+
+## Background
+After a user authenticates with Scalekit, they are redirected back to your application with an authorization code. Your application must exchange this code for tokens and user details.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-callback`.
+- Implement a GET `/callback` endpoint.
+- The endpoint should:
+    - Extract `code` and `state` from query parameters.
+    - Use `scalekit.authenticateWithCode()` to exchange the code for tokens.
+    - Decode the `idToken` using a library like `jsonwebtoken`.
+    - Return a JSON response containing the user's email and name from the decoded token.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-callback`.
+2. Initialize a Node.js project and install `express`, `@scalekit-sdk/node`, and `jsonwebtoken`.
+3. Create a file `server.js` that:
+    - Initializes the `Scalekit` client.
+    - Implements the `/callback` route.
+    - Uses `scalekit.authenticateWithCode(code, 'http://localhost:3001/callback')`.
+    - Decodes the `idToken` and extracts `email` and `name`.
+    - Sends these details back as JSON.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-callback
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo callback_handler__zeHHyQK > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scalekit Callback Handler
+
+## Background
+After a user authenticates with Scalekit, they are redirected back to your application with an authorization code. Your application must exchange this code for tokens and user details.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-callback`.
+- Implement a GET `/callback` endpoint.
+- The endpoint should:
+    - Extract `code` and `state` from query parameters.
+    - Use `scalekit.authenticateWithCode()` to exchange the code for tokens.
+    - Decode the `idToken` using a library like `jsonwebtoken`.
+    - Return a JSON response containing the user's email and name from the decoded token.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-callback`.
+2. Initialize a Node.js project and install `express`, `@scalekit-sdk/node`, and `jsonwebtoken`.
+3. Create a file `server.js` that:
+    - Initializes the `Scalekit` client.
+    - Implements the `/callback` route.
+    - Uses `scalekit.authenticateWithCode(code, 'http://localhost:3001/callback')`.
+    - Decodes the `idToken` and extracts `email` and `name`.
+    - Sends these details back as JSON.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-callback
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command failed
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Not retrying trial because the maximum number of retries has been reached
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo callback_handler__RxpcjAF > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scalekit Callback Handler
+
+## Background
+After a user authenticates with Scalekit, they are redirected back to your application with an authorization code. Your application must exchange this code for tokens and user details.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-callback`.
+- Implement a GET `/callback` endpoint.
+- The endpoint should:
+    - Extract `code` and `state` from query parameters.
+    - Use `scalekit.authenticateWithCode()` to exchange the code for tokens.
+    - Decode the `idToken` using a library like `jsonwebtoken`.
+    - Return a JSON response containing the user's email and name from the decoded token.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-callback`.
+2. Initialize a Node.js project and install `express`, `@scalekit-sdk/node`, and `jsonwebtoken`.
+3. Create a file `server.js` that:
+    - Initializes the `Scalekit` client.
+    - Implements the `/callback` route.
+    - Uses `scalekit.authenticateWithCode(code, 'http://localhost:3001/callback')`.
+    - Decodes the `idToken` and extracts `email` and `name`.
+    - Sends these details back as JSON.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-callback
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo login_redirect_flow__c2w3u4x > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scalekit Login Redirect Flow
+
+## Background
+In a typical web application using Scalekit, the login process starts with a redirect to Scalekit's authorization server. You must also implement CSRF protection by generating a random `state` and storing it in the user's session.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-app`.
+- Implement a GET `/login` endpoint.
+- The endpoint should:
+    - Generate a random `state` string.
+    - Store the `state` in the session (use `express-session`).
+    - Use the Scalekit SDK to generate an authorization URL with:
+        - `redirect_uri`: `http://localhost:3001/callback`
+        - `state`: the generated state.
+        - `organization_id`: from the query parameter `organization_id`.
+    - Redirect the user to the generated URL.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-app`.
+2. Initialize a Node.js project and install `express`, `express-session`, and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Sets up Express with `express-session`.
+    - Initializes the `Scalekit` client.
+    - Implements the `/login` route as described.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-app
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo login_redirect_flow__hkTgvWK > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scalekit Login Redirect Flow
+
+## Background
+In a typical web application using Scalekit, the login process starts with a redirect to Scalekit's authorization server. You must also implement CSRF protection by generating a random `state` and storing it in the user's session.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-app`.
+- Implement a GET `/login` endpoint.
+- The endpoint should:
+    - Generate a random `state` string.
+    - Store the `state` in the session (use `express-session`).
+    - Use the Scalekit SDK to generate an authorization URL with:
+        - `redirect_uri`: `http://localhost:3001/callback`
+        - `state`: the generated state.
+        - `organization_id`: from the query parameter `organization_id`.
+    - Redirect the user to the generated URL.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-app`.
+2. Initialize a Node.js project and install `express`, `express-session`, and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Sets up Express with `express-session`.
+    - Initializes the `Scalekit` client.
+    - Implements the `/login` route as described.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-app
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo login_redirect_flow__Cm7rgU7 > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scalekit Login Redirect Flow
+
+## Background
+In a typical web application using Scalekit, the login process starts with a redirect to Scalekit's authorization server. You must also implement CSRF protection by generating a random `state` and storing it in the user's session.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-app`.
+- Implement a GET `/login` endpoint.
+- The endpoint should:
+    - Generate a random `state` string.
+    - Store the `state` in the session (use `express-session`).
+    - Use the Scalekit SDK to generate an authorization URL with:
+        - `redirect_uri`: `http://localhost:3001/callback`
+        - `state`: the generated state.
+        - `organization_id`: from the query parameter `organization_id`.
+    - Redirect the user to the generated URL.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-app`.
+2. Initialize a Node.js project and install `express`, `express-session`, and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Sets up Express with `express-session`.
+    - Initializes the `Scalekit` client.
+    - Implements the `/login` route as described.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-app
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo login_redirect_flow__7NHzeg4 > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scalekit Login Redirect Flow
+
+## Background
+In a typical web application using Scalekit, the login process starts with a redirect to Scalekit's authorization server. You must also implement CSRF protection by generating a random `state` and storing it in the user's session.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-app`.
+- Implement a GET `/login` endpoint.
+- The endpoint should:
+    - Generate a random `state` string.
+    - Store the `state` in the session (use `express-session`).
+    - Use the Scalekit SDK to generate an authorization URL with:
+        - `redirect_uri`: `http://localhost:3001/callback`
+        - `state`: the generated state.
+        - `organization_id`: from the query parameter `organization_id`.
+    - Redirect the user to the generated URL.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-app`.
+2. Initialize a Node.js project and install `express`, `express-session`, and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Sets up Express with `express-session`.
+    - Initializes the `Scalekit` client.
+    - Implements the `/login` route as described.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-app
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo login_redirect_flow__ZquGMBb > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Scalekit Login Redirect Flow
+
+## Background
+In a typical web application using Scalekit, the login process starts with a redirect to Scalekit's authorization server. You must also implement CSRF protection by generating a random `state` and storing it in the user's session.
+
+## Requirements
+- Create an Express.js application in `/home/user/scalekit-app`.
+- Implement a GET `/login` endpoint.
+- The endpoint should:
+    - Generate a random `state` string.
+    - Store the `state` in the session (use `express-session`).
+    - Use the Scalekit SDK to generate an authorization URL with:
+        - `redirect_uri`: `http://localhost:3001/callback`
+        - `state`: the generated state.
+        - `organization_id`: from the query parameter `organization_id`.
+    - Redirect the user to the generated URL.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-app`.
+2. Initialize a Node.js project and install `express`, `express-session`, and `@scalekit-sdk/node`.
+3. Create a file `server.js` that:
+    - Sets up Express with `express-session`.
+    - Initializes the `Scalekit` client.
+    - Implements the `/login` route as described.
+4. Start the server on port 3001.
+
+## Constraints
+- Project path: /home/user/scalekit-app
+- Port: 3001
+- Start command: node server.js
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo admin_portal_link__Kp3UuVU > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate Scalekit Admin Portal Link
+
+## Background
+Scalekit provides a hosted Admin Portal that your customers can use to manage their own SSO and SCIM settings. You can generate a secure, short-lived link to this portal for a specific organization.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Generate an Admin Portal link for the organization `org_1234567890`.
+- The link should be for the `sso` and `directory_sync` features.
+- Write the generated link to `/home/user/scalekit-admin/portal_link.txt`.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-admin`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `generate_portal.js` that:
+    - Initializes a `Scalekit` instance.
+    - Uses `scalekit.organization.generatePortalLink()` with `organization_id: 'org_1234567890'` and `features: ['sso', 'directory_sync']`.
+    - Writes the resulting link to `/home/user/scalekit-admin/portal_link.txt`.
+4. Run the script using `node generate_portal.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-admin
+- Portal link file: /home/user/scalekit-admin/portal_link.txt
+
+## Integrations
+- Scalekit
+
+EOF
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo admin_portal_link__M5Vfckt > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate Scalekit Admin Portal Link
+
+## Background
+Scalekit provides a hosted Admin Portal that your customers can use to manage their own SSO and SCIM settings. You can generate a secure, short-lived link to this portal for a specific organization.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Generate an Admin Portal link for the organization `org_1234567890`.
+- The link should be for the `sso` and `directory_sync` features.
+- Write the generated link to `/home/user/scalekit-admin/portal_link.txt`.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-admin`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `generate_portal.js` that:
+    - Initializes a `Scalekit` instance.
+    - Uses `scalekit.organization.generatePortalLink()` with `organization_id: 'org_1234567890'` and `features: ['sso', 'directory_sync']`.
+    - Writes the resulting link to `/home/user/scalekit-admin/portal_link.txt`.
+4. Run the script using `node generate_portal.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-admin
+- Portal link file: /home/user/scalekit-admin/portal_link.txt
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo admin_portal_link__AMLZwWX > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate Scalekit Admin Portal Link
+
+## Background
+Scalekit provides a hosted Admin Portal that your customers can use to manage their own SSO and SCIM settings. You can generate a secure, short-lived link to this portal for a specific organization.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Generate an Admin Portal link for the organization `org_1234567890`.
+- The link should be for the `sso` and `directory_sync` features.
+- Write the generated link to `/home/user/scalekit-admin/portal_link.txt`.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-admin`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `generate_portal.js` that:
+    - Initializes a `Scalekit` instance.
+    - Uses `scalekit.organization.generatePortalLink()` with `organization_id: 'org_1234567890'` and `features: ['sso', 'directory_sync']`.
+    - Writes the resulting link to `/home/user/scalekit-admin/portal_link.txt`.
+4. Run the script using `node generate_portal.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-admin
+- Portal link file: /home/user/scalekit-admin/portal_link.txt
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo admin_portal_link__q42SPhf > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate Scalekit Admin Portal Link
+
+## Background
+Scalekit provides a hosted Admin Portal that your customers can use to manage their own SSO and SCIM settings. You can generate a secure, short-lived link to this portal for a specific organization.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Generate an Admin Portal link for the organization `org_1234567890`.
+- The link should be for the `sso` and `directory_sync` features.
+- Write the generated link to `/home/user/scalekit-admin/portal_link.txt`.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-admin`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `generate_portal.js` that:
+    - Initializes a `Scalekit` instance.
+    - Uses `scalekit.organization.generatePortalLink()` with `organization_id: 'org_1234567890'` and `features: ['sso', 'directory_sync']`.
+    - Writes the resulting link to `/home/user/scalekit-admin/portal_link.txt`.
+4. Run the script using `node generate_portal.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-admin
+- Portal link file: /home/user/scalekit-admin/portal_link.txt
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo admin_portal_link__heJGkXa > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate Scalekit Admin Portal Link
+
+## Background
+Scalekit provides a hosted Admin Portal that your customers can use to manage their own SSO and SCIM settings. You can generate a secure, short-lived link to this portal for a specific organization.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Generate an Admin Portal link for the organization `org_1234567890`.
+- The link should be for the `sso` and `directory_sync` features.
+- Write the generated link to `/home/user/scalekit-admin/portal_link.txt`.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-admin`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `generate_portal.js` that:
+    - Initializes a `Scalekit` instance.
+    - Uses `scalekit.organization.generatePortalLink()` with `organization_id: 'org_1234567890'` and `features: ['sso', 'directory_sync']`.
+    - Writes the resulting link to `/home/user/scalekit-admin/portal_link.txt`.
+4. Run the script using `node generate_portal.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-admin
+- Portal link file: /home/user/scalekit-admin/portal_link.txt
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo manage_organizations__v4upfVn > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Manage Scalekit Organizations
+
+## Background
+Scalekit allows you to manage multi-tenant organizations programmatically. You can create new organizations and list existing ones.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Create a new organization with the name `Harbor Test Org` and an external ID derived from the `trial_id` found in `/logs/trial_id`.
+- List all organizations and verify that the newly created organization is in the list.
+- Write the ID of the created organization to `/home/user/scalekit-orgs/org_id.txt`.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-orgs`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Read the `trial_id` from `/logs/trial_id`.
+4. Create a file `manage_orgs.js` that:
+    - Initializes a `Scalekit` instance.
+    - Creates an organization using `scalekit.organization.createOrganization()` with `display_name: 'Harbor Test Org'` and `external_id: 'ext_org_' + trial_id`.
+    - Lists organizations using `scalekit.organization.listOrganizations()`.
+    - Finds the created organization in the list and writes its `id` to `/home/user/scalekit-orgs/org_id.txt`.
+5. Run the script using `node manage_orgs.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-orgs
+- Org ID file: /home/user/scalekit-orgs/org_id.txt
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo manage_organizations__rfQKoTG > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Manage Scalekit Organizations
+
+## Background
+Scalekit allows you to manage multi-tenant organizations programmatically. You can create new organizations and list existing ones.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Create a new organization with the name `Harbor Test Org` and an external ID derived from the `trial_id` found in `/logs/trial_id`.
+- List all organizations and verify that the newly created organization is in the list.
+- Write the ID of the created organization to `/home/user/scalekit-orgs/org_id.txt`.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-orgs`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Read the `trial_id` from `/logs/trial_id`.
+4. Create a file `manage_orgs.js` that:
+    - Initializes a `Scalekit` instance.
+    - Creates an organization using `scalekit.organization.createOrganization()` with `display_name: 'Harbor Test Org'` and `external_id: 'ext_org_' + trial_id`.
+    - Lists organizations using `scalekit.organization.listOrganizations()`.
+    - Finds the created organization in the list and writes its `id` to `/home/user/scalekit-orgs/org_id.txt`.
+5. Run the script using `node manage_orgs.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-orgs
+- Org ID file: /home/user/scalekit-orgs/org_id.txt
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo manage_organizations__2234ZJo > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Manage Scalekit Organizations
+
+## Background
+Scalekit allows you to manage multi-tenant organizations programmatically. You can create new organizations and list existing ones.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Create a new organization with the name `Harbor Test Org` and an external ID derived from the `trial_id` found in `/logs/trial_id`.
+- List all organizations and verify that the newly created organization is in the list.
+- Write the ID of the created organization to `/home/user/scalekit-orgs/org_id.txt`.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-orgs`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Read the `trial_id` from `/logs/trial_id`.
+4. Create a file `manage_orgs.js` that:
+    - Initializes a `Scalekit` instance.
+    - Creates an organization using `scalekit.organization.createOrganization()` with `display_name: 'Harbor Test Org'` and `external_id: 'ext_org_' + trial_id`.
+    - Lists organizations using `scalekit.organization.listOrganizations()`.
+    - Finds the created organization in the list and writes its `id` to `/home/user/scalekit-orgs/org_id.txt`.
+5. Run the script using `node manage_orgs.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-orgs
+- Org ID file: /home/user/scalekit-orgs/org_id.txt
+
+## Integrations
+- Scalekit
+
+EOF
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo manage_organizations__GbAzCwz > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Manage Scalekit Organizations
+
+## Background
+Scalekit allows you to manage multi-tenant organizations programmatically. You can create new organizations and list existing ones.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Create a new organization with the name `Harbor Test Org` and an external ID derived from the `trial_id` found in `/logs/trial_id`.
+- List all organizations and verify that the newly created organization is in the list.
+- Write the ID of the created organization to `/home/user/scalekit-orgs/org_id.txt`.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-orgs`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Read the `trial_id` from `/logs/trial_id`.
+4. Create a file `manage_orgs.js` that:
+    - Initializes a `Scalekit` instance.
+    - Creates an organization using `scalekit.organization.createOrganization()` with `display_name: 'Harbor Test Org'` and `external_id: 'ext_org_' + trial_id`.
+    - Lists organizations using `scalekit.organization.listOrganizations()`.
+    - Finds the created organization in the list and writes its `id` to `/home/user/scalekit-orgs/org_id.txt`.
+5. Run the script using `node manage_orgs.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-orgs
+- Org ID file: /home/user/scalekit-orgs/org_id.txt
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo manage_organizations__qTZVzLK > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Manage Scalekit Organizations
+
+## Background
+Scalekit allows you to manage multi-tenant organizations programmatically. You can create new organizations and list existing ones.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Create a new organization with the name `Harbor Test Org` and an external ID derived from the `trial_id` found in `/logs/trial_id`.
+- List all organizations and verify that the newly created organization is in the list.
+- Write the ID of the created organization to `/home/user/scalekit-orgs/org_id.txt`.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-orgs`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Read the `trial_id` from `/logs/trial_id`.
+4. Create a file `manage_orgs.js` that:
+    - Initializes a `Scalekit` instance.
+    - Creates an organization using `scalekit.organization.createOrganization()` with `display_name: 'Harbor Test Org'` and `external_id: 'ext_org_' + trial_id`.
+    - Lists organizations using `scalekit.organization.listOrganizations()`.
+    - Finds the created organization in the list and writes its `id` to `/home/user/scalekit-orgs/org_id.txt`.
+5. Run the script using `node manage_orgs.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-orgs
+- Org ID file: /home/user/scalekit-orgs/org_id.txt
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo generate_auth_url__7qR2986 > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate Scalekit Authorization URL
+
+## Background
+Scalekit provides a method to generate a URL to redirect users for SSO login. This URL includes parameters like the redirect URI and organization ID.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Generate an authorization URL with the following parameters:
+    - `redirect_uri`: `http://localhost:3001/callback`
+    - `organization_id`: `org_1234567890`
+    - `state`: `random_state_string`
+- Write the generated URL to a log file.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-auth-url`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `generate_url.js` that:
+    - Initializes a `Scalekit` instance using environment variables.
+    - Uses `scalekit.getAuthorizationUrl()` to generate the URL with the specified parameters.
+    - Writes the resulting URL to `/home/user/scalekit-auth-url/output.log`.
+4. Run the script using `node generate_url.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-auth-url
+- Log file: /home/user/scalekit-auth-url/output.log
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo generate_auth_url__2WoM94Q > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate Scalekit Authorization URL
+
+## Background
+Scalekit provides a method to generate a URL to redirect users for SSO login. This URL includes parameters like the redirect URI and organization ID.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Generate an authorization URL with the following parameters:
+    - `redirect_uri`: `http://localhost:3001/callback`
+    - `organization_id`: `org_1234567890`
+    - `state`: `random_state_string`
+- Write the generated URL to a log file.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-auth-url`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `generate_url.js` that:
+    - Initializes a `Scalekit` instance using environment variables.
+    - Uses `scalekit.getAuthorizationUrl()` to generate the URL with the specified parameters.
+    - Writes the resulting URL to `/home/user/scalekit-auth-url/output.log`.
+4. Run the script using `node generate_url.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-auth-url
+- Log file: /home/user/scalekit-auth-url/output.log
+
+## Integrations
+- Scalekit
+
+EOF
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo generate_auth_url__xCAkUcg > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate Scalekit Authorization URL
+
+## Background
+Scalekit provides a method to generate a URL to redirect users for SSO login. This URL includes parameters like the redirect URI and organization ID.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Generate an authorization URL with the following parameters:
+    - `redirect_uri`: `http://localhost:3001/callback`
+    - `organization_id`: `org_1234567890`
+    - `state`: `random_state_string`
+- Write the generated URL to a log file.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-auth-url`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `generate_url.js` that:
+    - Initializes a `Scalekit` instance using environment variables.
+    - Uses `scalekit.getAuthorizationUrl()` to generate the URL with the specified parameters.
+    - Writes the resulting URL to `/home/user/scalekit-auth-url/output.log`.
+4. Run the script using `node generate_url.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-auth-url
+- Log file: /home/user/scalekit-auth-url/output.log
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Running command: echo generate_auth_url__sT8uVqU > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate Scalekit Authorization URL
+
+## Background
+Scalekit provides a method to generate a URL to redirect users for SSO login. This URL includes parameters like the redirect URI and organization ID.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Generate an authorization URL with the following parameters:
+    - `redirect_uri`: `http://localhost:3001/callback`
+    - `organization_id`: `org_1234567890`
+    - `state`: `random_state_string`
+- Write the generated URL to a log file.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-auth-url`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `generate_url.js` that:
+    - Initializes a `Scalekit` instance using environment variables.
+    - Uses `scalekit.getAuthorizationUrl()` to generate the URL with the specified parameters.
+    - Writes the resulting URL to `/home/user/scalekit-auth-url/output.log`.
+4. Run the script using `node generate_url.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-auth-url
+- Log file: /home/user/scalekit-auth-url/output.log
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo generate_auth_url__bvW39eA > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate Scalekit Authorization URL
+
+## Background
+Scalekit provides a method to generate a URL to redirect users for SSO login. This URL includes parameters like the redirect URI and organization ID.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK.
+- Generate an authorization URL with the following parameters:
+    - `redirect_uri`: `http://localhost:3001/callback`
+    - `organization_id`: `org_1234567890`
+    - `state`: `random_state_string`
+- Write the generated URL to a log file.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-auth-url`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `generate_url.js` that:
+    - Initializes a `Scalekit` instance using environment variables.
+    - Uses `scalekit.getAuthorizationUrl()` to generate the URL with the specified parameters.
+    - Writes the resulting URL to `/home/user/scalekit-auth-url/output.log`.
+4. Run the script using `node generate_url.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-auth-url
+- Log file: /home/user/scalekit-auth-url/output.log
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo initialize_scalekit__N3af9kY > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Initialize Scalekit SDK
+
+## Background
+Scalekit is an enterprise authentication platform. To use its features, you must first initialize the Scalekit client with your environment credentials.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK using environment variables.
+- Print the Scalekit environment URL to a log file.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-init`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `init.js` that:
+    - Imports `Scalekit` from `@scalekit-sdk/node`.
+    - Initializes a new `Scalekit` instance using `process.env.SCALEKIT_ENVIRONMENT_URL`, `process.env.SCALEKIT_CLIENT_ID`, and `process.env.SCALEKIT_CLIENT_SECRET`.
+    - Prints the environment URL (from `process.env.SCALEKIT_ENVIRONMENT_URL`) to `/home/user/scalekit-init/output.log`.
+4. Run the script using `node init.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-init
+- Log file: /home/user/scalekit-init/output.log
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo initialize_scalekit__CikVPno > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model google/gemini-3-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Initialize Scalekit SDK
+
+## Background
+Scalekit is an enterprise authentication platform. To use its features, you must first initialize the Scalekit client with your environment credentials.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK using environment variables.
+- Print the Scalekit environment URL to a log file.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-init`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `init.js` that:
+    - Imports `Scalekit` from `@scalekit-sdk/node`.
+    - Initializes a new `Scalekit` instance using `process.env.SCALEKIT_ENVIRONMENT_URL`, `process.env.SCALEKIT_CLIENT_ID`, and `process.env.SCALEKIT_CLIENT_SECRET`.
+    - Prints the environment URL (from `process.env.SCALEKIT_ENVIRONMENT_URL`) to `/home/user/scalekit-init/output.log`.
+4. Run the script using `node init.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-init
+- Log file: /home/user/scalekit-init/output.log
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Running command: echo initialize_scalekit__Wub8TCH > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model openai/gpt-5.2-codex --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Initialize Scalekit SDK
+
+## Background
+Scalekit is an enterprise authentication platform. To use its features, you must first initialize the Scalekit client with your environment credentials.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK using environment variables.
+- Print the Scalekit environment URL to a log file.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-init`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `init.js` that:
+    - Imports `Scalekit` from `@scalekit-sdk/node`.
+    - Initializes a new `Scalekit` instance using `process.env.SCALEKIT_ENVIRONMENT_URL`, `process.env.SCALEKIT_CLIENT_ID`, and `process.env.SCALEKIT_CLIENT_SECRET`.
+    - Prints the environment URL (from `process.env.SCALEKIT_ENVIRONMENT_URL`) to `/home/user/scalekit-init/output.log`.
+4. Run the script using `node init.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-init
+- Log file: /home/user/scalekit-init/output.log
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo initialize_scalekit__Q38GwZC > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Initialize Scalekit SDK
+
+## Background
+Scalekit is an enterprise authentication platform. To use its features, you must first initialize the Scalekit client with your environment credentials.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK using environment variables.
+- Print the Scalekit environment URL to a log file.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-init`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `init.js` that:
+    - Imports `Scalekit` from `@scalekit-sdk/node`.
+    - Initializes a new `Scalekit` instance using `process.env.SCALEKIT_ENVIRONMENT_URL`, `process.env.SCALEKIT_CLIENT_ID`, and `process.env.SCALEKIT_CLIENT_SECRET`.
+    - Prints the environment URL (from `process.env.SCALEKIT_ENVIRONMENT_URL`) to `/home/user/scalekit-init/output.log`.
+4. Run the script using `node init.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-init
+- Log file: /home/user/scalekit-init/output.log
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; if command -v pochi >/dev/null 2>&1; then installed_version="$(pochi --version | tr -d '\r')"; printf "Found pochi version: %s\n" "$installed_version"; printf "__POCHI_INSTALLED_VERSION__=%s\n" "$installed_version"; else echo "Pochi is not installed"; echo "__POCHI_INSTALLED_VERSION__="; fi
+Command outputs captured
+Running command: set -euo pipefail; export PATH="$HOME/.pochi/bin:$PATH"; pochi --version; mkdir -p /logs/agent/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo initialize_scalekit__qDc9wcb > /logs/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" -e "s/ANTHROPIC_API_KEY/${ANTHROPIC_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.5": {
+          "name": "kimi-K2.5"
+        },
+        "Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "name": "qwen3-coder-480b"
+        }
+      }
+    },
+    "anthropic": {
+      "kind": "openai",
+      "baseURL": "https://api.anthropic.com/v1",
+      "apiKey": "ANTHROPIC_API_KEY",
+      "models": {
+        "claude-opus-4-6": {
+          "name": "claude-opus-4-6"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: export PATH="$HOME/.pochi/bin:$PATH"; pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Initialize Scalekit SDK
+
+## Background
+Scalekit is an enterprise authentication platform. To use its features, you must first initialize the Scalekit client with your environment credentials.
+
+## Requirements
+- Initialize the Scalekit Node.js SDK using environment variables.
+- Print the Scalekit environment URL to a log file.
+
+## Implementation Guide
+1. Create a directory `/home/user/scalekit-init`.
+2. Initialize a Node.js project and install `@scalekit-sdk/node`.
+3. Create a file `init.js` that:
+    - Imports `Scalekit` from `@scalekit-sdk/node`.
+    - Initializes a new `Scalekit` instance using `process.env.SCALEKIT_ENVIRONMENT_URL`, `process.env.SCALEKIT_CLIENT_ID`, and `process.env.SCALEKIT_CLIENT_SECRET`.
+    - Prints the environment URL (from `process.env.SCALEKIT_ENVIRONMENT_URL`) to `/home/user/scalekit-init/output.log`.
+4. Run the script using `node init.js`.
+
+## Constraints
+- Project path: /home/user/scalekit-init
+- Log file: /home/user/scalekit-init/output.log
+
+## Integrations
+- Scalekit
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

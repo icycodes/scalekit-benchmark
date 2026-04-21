@@ -1,0 +1,33 @@
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 8ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 2 items
+
+tests/test_final_state.py .F                                             [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_output_log_content ____________________________
+
+    def test_output_log_content():
+        expected_url = os.environ.get("SCALEKIT_ENVIRONMENT_URL")
+        with open(LOG_FILE, "r") as f:
+            content = f.read().strip()
+>       assert content == expected_url, f"Expected {expected_url}, got {content}"
+E       AssertionError: Expected https://tabbyml.scalekit.dev, got https://example.scalekit.com
+E       assert 'https://example.scalekit.com' == 'https://tabbyml.scalekit.dev'
+E         
+E         - https://tabbyml.scalekit.dev
+E         ?         ^ ---            ^^^
+E         + https://example.scalekit.com
+E         ?         ^^  + +          ^^^
+
+tests/test_final_state.py:14: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_output_log_exists
+FAILED tests/test_final_state.py::test_output_log_content - AssertionError: E...
+========================= 1 failed, 1 passed in 0.01s ==========================

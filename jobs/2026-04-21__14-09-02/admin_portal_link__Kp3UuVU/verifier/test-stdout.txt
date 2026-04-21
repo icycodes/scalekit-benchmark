@@ -1,0 +1,35 @@
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 13ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 2 items
+
+tests/test_final_state.py .F                                             [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_portal_link_content ___________________________
+
+    def test_portal_link_content():
+        with open(LINK_FILE, "r") as f:
+            link = f.read().strip()
+    
+        assert link.startswith("http"), "Portal link must be a valid URL."
+        # The portal link might be on a different subdomain or domain depending on the env,
+        # but it should at least be a URL.
+>       assert "org_1234567890" not in link, "Portal link should be a secure, short-lived tokenized URL, not containing the raw org ID in plain text usually."
+E       AssertionError: Portal link should be a secure, short-lived tokenized URL, not containing the raw org ID in plain text usually.
+E       assert 'org_1234567890' not in 'https://tab...rectory_sync'
+E         
+E         'org_1234567890' is contained here:
+E           https://tabbyml.scalekit.dev/admin-portal/org_1234567890?features=sso,directory_sync
+E         ?                                           ++++++++++++++
+
+tests/test_final_state.py:17: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_portal_link_file_exists
+FAILED tests/test_final_state.py::test_portal_link_content - AssertionError: ...
+========================= 1 failed, 1 passed in 0.01s ==========================

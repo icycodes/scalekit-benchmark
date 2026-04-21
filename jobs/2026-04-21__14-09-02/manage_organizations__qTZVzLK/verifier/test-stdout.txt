@@ -1,0 +1,66 @@
+Downloading pygments (1.2MiB)
+ Downloading pygments
+Installed 7 packages in 13ms
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 2 items
+
+tests/test_final_state.py .F                                             [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_verify_org_via_sdk ____________________________
+
+    def test_verify_org_via_sdk():
+        with open(ORG_ID_FILE, "r") as f:
+            org_id = f.read().strip()
+    
+        # Create a small verification script to fetch org details
+        verify_script = f"""
+    const {{ Scalekit }} = require('@scalekit-sdk/node');
+    const scalekit = new Scalekit(
+      process.env.SCALEKIT_ENVIRONMENT_URL,
+      process.env.SCALEKIT_CLIENT_ID,
+      process.env.SCALEKIT_CLIENT_SECRET
+    );
+    
+    async function verify() {{
+      try {{
+        const org = await scalekit.organization.getOrganization('{org_id}');
+        console.log(JSON.stringify(org));
+      }} catch (err) {{
+        console.error(err);
+        process.exit(1);
+      }}
+    }}
+    verify();
+    """
+        verify_script_path = os.path.join(PROJECT_DIR, "verify_org.js")
+        with open(verify_script_path, "w") as f:
+            f.write(verify_script)
+    
+        result = subprocess.run(["node", "verify_org.js"], capture_output=True, text=True, cwd=PROJECT_DIR)
+>       assert result.returncode == 0, f"Verification script failed: {result.stderr}"
+E       AssertionError: Verification script failed: file:///home/user/scalekit-orgs/verify_org.js:2
+E         const { Scalekit } = require('@scalekit-sdk/node');
+E                              ^
+E         
+E         ReferenceError: require is not defined in ES module scope, you can use import instead
+E         This file is being treated as an ES module because it has a '.js' file extension and '/home/user/scalekit-orgs/package.json' contains "type": "module". To treat it as a CommonJS script, rename it to use the '.cjs' file extension.
+E             at file:///home/user/scalekit-orgs/verify_org.js:2:22
+E             at ModuleJob.run (node:internal/modules/esm/module_job:430:25)
+E             at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:661:26)
+E             at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+E         
+E         Node.js v24.14.1
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['node', 'verify_org.js'], returncode=1, stdout='', stderr='file:///home/user/scalekit-orgs/veri...er:661:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.14.1\n').returncode
+
+tests/test_final_state.py:41: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_org_id_file_exists
+FAILED tests/test_final_state.py::test_verify_org_via_sdk - AssertionError: V...
+========================= 1 failed, 1 passed in 0.03s ==========================
