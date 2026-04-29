@@ -1,4 +1,4 @@
 1:"$Sreact.fragment"
-2:I[36064,["/scalekit-benchmark/_next/static/chunks/f9765c676dff8abe.js","/scalekit-benchmark/_next/static/chunks/c21188132e0e0d48.js","/scalekit-benchmark/_next/static/chunks/2ad5122eae704b1a.js"],"default"]
-3:I[81497,["/scalekit-benchmark/_next/static/chunks/f9765c676dff8abe.js","/scalekit-benchmark/_next/static/chunks/c21188132e0e0d48.js","/scalekit-benchmark/_next/static/chunks/2ad5122eae704b1a.js"],"default"]
-0:{"buildId":"Di_ZkevXBP6egfhtEHeQx","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
+2:I[36064,["/scalekit-benchmark/_next/static/chunks/eee3fa4a069aaac4.js","/scalekit-benchmark/_next/static/chunks/c21188132e0e0d48.js","/scalekit-benchmark/_next/static/chunks/3ecbb78a8ff87549.js"],"default"]
+3:I[81497,["/scalekit-benchmark/_next/static/chunks/eee3fa4a069aaac4.js","/scalekit-benchmark/_next/static/chunks/c21188132e0e0d48.js","/scalekit-benchmark/_next/static/chunks/3ecbb78a8ff87549.js"],"default"]
+0:{"buildId":"q8LMfp-iSgETdOrVaM8Nr","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
