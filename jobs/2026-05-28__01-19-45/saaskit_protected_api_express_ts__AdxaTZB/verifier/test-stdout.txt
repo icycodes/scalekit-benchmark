@@ -1,0 +1,527 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0, xprocess-1.0.2
+collected 9 items
+
+tests/test_final_state.py EEEEEEEEE                                      [100%]
+
+==================================== ERRORS ====================================
+_____________ ERROR at setup of test_landing_page_has_sign_in_link _____________
+
+xprocess = <xprocess.xprocess.XProcess object at 0x74d7d3f8b8c0>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the user's Express.js app via `npm start` and wait until port
+        3000 is listening before yielding to the tests."""
+    
+        class Starter(ProcessStarter):
+            name = "saaskit_protected_api_app"
+            args = ["npm", "start"]
+            env = os.environ.copy()
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 180
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.settimeout(1.0)
+                    return s.connect_ex(("localhost", 3000)) == 0
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x74d7d35cf440>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 180                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/saaskit_protected_api_app$ npm start
+process 'saaskit_protected_api_app' started pid=633
+_________ ERROR at setup of test_login_redirects_to_scalekit_authorize _________
+
+xprocess = <xprocess.xprocess.XProcess object at 0x74d7d3f8b8c0>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the user's Express.js app via `npm start` and wait until port
+        3000 is listening before yielding to the tests."""
+    
+        class Starter(ProcessStarter):
+            name = "saaskit_protected_api_app"
+            args = ["npm", "start"]
+            env = os.environ.copy()
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 180
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.settimeout(1.0)
+                    return s.connect_ex(("localhost", 3000)) == 0
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x74d7d35cf440>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 180                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+_____ ERROR at setup of test_dashboard_redirects_to_login_when_no_cookies ______
+
+xprocess = <xprocess.xprocess.XProcess object at 0x74d7d3f8b8c0>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the user's Express.js app via `npm start` and wait until port
+        3000 is listening before yielding to the tests."""
+    
+        class Starter(ProcessStarter):
+            name = "saaskit_protected_api_app"
+            args = ["npm", "start"]
+            env = os.environ.copy()
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 180
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.settimeout(1.0)
+                    return s.connect_ex(("localhost", 3000)) == 0
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x74d7d35cf440>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 180                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+_ ERROR at setup of test_dashboard_redirects_to_login_when_bogus_access_token __
+
+xprocess = <xprocess.xprocess.XProcess object at 0x74d7d3f8b8c0>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the user's Express.js app via `npm start` and wait until port
+        3000 is listening before yielding to the tests."""
+    
+        class Starter(ProcessStarter):
+            name = "saaskit_protected_api_app"
+            args = ["npm", "start"]
+            env = os.environ.copy()
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 180
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.settimeout(1.0)
+                    return s.connect_ex(("localhost", 3000)) == 0
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x74d7d35cf440>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 180                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+_____ ERROR at setup of test_api_me_returns_401_json_when_unauthenticated ______
+
+xprocess = <xprocess.xprocess.XProcess object at 0x74d7d3f8b8c0>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the user's Express.js app via `npm start` and wait until port
+        3000 is listening before yielding to the tests."""
+    
+        class Starter(ProcessStarter):
+            name = "saaskit_protected_api_app"
+            args = ["npm", "start"]
+            env = os.environ.copy()
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 180
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.settimeout(1.0)
+                    return s.connect_ex(("localhost", 3000)) == 0
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x74d7d35cf440>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 180                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+____ ERROR at setup of test_api_me_returns_401_json_when_bogus_access_token ____
+
+xprocess = <xprocess.xprocess.XProcess object at 0x74d7d3f8b8c0>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the user's Express.js app via `npm start` and wait until port
+        3000 is listening before yielding to the tests."""
+    
+        class Starter(ProcessStarter):
+            name = "saaskit_protected_api_app"
+            args = ["npm", "start"]
+            env = os.environ.copy()
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 180
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.settimeout(1.0)
+                    return s.connect_ex(("localhost", 3000)) == 0
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x74d7d35cf440>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 180                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+_________ ERROR at setup of test_goodbye_page_shows_signed_out_message _________
+
+xprocess = <xprocess.xprocess.XProcess object at 0x74d7d3f8b8c0>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the user's Express.js app via `npm start` and wait until port
+        3000 is listening before yielding to the tests."""
+    
+        class Starter(ProcessStarter):
+            name = "saaskit_protected_api_app"
+            args = ["npm", "start"]
+            env = os.environ.copy()
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 180
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.settimeout(1.0)
+                    return s.connect_ex(("localhost", 3000)) == 0
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x74d7d35cf440>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 180                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+____ ERROR at setup of test_logout_redirects_to_scalekit_and_clears_cookies ____
+
+xprocess = <xprocess.xprocess.XProcess object at 0x74d7d3f8b8c0>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the user's Express.js app via `npm start` and wait until port
+        3000 is listening before yielding to the tests."""
+    
+        class Starter(ProcessStarter):
+            name = "saaskit_protected_api_app"
+            args = ["npm", "start"]
+            env = os.environ.copy()
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 180
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.settimeout(1.0)
+                    return s.connect_ex(("localhost", 3000)) == 0
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x74d7d35cf440>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 180                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+_________ ERROR at setup of test_end_to_end_signin_with_test_user_otp __________
+
+xprocess = <xprocess.xprocess.XProcess object at 0x74d7d3f8b8c0>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """Start the user's Express.js app via `npm start` and wait until port
+        3000 is listening before yielding to the tests."""
+    
+        class Starter(ProcessStarter):
+            name = "saaskit_protected_api_app"
+            args = ["npm", "start"]
+            env = os.environ.copy()
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 180
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    s.settimeout(1.0)
+                    return s.connect_ex(("localhost", 3000)) == 0
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x74d7d35cf440>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 180                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+=========================== short test summary info ============================
+ERROR tests/test_final_state.py::test_landing_page_has_sign_in_link - Timeout...
+ERROR tests/test_final_state.py::test_login_redirects_to_scalekit_authorize
+ERROR tests/test_final_state.py::test_dashboard_redirects_to_login_when_no_cookies
+ERROR tests/test_final_state.py::test_dashboard_redirects_to_login_when_bogus_access_token
+ERROR tests/test_final_state.py::test_api_me_returns_401_json_when_unauthenticated
+ERROR tests/test_final_state.py::test_api_me_returns_401_json_when_bogus_access_token
+ERROR tests/test_final_state.py::test_goodbye_page_shows_signed_out_message
+ERROR tests/test_final_state.py::test_logout_redirects_to_scalekit_and_clears_cookies
+ERROR tests/test_final_state.py::test_end_to_end_signin_with_test_user_otp - ...
+======================== 9 errors in 180.31s (0:03:00) =========================

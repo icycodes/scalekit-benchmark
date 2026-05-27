@@ -1,0 +1,65 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 0,
+            "failed": 4,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779906357684,
+            "stop": 1779906357717
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_tools_json_top_level_shape",
+                "status": "failed",
+                "duration": 9,
+                "start": 1779906357700,
+                "stop": 1779906357709,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "@pytest.fixture(scope=\"module\")\n    def tools_catalog():\n>       assert os.path.isfile(TOOLS_JSON_PATH), (\n            f\"Expected catalog file {TOOLS_JSON_PATH} to exist.\"\n        )\nE       AssertionError: Expected catalog file /home/user/myproject/tools.json to exist.\nE       assert False\nE        +  where False = <function isfile at 0x7cad47624220>('/home/user/myproject/tools.json')\nE        +    where <function isfile at 0x7cad47624220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:14: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_github_tools_listed_correctly",
+                "status": "failed",
+                "duration": 3,
+                "start": 1779906357709,
+                "stop": 1779906357712,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "@pytest.fixture(scope=\"module\")\n    def tools_catalog():\n>       assert os.path.isfile(TOOLS_JSON_PATH), (\n            f\"Expected catalog file {TOOLS_JSON_PATH} to exist.\"\n        )\nE       AssertionError: Expected catalog file /home/user/myproject/tools.json to exist.\nE       assert False\nE        +  where False = <function isfile at 0x7cad47624220>('/home/user/myproject/tools.json')\nE        +    where <function isfile at 0x7cad47624220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:14: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_slack_tools_listed_correctly",
+                "status": "failed",
+                "duration": 2,
+                "start": 1779906357712,
+                "stop": 1779906357714,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "@pytest.fixture(scope=\"module\")\n    def tools_catalog():\n>       assert os.path.isfile(TOOLS_JSON_PATH), (\n            f\"Expected catalog file {TOOLS_JSON_PATH} to exist.\"\n        )\nE       AssertionError: Expected catalog file /home/user/myproject/tools.json to exist.\nE       assert False\nE        +  where False = <function isfile at 0x7cad47624220>('/home/user/myproject/tools.json')\nE        +    where <function isfile at 0x7cad47624220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:14: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_log_summary_lines",
+                "status": "failed",
+                "duration": 3,
+                "start": 1779906357714,
+                "stop": 1779906357717,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "@pytest.fixture(scope=\"module\")\n    def log_text():\n>       assert os.path.isfile(LOG_FILE_PATH), (\n            f\"Expected log file {LOG_FILE_PATH} to exist.\"\n        )\nE       AssertionError: Expected log file /home/user/myproject/output.log to exist.\nE       assert False\nE        +  where False = <function isfile at 0x7cad47624220>('/home/user/myproject/output.log')\nE        +    where <function isfile at 0x7cad47624220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:28: AssertionError"
+            }
+        ]
+    }
+}

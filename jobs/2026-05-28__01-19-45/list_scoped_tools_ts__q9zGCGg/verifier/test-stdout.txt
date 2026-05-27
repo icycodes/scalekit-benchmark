@@ -1,0 +1,71 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 4 items
+
+tests/test_final_state.py EEEE                                           [100%]
+
+==================================== ERRORS ====================================
+______________ ERROR at setup of test_tools_json_top_level_shape _______________
+
+    @pytest.fixture(scope="module")
+    def tools_catalog():
+>       assert os.path.isfile(TOOLS_JSON_PATH), (
+            f"Expected catalog file {TOOLS_JSON_PATH} to exist."
+        )
+E       AssertionError: Expected catalog file /home/user/myproject/tools.json to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7cad47624220>('/home/user/myproject/tools.json')
+E        +    where <function isfile at 0x7cad47624220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:14: AssertionError
+_____________ ERROR at setup of test_github_tools_listed_correctly _____________
+
+    @pytest.fixture(scope="module")
+    def tools_catalog():
+>       assert os.path.isfile(TOOLS_JSON_PATH), (
+            f"Expected catalog file {TOOLS_JSON_PATH} to exist."
+        )
+E       AssertionError: Expected catalog file /home/user/myproject/tools.json to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7cad47624220>('/home/user/myproject/tools.json')
+E        +    where <function isfile at 0x7cad47624220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:14: AssertionError
+_____________ ERROR at setup of test_slack_tools_listed_correctly ______________
+
+    @pytest.fixture(scope="module")
+    def tools_catalog():
+>       assert os.path.isfile(TOOLS_JSON_PATH), (
+            f"Expected catalog file {TOOLS_JSON_PATH} to exist."
+        )
+E       AssertionError: Expected catalog file /home/user/myproject/tools.json to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7cad47624220>('/home/user/myproject/tools.json')
+E        +    where <function isfile at 0x7cad47624220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:14: AssertionError
+___________________ ERROR at setup of test_log_summary_lines ___________________
+
+    @pytest.fixture(scope="module")
+    def log_text():
+>       assert os.path.isfile(LOG_FILE_PATH), (
+            f"Expected log file {LOG_FILE_PATH} to exist."
+        )
+E       AssertionError: Expected log file /home/user/myproject/output.log to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7cad47624220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x7cad47624220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:28: AssertionError
+=========================== short test summary info ============================
+ERROR tests/test_final_state.py::test_tools_json_top_level_shape - AssertionE...
+ERROR tests/test_final_state.py::test_github_tools_listed_correctly - Asserti...
+ERROR tests/test_final_state.py::test_slack_tools_listed_correctly - Assertio...
+ERROR tests/test_final_state.py::test_log_summary_lines - AssertionError: Exp...
+============================== 4 errors in 0.03s ===============================

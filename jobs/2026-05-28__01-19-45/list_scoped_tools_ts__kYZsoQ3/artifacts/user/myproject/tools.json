@@ -1,0 +1,36 @@
+{
+  "github-test": [
+    "github_branches_list",
+    "github_branch_create",
+    "github_branch_get",
+    "github_pull_requests_list",
+    "github_pull_request_create",
+    "github_user_repos_list",
+    "github_public_repos_list",
+    "github_repo_get",
+    "github_file_create_update",
+    "github_file_contents_get",
+    "github_issues_list",
+    "github_issue_create"
+  ],
+  "slack-test": [
+    "slack_list_channels",
+    "slack_get_conversation_info",
+    "slack_leave_conversation",
+    "slack_add_reaction",
+    "slack_fetch_conversation_history",
+    "slack_invite_users_to_channel",
+    "slack_update_message",
+    "slack_lookup_user_by_email",
+    "slack_pin_message",
+    "slack_set_user_status",
+    "slack_list_users",
+    "slack_delete_message",
+    "slack_get_conversation_replies",
+    "slack_create_channel",
+    "slack_get_user_info",
+    "slack_join_conversation",
+    "slack_get_user_presence",
+    "slack_send_message"
+  ]
+}

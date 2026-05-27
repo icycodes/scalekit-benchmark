@@ -1,0 +1,242 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /bootstrap
+plugins: Faker-25.8.0, anyio-4.13.0, json-ctrf-0.5.0
+collected 6 items
+
+bootstrap/test_initial_state.py::test_python3_available 
+-------------------------------- live log setup --------------------------------
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.address`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.address` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.automotive`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.automotive` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.bank`.
+DEBUG    faker.factory:factory.py:86 Specified locale `en_US` is not available for provider `faker.providers.bank`. Locale reset to `en_GB` for this provider.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.barcode`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.barcode` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.color`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.color` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.company`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.company` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.credit_card`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.credit_card` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.currency`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.currency` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.date_time`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.date_time` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:106 Provider `faker.providers.emoji` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+DEBUG    faker.factory:factory.py:106 Provider `faker.providers.file` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.geo`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.geo` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.internet`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.internet` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:106 Provider `faker.providers.isbn` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.job`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.job` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.lorem`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.lorem` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.misc`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.misc` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.passport`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.passport` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.person`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.person` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.phone_number`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.phone_number` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:106 Provider `faker.providers.profile` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+DEBUG    faker.factory:factory.py:106 Provider `faker.providers.python` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+DEBUG    faker.factory:factory.py:106 Provider `faker.providers.sbn` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+DEBUG    faker.factory:factory.py:76 Looking for locale `en_US` in provider `faker.providers.ssn`.
+DEBUG    faker.factory:factory.py:95 Provider `faker.providers.ssn` has been localized to `en_US`.
+DEBUG    faker.factory:factory.py:106 Provider `faker.providers.user_agent` does not feature localization. Specified locale `en_US` is not utilized for this provider.
+PASSED
+bootstrap/test_initial_state.py::test_project_directory_exists PASSED
+bootstrap/test_initial_state.py::test_project_directory_is_empty PASSED
+bootstrap/test_initial_state.py::test_scalekit_sdk_importable PASSED
+bootstrap/test_initial_state.py::test_scalekit_env_vars_present PASSED
+bootstrap/test_initial_state.py::test_zealt_run_id_present PASSED
+
+=============================== warnings summary ===============================
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/tool_request.py:5: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ToolRequest(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/create_connected_account_request.py:13: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class CreateConnectedAccountRequest(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/update_connected_account_request.py:13: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class UpdateConnectedAccountRequest(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/execute_tool_response.py:9: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ExecuteToolResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/magic_link_response.py:7: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class MagicLinkResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+test_initial_state.py::test_scalekit_sdk_importable
+test_initial_state.py::test_scalekit_sdk_importable
+test_initial_state.py::test_scalekit_sdk_importable
+test_initial_state.py::test_scalekit_sdk_importable
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/pydantic/_internal/_generate_schema.py:325: PydanticDeprecatedSince20: `json_encoders` is deprecated. See https://docs.pydantic.dev/2.13/concepts/serialization/#custom-serializers for alternatives. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    warnings.warn(
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/list_connected_accounts_response.py:9: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ConnectedAccountForList(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/list_connected_accounts_response.py:106: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ListConnectedAccountsResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/delete_connected_account_response.py:4: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class DeleteConnectedAccountResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/get_connected_account_auth_response.py:93: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class GetConnectedAccountAuthResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/get_connected_account_auth_response.py:137: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class GetConnectedAccountDetailsResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/create_connected_account_response.py:7: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class CreateConnectedAccountResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/update_connected_account_response.py:7: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class UpdateConnectedAccountResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/mcp_config.py:67: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class McpConfig(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/create_mcp_config_response.py:8: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class CreateMcpConfigResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/mcp_instance.py:13: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class McpInstance(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/mcp_instance.py:67: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class McpInstanceConnectionAuthState(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/ensure_mcp_instance_response.py:8: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class EnsureMcpInstanceResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/get_mcp_instance_response.py:8: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class GetMcpInstanceResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/get_mcp_instance_auth_state_response.py:8: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class GetMcpInstanceAuthStateResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/list_mcp_configs_response.py:8: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ListMcpConfigsResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/list_mcp_instances_response.py:8: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ListMcpInstancesResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/update_mcp_config_response.py:8: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class UpdateMcpConfigResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/update_mcp_instance_response.py:8: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class UpdateMcpInstanceResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/delete_mcp_config_response.py:4: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class DeleteMcpConfigResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/delete_mcp_instance_response.py:4: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class DeleteMcpInstanceResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/verify_connected_account_user_response.py:5: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class VerifyConnectedAccountUserResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/custom_provider.py:207: PydanticDeprecatedSince20: Pydantic V1 style `@root_validator` validators are deprecated. You should migrate to Pydantic V2 style `@model_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    @root_validator(skip_on_failure=True)
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/custom_provider.py:139: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class AuthPattern(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/custom_provider.py:272: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class Provider(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/create_custom_provider_request.py:60: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    @validator("proxy_url")
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/create_custom_provider_request.py:67: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    @validator("auth_patterns")
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/create_custom_provider_request.py:9: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class CreateCustomProviderRequest(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/update_custom_provider_request.py:57: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    @validator("proxy_url")
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/update_custom_provider_request.py:64: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    @validator("auth_patterns")
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/update_custom_provider_request.py:9: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class UpdateCustomProviderRequest(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/list_providers_request.py:43: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    @validator("provider_type")
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/list_providers_request.py:49: PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    @validator("page_size")
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/list_providers_request.py:6: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ListProvidersRequest(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/requests/delete_custom_provider_request.py:4: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class DeleteCustomProviderRequest(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/create_custom_provider_response.py:8: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class CreateCustomProviderResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/update_custom_provider_response.py:8: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class UpdateCustomProviderResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/list_providers_response.py:8: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class ListProvidersResponse(BaseModel):
+
+test_initial_state.py::test_scalekit_sdk_importable
+  /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/delete_custom_provider_response.py:4: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class DeleteCustomProviderResponse(BaseModel):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 6 passed, 49 warnings in 0.37s ========================

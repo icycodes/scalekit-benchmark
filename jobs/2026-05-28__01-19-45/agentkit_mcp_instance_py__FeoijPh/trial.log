@@ -1,0 +1,93 @@
+Skipping image OS validation for hb__agentkit_mcp_instance_py: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-feoijph > /logs/artifacts/run-id && echo agentkit_mcp_instance_py__FeoijPh > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Provision a Per-User Scalekit MCP Server (Python)
+
+## Background
+Scalekit AgentKit can publish a **Model Context Protocol (MCP) server** that proxies tool calls to third-party SaaS apps using each user's stored credentials. The pattern has two pieces:
+
+* An **MCP config** declares which connections (and optionally which specific tools) the MCP server exposes. It is created once.
+* An **MCP instance** is the per-user instantiation of a config; calling `ensure_instance` returns a pre-authenticated MCP URL that any MCP-compatible client (Claude Desktop, Cursor, LangChain, etc.) can connect to.
+
+In this task you will use the Scalekit Python SDK to provision an MCP config that exposes both the `github-test` and the `slack-test` connections, then ensure a per-user MCP instance for the user `zealt-user01`, and write the resulting URL to a log file.
+
+The Scalekit credentials (`SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`, `SCALEKIT_ENV_URL`) are already present in the environment. The two connections and the `zealt-user01` connected accounts are already `ACTIVE`, so no OAuth flow is required.
+
+## Requirements
+- Write the program at `/home/user/myproject/run.py`.
+- The program MUST use the Scalekit Python SDK (`scalekit-sdk-python`) and the AgentKit MCP API (`actions.mcp.create_config` and `actions.mcp.ensure_instance`). It MUST NOT shell out, call the Scalekit HTTP API directly, or mock these methods.
+- Create an MCP config whose `name` is `agentkit-mcp-${run-id}`, where `run-id` is read at runtime from the `ZEALT_RUN_ID` environment variable. Do NOT hardcode the run-id.
+- The MCP config MUST expose BOTH the `github-test` and the `slack-test` connections (the connection list inside the config must contain entries for both).
+- After creating the config, call `ensure_instance` against the same config name with `zealt-user01` as the user identifier to obtain that user's MCP URL.
+- After a successful ensure_instance call, the program MUST append exactly three lines to the log file in the format described in the Acceptance Criteria.
+
+## Implementation Hints
+- Initialize `ScalekitClient` with the three Scalekit environment variables (`SCALEKIT_ENV_URL`, `SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`).
+- The Scalekit dashboard connection names are exactly `github-test` and `slack-test`, and the user identifier is exactly `zealt-user01`. These are workspace-specific names that must be hardcoded as string literals — no extra environment variables exist for them.
+- The MCP config API lives under `scalekit_client.actions.mcp`. You will need `McpConfigConnectionToolMapping` (importable from `scalekit.actions.types`) when building the `connection_tool_mappings` argument to `create_config`.
+- It is fine to omit the `tools` field in a `McpConfigConnectionToolMapping` to expose every tool of that connection.
+- `ensure_instance` is idempotent: calling it again for the same `(config_name, user_identifier)` pair returns the same instance, so it is safe to re-run.
+- The returned instance object exposes the MCP URL (commonly `instance.mcp_url`, or `instance.url` depending on the SDK version). Either is acceptable as long as the URL written to the log file is the URL returned by the SDK.
+- Read `ZEALT_RUN_ID` from the environment at runtime; do not hardcode the run-id anywhere in the script.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Script path: /home/user/myproject/run.py
+- Log file: /home/user/myproject/output.log
+- Ensure the script is actually executed against the live Scalekit environment and the MCP config + instance are really created via the Scalekit Python SDK (no mocks, no stubs, no direct HTTP calls to the Scalekit API).
+- The MCP config MUST be named `agentkit-mcp-${run-id}` (run-id read from `ZEALT_RUN_ID`).
+- The MCP config MUST be registered with `actions.mcp.create_config` and expose both the `github-test` and the `slack-test` connections.
+- A per-user MCP instance MUST be ensured for `zealt-user01` against that config.
+- The log file MUST contain exactly the following three lines, each on its own line and in this exact label format:
+  - `Config: agentkit-mcp-<run-id>`
+  - `Identifier: zealt-user01`
+  - `MCP URL: <https url returned by ensure_instance>`
+- The value on the `MCP URL:` line MUST be an `https://` URL that points to a Scalekit-hosted host (host contains `scalekit`).
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

@@ -1,0 +1,2 @@
+from scalekit.actions.types import McpConfigConnectionToolMapping
+print(McpConfigConnectionToolMapping)

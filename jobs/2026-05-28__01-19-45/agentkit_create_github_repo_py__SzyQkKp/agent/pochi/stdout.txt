@@ -1,0 +1,13 @@
+[18:32:56.360 window] ERROR (#1): RuntimeError: access to a null reference (evaluating 'func(...cArgs)')
+  RuntimeError: access to a null reference (evaluating 'func(...cArgs)')
+    at unknown
+    at unknown
+    at ccall (/$bunfs/root/pochi:486091:19)
+    at <anonymous> (/$bunfs/root/pochi:487210:22)
+    at makeInMemoryDb (/$bunfs/root/pochi:488308:40)
+    at <anonymous> (/$bunfs/root/pochi:488905:64)
+    at @livestore/adapter-node:adapter (/$bunfs/root/pochi:489334:33)
+    at createStore:makeAdapter (/$bunfs/root/pochi:464493:102)
+    at createStore (/$bunfs/root/pochi:464523:35)
+    at createStore (/$bunfs/root/pochi:464454:33)
+  thread: window

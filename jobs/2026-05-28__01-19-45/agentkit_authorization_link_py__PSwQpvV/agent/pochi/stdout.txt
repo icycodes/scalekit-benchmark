@@ -1,0 +1,52 @@
+- Initializing MCP connections...
+You
+# Scalekit AgentKit: Generate an Authorization Link for a New User ## Background Scalekit AgentKit lets your agent connect to third-party SaaS apps on behalf of a user. Before the agent can act, you must (a) create or fetch a `connected_account` for a `(connection, identifier)` pair, and (b) if the account is not yet `ACTIVE`, generate a hosted authorization link the user can use to authorize OAuth. In this task you will use the Scalekit Python SDK to bootstrap the OAuth flow for a brand-new identifier against the `github-test` connection. Because the identifier is new, the connected account must start in the `PENDING` state and you must surface a real Scalekit-hosted authorization URL for the user to complete the OAuth flow. ## Requirements * Use the Scalekit Python SDK (`scalekit-sdk-python`) and read `SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`, and `SCALEKIT_ENV_URL` from environment variables. * Use the connection name `github-test` exactly as it is registered in the dashboard. * Use a brand-new identifier based on the `run-id` so the resulting connected account is freshly created and starts in `PENDING`. * Call `get_or_create_connected_account` and then `get_authorization_link` for that same identifier and connection. * Persist the result of the run to a log file so the verifier can inspect it. ## Implementation Hints * Initialize `ScalekitClient` with the three environment variables. * The `connection_name` is workspace-specific and case-sensitive. The provided fixture is `github-test` — do not use the provider slug `github`. * Read the `run-id` from the `ZEALT_RUN_ID` environment variable and append it to the identifier so concurrent task runs do not collide and the account starts in `PENDING`. * Use `scalekit.actions.get_or_create_connected_account(...)` to bootstrap the account record and `scalekit.actions.get_authorization_link(...)` to obtain the hosted OAuth link. * Do not perform the OAuth flow; just generate the link. * Write all output to the project log file. ## Acceptance Criteria * Project path: /home/user/myproject * Ensure the script is actually executed against the live Scalekit environment and the log artifact exists (no mocking). * Log file: /home/user/myproject/output.log * The identifier used **MUST** be `agentkit-link-user-${run-id}` where `${run-id}` is read from the `ZEALT_RUN_ID` environment variable. * The connection used **MUST** be `github-test`. * The log file MUST contain the following three lines, each on its own line and in this exact label format: * `Identifier: <identifier>` * `Status: <connected_account_status>` * `Authorization URL: <https authorization link>` * After the script runs, the corresponding connected account on Scalekit MUST exist and be in the `PENDING` state (i.e., not yet authorized). * The `Authorization URL` value MUST be an `https://` URL pointing to a Scalekit-hosted endpoint.   
+
+Pochi
+💭 Thinking for 376 characters   
+📂 Listing files in /home/user/myproject ✔ 
+💫 Executing echo "SCALEKIT_ENV_URL=$SCALEKIT_ENV_URL" && echo "SCALEKIT_CLIENT_ID=$SCALEKIT_CLIENT_ID" && echo "SCALEKIT_CLIENT_SECRET=${SCALEKIT_CLIENT_SECRET:0:8}..." && echo "ZEALT_RUN_ID=$ZEALT_RUN_ID" ✔ 
+💫 Executing pip show scalekit-sdk-python 2>/dev/null || pip install scalekit-sdk-python 2>&1 | tail -5 ✔ 
+💫 Executing python3 -c "from scalekit import ScalekitClient; help(ScalekitClient)" 2>&1 | head -40 ✔ 
+💫 Executing python3 -c "from scalekit import ScalekitClient; import inspect; c = dir(ScalekitClient); print(c)" 2>&1 ✔ 
+💫 Executing python3 -c "from scalekit.actions import Actions; help(Actions)" 2>&1 | head -80 ✔ 
+💫 Executing find /usr/local/lib/python3.12/dist-packages/scalekit -name "*.py" | head -30 && ls /usr/local/lib/python3.12/dist-packages/scalekit/ ✔ 
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py ✔ 
+Now I have enough information about the SDK. Let me write the script:   
+💫 Executing mkdir -p /home/user/myproject ✔ 
+✏️  Writing /home/user/myproject/main.py ✔ 
+💫 Executing cd /home/user/myproject && python3 main.py ✖ "Command exited with code 1"
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/create_connected_account_response.py ✔ 
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/get_connected_account_auth_response.py ✔ 
+The status is nested under `account.connected_account.status`. Let me also check the `MagicLinkResponse`:   
+💫 Executing grep -n "class MagicLinkResponse" /usr/local/lib/python3.12/dist-packages/scalekit/actions/types.py && grep -n "url\|magic_link\|authorization" /usr/local/lib/python3.12/dist-packages/scalekit/actions/types.py | head -30 ✖ "Command exited with code 1"
+💫 Executing find /usr/local/lib/python3.12/dist-packages/scalekit -name "*.py" | xargs grep -l "MagicLinkResponse" 2>/dev/null ✔ 
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/magic_link_response.py ✔ 
+The authorization URL is at `auth_link_response.link`. Now I'll fix the script:   
+🔧 Applying diff to /home/user/myproject/main.py ✔ 
+💫 Executing cd /home/user/myproject && python3 main.py ✔ 
+💫 Executing cat /home/user/myproject/output.log ✔ 
+The script executed successfully against the live Scalekit environment.   
+🎉 Task Completed
+The script `/home/user/myproject/main.py` was created and executed successfully against the live Scalekit environment.
+
+**What was implemented:**
+- Reads `SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`, `SCALEKIT_ENV_URL`, and `ZEALT_RUN_ID` from environment variables
+- Builds identifier `agentkit-link-user-{run-id}` → `agentkit-link-user-zr-pswqpvv`
+- Calls `scalekit.actions.get_or_create_connected_account()` with `connection_name="github-test"` to create a fresh `PENDING_AUTH` account
+- Calls `scalekit.actions.get_authorization_link()` to obtain the hosted OAuth URL
+- Writes the three required lines to `/home/user/myproject/output.log`
+
+**Log file contents (`output.log`):**
+```
+Identifier: agentkit-link-user-zr-pswqpvv
+Status: PENDING_AUTH
+Authorization URL: https://tabbyml.scalekit.dev/magicLink/1b638fb9-dca5-416a-9d1b-8e6da2d14e9b_o
+```
+
+All acceptance criteria are met:
+- Identifier matches the required format `agentkit-link-user-${run-id}`
+- Connection used is `github-test`
+- Connected account is in `PENDING_AUTH` state (not yet authorized)
+- Authorization URL is an `https://` link pointing to the Scalekit-hosted endpoint   
+  

@@ -1,0 +1,4 @@
+{
+    "task": ["SCALEKIT_CLIENT_ID", "SCALEKIT_CLIENT_SECRET", "SCALEKIT_ENV_URL"],
+    "verifier": ["GH_TOKEN"]
+}

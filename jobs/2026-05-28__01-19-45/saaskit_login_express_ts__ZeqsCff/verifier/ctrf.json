@@ -1,0 +1,85 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 6,
+            "passed": 4,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779906557351,
+            "stop": 1779906877374
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_landing_page_has_sign_in_link",
+                "status": "passed",
+                "duration": 532,
+                "start": 1779906557457,
+                "stop": 1779906557989,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_login_redirects_to_scalekit_authorize",
+                "status": "passed",
+                "duration": 11,
+                "start": 1779906557990,
+                "stop": 1779906558001,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_dashboard_redirects_to_login_when_unauthenticated",
+                "status": "passed",
+                "duration": 7,
+                "start": 1779906558002,
+                "stop": 1779906558009,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_goodbye_page_shows_signed_out_message",
+                "status": "passed",
+                "duration": 7,
+                "start": 1779906558010,
+                "stop": 1779906558017,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_logout_redirects_to_scalekit_and_clears_cookies",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 43,
+                "start": 1779906558018,
+                "stop": 1779906558061,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_logout_redirects_to_scalekit_and_clears_cookies(start_app):\n        \"\"\"Hitting /logout (even with a synthetic id token cookie) must produce\n        a redirect to Scalekit's /oidc/logout endpoint with id_token_hint and\n        post_logout_redirect_uri parameters, and must clear the session cookies.\"\"\"\n        synthetic_cookies = {\n            \"idToken\": \"synthetic-id-token-for-logout-test\",\n            \"accessToken\": \"synthetic-access-token-for-logout-test\",\n            \"refreshToken\": \"synthetic-refresh-token-for-logout-test\",\n        }\n        resp = requests.get(\n            f\"{BASE_URL}/logout\",\n            allow_redirects=False,\n            cookies=synthetic_cookies,\n            timeout=30,\n        )\n        assert resp.status_code in (302, 303, 307), (\n            f\"GET /logout must HTTP-redirect to the Scalekit logout endpoint, \"\n            f\"got status {resp.status_code}.\"\n        )\n    \n        location = resp.headers.get(\"Location\", \"\")\n        assert location.startswith(\"https://\"), (\n            f\"GET /logout Location must be an https:// Scalekit URL, got: {location!r}\"\n        )\n    \n        parsed = urlparse(location)\n        assert \"scalekit\" in parsed.netloc.lower(), (\n            f\"GET /logout Location must be on a Scalekit-hosted host, \"\n            f\"got netloc: {parsed.netloc!r}\"\n        )\n        assert \"logout\" in parsed.path.lower(), (\n            f\"GET /logout Location must hit a logout endpoint (e.g., /oidc/logout), \"\n            f\"got path: {parsed.path!r}\"\n        )\n    \n        qs = parse_qs(parsed.query)\n        id_token_hint = qs.get(\"id_token_hint\", [])\n>       assert id_token_hint and id_token_hint[0], (\n            f\"Logout URL must include a non-empty id_token_hint parameter, \"\n            f\"got query: {parsed.query!r}\"\n        )\nE       AssertionError: Logout URL must include a non-empty id_token_hint parameter, got query: ''\nE       assert ([])\n\ntests/test_final_state.py:183: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_end_to_end_signin_with_test_user_otp",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 319312,
+                "start": 1779906558062,
+                "stop": 1779906877374,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\nbrowser_verifier = <pochi_verifier.verifier.PochiVerifier object at 0x7ab2104ab2f0>\n\n    def test_end_to_end_signin_with_test_user_otp(start_app, browser_verifier):\n        \"\"\"Drive Scalekit's hosted login flow with the preconfigured test user and\n        static OTP, then verify the dashboard shows the signed-in email and the\n        sign-out control works.\"\"\"\n        reason = (\n            \"The Express.js app must integrate Scalekit SaaSKit end-to-end. \"\n            \"Starting from the landing page, a user must be able to sign in through \"\n            \"Scalekit's hosted login using the preconfigured test user and static OTP, \"\n            \"land on a protected dashboard that shows their email, and then sign out \"\n            \"and end up on the goodbye page.\"\n        )\n        truth = (\n            \"Step 1: Navigate to http://localhost:3000/.\\n\"\n            \"Step 2: Click the visible 'Sign in' (or 'Log in') link/button on the landing page. \"\n            \"The browser must be redirected to a Scalekit-hosted login page (the URL host should contain 'scalekit').\\n\"\n            \"Step 3: On the Scalekit hosted login page, enter the email address \"\n            f\"'{TEST_USER_EMAIL}' into the email field and click Continue / Submit. \"\n            \"If the page asks to choose an authentication method, pick Email OTP / verification code.\\n\"\n            f\"Step 4: When the page prompts for a one-time code, enter '{TEST_USER_OTP}' and submit.\\n\"\n            \"Step 5: The browser must be redirected back to http://localhost:3000/callback?code=... \"\n            \"and then onward to http://localhost:3000/dashboard.\\n\"\n            f\"Step 6: Verify that the /dashboard page visibly contains the email \"\n            f\"'{TEST_USER_EMAIL}' somewhere in its content.\\n\"\n            \"Step 7: Verify that a visible 'Sign out' / 'Logout' link or button is present on /dashboard.\\n\"\n            \"Step 8: Click the 'Sign out' / 'Logout' control. The browser must end up at \"\n            \"http://localhost:3000/goodbye and the page must show a clearly visible \"\n            \"'signed out' / 'goodbye' / 'logged out' confirmation message.\"\n        )\n    \n        result = browser_verifier.verify(\n            reason=reason,\n            truth=truth,\n            use_browser_agent=True,\n            trajectory_dir=\"/logs/verifier/pochi/test_end_to_end_signin_with_test_user_otp\",\n        )\n>       assert result.status == \"pass\", (\n            f\"Browser verification failed: {getattr(result, 'reason', result)!r}\"\n        )\nE       AssertionError: Browser verification failed: \"The test failed at Step 8. After clicking 'Sign out' on the dashboard, the browser was redirected to a Scalekit confirmation page (https://tabbyml.scalekit.dev/a/auth/logout/confirm) and then back to the Scalekit login page (https://tabbyml.scalekit.dev/a/auth/login), failing to reach the required goodbye page (http://localhost:3000/goodbye) as specified in the verification steps. While the goodbye page was found to exist with the correct message when accessed manually, the integrated logout flow did not correctly navigate to it.\"\nE       assert 'fail' == 'pass'\nE         - pass\nE         + fail\n\ntests/test_final_state.py:273: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

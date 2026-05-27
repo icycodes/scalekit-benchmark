@@ -1,0 +1,41 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: Faker-25.8.0, anyio-4.13.0, json-ctrf-0.5.0
+collected 5 items
+
+tests/test_final_state.py F....                                          [100%]
+
+=================================== FAILURES ===================================
+________________ test_script_file_exists_and_uses_scalekit_sdk _________________
+
+    def test_script_file_exists_and_uses_scalekit_sdk():
+        assert os.path.isfile(SCRIPT_FILE), (
+            f"Expected the executor's script at {SCRIPT_FILE}, but it was not found."
+        )
+        with open(SCRIPT_FILE, "r", encoding="utf-8") as fh:
+            contents = fh.read()
+        assert re.search(r"\bscalekit\b", contents, re.IGNORECASE), (
+            f"Expected {SCRIPT_FILE} to import or reference the Scalekit Python SDK "
+            "(module name 'scalekit') so the action is performed against the real "
+            "Scalekit AgentKit API rather than mocked."
+        )
+>       assert re.search(r"execute[_]?tool", contents, re.IGNORECASE), (
+            f"Expected {SCRIPT_FILE} to call Scalekit's execute_tool (the AgentKit tool-execution "
+            f"entry point), but no such call was found."
+        )
+E       AssertionError: Expected /home/user/myproject/run.py to call Scalekit's execute_tool (the AgentKit tool-execution entry point), but no such call was found.
+E       assert None
+E        +  where None = <function search at 0x77a7ffc1bb00>('execute[_]?tool', '"""\nCreate a GitHub repository via Scalekit AgentKit for user zealt-user01.\n\nThis script uses the Scalekit Python ...   fh.write(log_line)\n\n    print(log_line, end="")\n    print("Done.")\n\n\nif __name__ == "__main__":\n    main()\n', re.IGNORECASE)
+E        +    where <function search at 0x77a7ffc1bb00> = re.search
+E        +    and   re.IGNORECASE = re.IGNORECASE
+
+tests/test_final_state.py:52: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_script_does_not_bypass_scalekit
+PASSED tests/test_final_state.py::test_log_file_exists_with_expected_format
+PASSED tests/test_final_state.py::test_github_repo_created_under_zealt_user01
+PASSED tests/test_final_state.py::test_github_repo_initialized_with_readme
+FAILED tests/test_final_state.py::test_script_file_exists_and_uses_scalekit_sdk
+========================= 1 failed, 4 passed in 1.49s ==========================

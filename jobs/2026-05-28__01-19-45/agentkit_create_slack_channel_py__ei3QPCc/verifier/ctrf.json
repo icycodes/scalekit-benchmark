@@ -1,0 +1,82 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 1,
+            "failed": 4,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779903805072,
+            "stop": 1779903806227
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_script_file_exists_and_uses_scalekit_sdk",
+                "status": "passed",
+                "duration": 36,
+                "start": 1779903805094,
+                "stop": 1779903805130,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_exists_with_expected_format",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 21,
+                "start": 1779903805130,
+                "stop": 1779903805151,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_exists_with_expected_format():\n>       assert os.path.isfile(LOG_FILE), (\n            f\"Expected the log file {LOG_FILE} to exist after the task ran.\"\n        )\nE       AssertionError: Expected the log file /home/user/myproject/output.log to exist after the task ran.\nE       assert False\nE        +  where False = <function isfile at 0x72511c664220>('/home/user/myproject/output.log')\nE        +    where <function isfile at 0x72511c664220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:67: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_slack_channel_created_with_expected_name",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 564,
+                "start": 1779903805151,
+                "stop": 1779903805715,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_slack_channel_created_with_expected_name():\n        expected_name = _expected_channel_name()\n        channels = _list_slack_channels()\n        names = [c.get(\"name\") for c in channels]\n>       assert expected_name in names, (\n            f\"Expected to find a Slack channel named '{expected_name}' in the workspace, \"\n            f\"but conversations.list returned: {names}\"\n        )\nE       AssertionError: Expected to find a Slack channel named 'agentkit-task-zr-ei3qpcc' in the workspace, but conversations.list returned: ['all-zealt-user01', 'social', 'sentiment-trigger_github_notion__ky4kb8k', 'test-chan-create_slack_channel_cli__tqcnhjm', 'new-channel', 'topic-test-slack_channel_topic_python__wdrooqx', 'topic-test-python-tmmb3up', 'topic-test-slack-channel-topic-python--unlespr', 'topic-test-slack_channel_topic_python__dqelbky']\nE       assert 'agentkit-task-zr-ei3qpcc' in ['all-zealt-user01', 'social', 'sentiment-trigger_github_notion__ky4kb8k', 'test-chan-create_slack_channel_cli__tqcnhjm', 'new-channel', 'topic-test-slack_channel_topic_python__wdrooqx', ...]\n\ntests/test_final_state.py:88: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_slack_channel_is_public_and_active",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 503,
+                "start": 1779903805716,
+                "stop": 1779903806219,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_slack_channel_is_public_and_active():\n        expected_name = _expected_channel_name()\n        channels = _list_slack_channels()\n        matching = [c for c in channels if c.get(\"name\") == expected_name]\n>       assert matching, (\n            f\"Expected to find the Slack channel '{expected_name}' via conversations.list.\"\n        )\nE       AssertionError: Expected to find the Slack channel 'agentkit-task-zr-ei3qpcc' via conversations.list.\nE       assert []\n\ntests/test_final_state.py:98: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_channel_id_matches_slack_api",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 7,
+                "start": 1779903806220,
+                "stop": 1779903806227,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_channel_id_matches_slack_api():\n        expected_name = _expected_channel_name()\n>       with open(LOG_FILE, \"r\", encoding=\"utf-8\") as fh:\nE       FileNotFoundError: [Errno 2] No such file or directory: '/home/user/myproject/output.log'\n\ntests/test_final_state.py:118: FileNotFoundError",
+                "message": "The test failed in the call phase"
+            }
+        ]
+    }
+}

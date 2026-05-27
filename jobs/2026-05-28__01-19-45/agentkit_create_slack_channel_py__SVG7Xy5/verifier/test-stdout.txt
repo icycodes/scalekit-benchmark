@@ -1,0 +1,65 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: Faker-25.8.0, anyio-4.13.0, json-ctrf-0.5.0
+collected 5 items
+
+tests/test_final_state.py .FFFF                                          [100%]
+
+=================================== FAILURES ===================================
+__________________ test_log_file_exists_with_expected_format ___________________
+
+    def test_log_file_exists_with_expected_format():
+>       assert os.path.isfile(LOG_FILE), (
+            f"Expected the log file {LOG_FILE} to exist after the task ran."
+        )
+E       AssertionError: Expected the log file /home/user/myproject/output.log to exist after the task ran.
+E       assert False
+E        +  where False = <function isfile at 0x783ead424220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x783ead424220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:67: AssertionError
+________________ test_slack_channel_created_with_expected_name _________________
+
+    def test_slack_channel_created_with_expected_name():
+        expected_name = _expected_channel_name()
+        channels = _list_slack_channels()
+        names = [c.get("name") for c in channels]
+>       assert expected_name in names, (
+            f"Expected to find a Slack channel named '{expected_name}' in the workspace, "
+            f"but conversations.list returned: {names}"
+        )
+E       AssertionError: Expected to find a Slack channel named 'agentkit-task-zr-svg7xy5' in the workspace, but conversations.list returned: ['all-zealt-user01', 'social', 'sentiment-trigger_github_notion__ky4kb8k', 'test-chan-create_slack_channel_cli__tqcnhjm', 'new-channel', 'topic-test-slack_channel_topic_python__wdrooqx', 'topic-test-python-tmmb3up', 'topic-test-slack-channel-topic-python--unlespr', 'topic-test-slack_channel_topic_python__dqelbky']
+E       assert 'agentkit-task-zr-svg7xy5' in ['all-zealt-user01', 'social', 'sentiment-trigger_github_notion__ky4kb8k', 'test-chan-create_slack_channel_cli__tqcnhjm', 'new-channel', 'topic-test-slack_channel_topic_python__wdrooqx', ...]
+
+tests/test_final_state.py:88: AssertionError
+___________________ test_slack_channel_is_public_and_active ____________________
+
+    def test_slack_channel_is_public_and_active():
+        expected_name = _expected_channel_name()
+        channels = _list_slack_channels()
+        matching = [c for c in channels if c.get("name") == expected_name]
+>       assert matching, (
+            f"Expected to find the Slack channel '{expected_name}' via conversations.list."
+        )
+E       AssertionError: Expected to find the Slack channel 'agentkit-task-zr-svg7xy5' via conversations.list.
+E       assert []
+
+tests/test_final_state.py:98: AssertionError
+____________________ test_log_channel_id_matches_slack_api _____________________
+
+    def test_log_channel_id_matches_slack_api():
+        expected_name = _expected_channel_name()
+>       with open(LOG_FILE, "r", encoding="utf-8") as fh:
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/user/myproject/output.log'
+
+tests/test_final_state.py:118: FileNotFoundError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_script_file_exists_and_uses_scalekit_sdk
+FAILED tests/test_final_state.py::test_log_file_exists_with_expected_format
+FAILED tests/test_final_state.py::test_slack_channel_created_with_expected_name
+FAILED tests/test_final_state.py::test_slack_channel_is_public_and_active - A...
+FAILED tests/test_final_state.py::test_log_channel_id_matches_slack_api - Fil...
+========================= 4 failed, 1 passed in 1.11s ==========================

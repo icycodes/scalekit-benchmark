@@ -1,0 +1,112 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: Faker-25.8.0, anyio-4.13.0, json-ctrf-0.5.0
+collected 5 items
+
+tests/test_final_state.py FFFFF                                          [100%]
+
+=================================== FAILURES ===================================
+________________ test_script_file_exists_and_uses_scalekit_sdk _________________
+
+    def test_script_file_exists_and_uses_scalekit_sdk():
+>       assert os.path.isfile(SCRIPT_FILE), (
+            f"Expected the executor's script at {SCRIPT_FILE}, but it was not found."
+        )
+E       AssertionError: Expected the executor's script at /home/user/myproject/run.py, but it was not found.
+E       assert False
+E        +  where False = <function isfile at 0x7e2496ca4220>('/home/user/myproject/run.py')
+E        +    where <function isfile at 0x7e2496ca4220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:42: AssertionError
+_____________________ test_script_does_not_bypass_scalekit _____________________
+
+    def test_script_does_not_bypass_scalekit():
+        """The repo MUST be created via Scalekit AgentKit, not via gh CLI or direct GitHub REST."""
+>       with open(SCRIPT_FILE, "r", encoding="utf-8") as fh:
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/user/myproject/run.py'
+
+tests/test_final_state.py:60: FileNotFoundError
+__________________ test_log_file_exists_with_expected_format ___________________
+
+    def test_log_file_exists_with_expected_format():
+>       assert os.path.isfile(LOG_FILE), (
+            f"Expected the log file {LOG_FILE} to exist after the task ran."
+        )
+E       AssertionError: Expected the log file /home/user/myproject/output.log to exist after the task ran.
+E       assert False
+E        +  where False = <function isfile at 0x7e2496ca4220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x7e2496ca4220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:76: AssertionError
+_________________ test_github_repo_created_under_zealt_user01 __________________
+
+    def test_github_repo_created_under_zealt_user01():
+        expected_name = _expected_repo_name()
+        result = subprocess.run(
+            [
+                "gh",
+                "repo",
+                "list",
+                REPO_OWNER,
+                "--limit",
+                "200",
+                "--json",
+                "name,visibility,isPrivate",
+            ],
+            capture_output=True,
+            text=True,
+            env=_gh_env(),
+        )
+        assert result.returncode == 0, (
+            f"'gh repo list {REPO_OWNER}' failed: stdout={result.stdout!r} stderr={result.stderr!r}"
+        )
+        try:
+            repos = json.loads(result.stdout)
+        except json.JSONDecodeError as exc:
+            raise AssertionError(
+                f"Could not parse JSON from 'gh repo list': {exc}; output was: {result.stdout!r}"
+            )
+        matching = [r for r in repos if r.get("name") == expected_name]
+>       assert matching, (
+            f"Expected to find a repository named '{expected_name}' under '{REPO_OWNER}', "
+            f"but got: {[r.get('name') for r in repos]}"
+        )
+E       AssertionError: Expected to find a repository named 'agentkit-repo-zr-szyqkkp' under 'zealt-user01', but got: ['multi-test-multi_execute_github_slack_pytho__vAV7iHT', 'multi-test-multi_execute_github_slack_pytho__pc35TV5', 'multi-test-multi_execute_github_slack_pytho__C4uFBmX', 'multi-test-multi_execute_github_slack_pytho__EeC8KSr', 'multi-test-multi_execute_github_slack_pytho__F5b4JZd', 'discovery-test-tool_discovery_agent_python__YJBsxwa', 'discovery-test-tool_discovery_agent_python__CzVbMEX', 'discovery-test-tool_discovery_agent_python__6P5jLMv', 'discovery-test-tool_discovery_agent_python__NUpzf7v', 'discovery-test-tool_discovery_agent_python__Ar7HoCo', 'desc-test-github_repo_description_cli__UX3iupv', 'desc-test-github_repo_description_cli__HQSoD4J', 'desc-test-github_repo_description_cli__Hg98JDd', 'desc-test-github_repo_description_cli__kQNQJWc', 'desc-test-github_repo_description_cli__tpfz89E', 'issue-test-github_label_commenter_python__7yqEtAY', 'issue-test-github_label_commenter_python__5XrzLAH', 'issue-test-github_label_commenter_python__R8htS4h', 'issue-test-github_label_commenter_python__4JZYD9s', 'issue-test-github_label_commenter_python__yRGLvjM', 'star-test-github_issue_trigger__nyNePo2', 'star-test-github_issue_trigger__FfTekCp', 'star-test-github_issue_trigger__uQ6KkYX', 'star-test-star_repo_agent__oHEvDHp', 'star-test-star_repo_agent__E3ho8hp', 'star-test-star_repo_agent__y7NpD6y', 'harbor-gh-star-python_github_star__JrFriCF', 'harbor-gh-star-python_github_star__KLDdVHa', 'harbor-gh-star-python_github_star__D5RFMTv', 'test-repo-456', 'harbor-trigger-trigger_github_notion__ky4kb8k', 'test-repo-123', 'custom-repo-custom_github_extension__nEoYigV', 'custom-repo-custom_github_extension__ZRKDGv5', 'custom-repo-custom_github_extension__coZdcpY', 'custom-repo-custom_github_extension__TYrGihw']
+E       assert []
+
+tests/test_final_state.py:120: AssertionError
+___________________ test_github_repo_initialized_with_readme ___________________
+
+    def test_github_repo_initialized_with_readme():
+        expected_name = _expected_repo_name()
+        result = subprocess.run(
+            [
+                "gh",
+                "api",
+                f"repos/{REPO_OWNER}/{expected_name}/readme",
+                "-H",
+                "Accept: application/vnd.github+json",
+            ],
+            capture_output=True,
+            text=True,
+            env=_gh_env(),
+        )
+>       assert result.returncode == 0, (
+            f"Expected GitHub repository '{REPO_OWNER}/{expected_name}' to have a README, "
+            f"but 'gh api repos/.../readme' failed: stdout={result.stdout!r} stderr={result.stderr!r}"
+        )
+E       AssertionError: Expected GitHub repository 'zealt-user01/agentkit-repo-zr-szyqkkp' to have a README, but 'gh api repos/.../readme' failed: stdout='{"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/contents#get-a-repository-readme","status":"404"}' stderr='gh: Not Found (HTTP 404)\n'
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['gh', 'api', 'repos/zealt-user01/agentkit-repo-zr-szyqkkp/readme', '-H', 'Accept: application/v...s://docs.github.com/rest/repos/contents#get-a-repository-readme","status":"404"}', stderr='gh: Not Found (HTTP 404)\n').returncode
+
+tests/test_final_state.py:149: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_final_state.py::test_script_file_exists_and_uses_scalekit_sdk
+FAILED tests/test_final_state.py::test_script_does_not_bypass_scalekit - File...
+FAILED tests/test_final_state.py::test_log_file_exists_with_expected_format
+FAILED tests/test_final_state.py::test_github_repo_created_under_zealt_user01
+FAILED tests/test_final_state.py::test_github_repo_initialized_with_readme - ...
+============================== 5 failed in 1.48s ===============================

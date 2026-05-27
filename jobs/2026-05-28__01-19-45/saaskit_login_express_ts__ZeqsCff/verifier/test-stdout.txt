@@ -1,0 +1,121 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0, xprocess-1.0.2
+collected 6 items
+
+tests/test_final_state.py ....FF                                         [100%]
+
+=================================== FAILURES ===================================
+_____________ test_logout_redirects_to_scalekit_and_clears_cookies _____________
+
+start_app = None
+
+    def test_logout_redirects_to_scalekit_and_clears_cookies(start_app):
+        """Hitting /logout (even with a synthetic id token cookie) must produce
+        a redirect to Scalekit's /oidc/logout endpoint with id_token_hint and
+        post_logout_redirect_uri parameters, and must clear the session cookies."""
+        synthetic_cookies = {
+            "idToken": "synthetic-id-token-for-logout-test",
+            "accessToken": "synthetic-access-token-for-logout-test",
+            "refreshToken": "synthetic-refresh-token-for-logout-test",
+        }
+        resp = requests.get(
+            f"{BASE_URL}/logout",
+            allow_redirects=False,
+            cookies=synthetic_cookies,
+            timeout=30,
+        )
+        assert resp.status_code in (302, 303, 307), (
+            f"GET /logout must HTTP-redirect to the Scalekit logout endpoint, "
+            f"got status {resp.status_code}."
+        )
+    
+        location = resp.headers.get("Location", "")
+        assert location.startswith("https://"), (
+            f"GET /logout Location must be an https:// Scalekit URL, got: {location!r}"
+        )
+    
+        parsed = urlparse(location)
+        assert "scalekit" in parsed.netloc.lower(), (
+            f"GET /logout Location must be on a Scalekit-hosted host, "
+            f"got netloc: {parsed.netloc!r}"
+        )
+        assert "logout" in parsed.path.lower(), (
+            f"GET /logout Location must hit a logout endpoint (e.g., /oidc/logout), "
+            f"got path: {parsed.path!r}"
+        )
+    
+        qs = parse_qs(parsed.query)
+        id_token_hint = qs.get("id_token_hint", [])
+>       assert id_token_hint and id_token_hint[0], (
+            f"Logout URL must include a non-empty id_token_hint parameter, "
+            f"got query: {parsed.query!r}"
+        )
+E       AssertionError: Logout URL must include a non-empty id_token_hint parameter, got query: ''
+E       assert ([])
+
+tests/test_final_state.py:183: AssertionError
+__________________ test_end_to_end_signin_with_test_user_otp ___________________
+
+start_app = None
+browser_verifier = <pochi_verifier.verifier.PochiVerifier object at 0x7ab2104ab2f0>
+
+    def test_end_to_end_signin_with_test_user_otp(start_app, browser_verifier):
+        """Drive Scalekit's hosted login flow with the preconfigured test user and
+        static OTP, then verify the dashboard shows the signed-in email and the
+        sign-out control works."""
+        reason = (
+            "The Express.js app must integrate Scalekit SaaSKit end-to-end. "
+            "Starting from the landing page, a user must be able to sign in through "
+            "Scalekit's hosted login using the preconfigured test user and static OTP, "
+            "land on a protected dashboard that shows their email, and then sign out "
+            "and end up on the goodbye page."
+        )
+        truth = (
+            "Step 1: Navigate to http://localhost:3000/.\n"
+            "Step 2: Click the visible 'Sign in' (or 'Log in') link/button on the landing page. "
+            "The browser must be redirected to a Scalekit-hosted login page (the URL host should contain 'scalekit').\n"
+            "Step 3: On the Scalekit hosted login page, enter the email address "
+            f"'{TEST_USER_EMAIL}' into the email field and click Continue / Submit. "
+            "If the page asks to choose an authentication method, pick Email OTP / verification code.\n"
+            f"Step 4: When the page prompts for a one-time code, enter '{TEST_USER_OTP}' and submit.\n"
+            "Step 5: The browser must be redirected back to http://localhost:3000/callback?code=... "
+            "and then onward to http://localhost:3000/dashboard.\n"
+            f"Step 6: Verify that the /dashboard page visibly contains the email "
+            f"'{TEST_USER_EMAIL}' somewhere in its content.\n"
+            "Step 7: Verify that a visible 'Sign out' / 'Logout' link or button is present on /dashboard.\n"
+            "Step 8: Click the 'Sign out' / 'Logout' control. The browser must end up at "
+            "http://localhost:3000/goodbye and the page must show a clearly visible "
+            "'signed out' / 'goodbye' / 'logged out' confirmation message."
+        )
+    
+        result = browser_verifier.verify(
+            reason=reason,
+            truth=truth,
+            use_browser_agent=True,
+            trajectory_dir="/logs/verifier/pochi/test_end_to_end_signin_with_test_user_otp",
+        )
+>       assert result.status == "pass", (
+            f"Browser verification failed: {getattr(result, 'reason', result)!r}"
+        )
+E       AssertionError: Browser verification failed: "The test failed at Step 8. After clicking 'Sign out' on the dashboard, the browser was redirected to a Scalekit confirmation page (https://tabbyml.scalekit.dev/a/auth/logout/confirm) and then back to the Scalekit login page (https://tabbyml.scalekit.dev/a/auth/login), failing to reach the required goodbye page (http://localhost:3000/goodbye) as specified in the verification steps. While the goodbye page was found to exist with the correct message when accessed manually, the integrated logout flow did not correctly navigate to it."
+E       assert 'fail' == 'pass'
+E         - pass
+E         + fail
+
+tests/test_final_state.py:273: AssertionError
+==================================== PASSES ====================================
+______________________ test_landing_page_has_sign_in_link ______________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/saaskit_express_app$ npm start
+process 'saaskit_express_app' started pid=728
+saaskit_express_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_landing_page_has_sign_in_link
+PASSED tests/test_final_state.py::test_login_redirects_to_scalekit_authorize
+PASSED tests/test_final_state.py::test_dashboard_redirects_to_login_when_unauthenticated
+PASSED tests/test_final_state.py::test_goodbye_page_shows_signed_out_message
+FAILED tests/test_final_state.py::test_logout_redirects_to_scalekit_and_clears_cookies
+FAILED tests/test_final_state.py::test_end_to_end_signin_with_test_user_otp
+=================== 2 failed, 4 passed in 320.01s (0:05:20) ====================

@@ -1,0 +1,136 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0, xprocess-1.0.2
+collected 7 items
+
+tests/test_final_state.py .....FF                                        [100%]
+
+=================================== FAILURES ===================================
+_____________ test_logout_redirects_to_scalekit_and_clears_cookies _____________
+
+start_app = None
+
+    def test_logout_redirects_to_scalekit_and_clears_cookies(start_app):
+        """Hitting /logout (even with a synthetic id token cookie) must produce
+        a redirect to Scalekit's /oidc/logout endpoint with id_token_hint and
+        post_logout_redirect_uri parameters, and must clear the session cookies."""
+        synthetic_cookies = {
+            "idToken": "synthetic-id-token-for-logout-test",
+            "accessToken": "synthetic-access-token-for-logout-test",
+            "refreshToken": "synthetic-refresh-token-for-logout-test",
+        }
+        resp = requests.get(
+            f"{BASE_URL}/logout",
+            allow_redirects=False,
+            cookies=synthetic_cookies,
+            timeout=30,
+        )
+        assert resp.status_code in (302, 303, 307), (
+            f"GET /logout must HTTP-redirect to the Scalekit logout endpoint, "
+            f"got status {resp.status_code}."
+        )
+    
+        location = resp.headers.get("Location", "")
+        assert location.startswith("https://"), (
+            f"GET /logout Location must be an https:// Scalekit URL, got: {location!r}"
+        )
+    
+        parsed = urlparse(location)
+        assert "scalekit" in parsed.netloc.lower(), (
+            f"GET /logout Location must be on a Scalekit-hosted host, "
+            f"got netloc: {parsed.netloc!r}"
+        )
+        assert "logout" in parsed.path.lower(), (
+            f"GET /logout Location must hit a logout endpoint (e.g., /oidc/logout), "
+            f"got path: {parsed.path!r}"
+        )
+    
+        qs = parse_qs(parsed.query)
+        id_token_hint = qs.get("id_token_hint", [])
+>       assert id_token_hint and id_token_hint[0], (
+            f"Logout URL must include a non-empty id_token_hint parameter, "
+            f"got query: {parsed.query!r}"
+        )
+E       AssertionError: Logout URL must include a non-empty id_token_hint parameter, got query: ''
+E       assert ([])
+
+tests/test_final_state.py:198: AssertionError
+___________________ test_end_to_end_signin_and_token_refresh ___________________
+
+start_app = None
+browser_verifier = <pochi_verifier.verifier.PochiVerifier object at 0x780edf87f560>
+
+    def test_end_to_end_signin_and_token_refresh(start_app, browser_verifier):
+        """Drive Scalekit's hosted login flow with the preconfigured test user and
+        static OTP, verify the dashboard shows iat/exp claims of the access token,
+        click the 'Refresh access token' control, and verify the iat value
+        strictly increases (proving a brand-new access token was issued via
+        scalekit.refreshAccessToken)."""
+        reason = (
+            "The Express.js app must integrate Scalekit SaaSKit end-to-end. After a "
+            "successful login the dashboard must display the access token's iat and "
+            "exp claim values. Clicking the visible 'Refresh access token' control "
+            "must invoke Scalekit's refreshAccessToken SDK call and re-render the "
+            "dashboard with a strictly newer iat value, proving that a freshly "
+            "issued access token has replaced the previous one. The user must then "
+            "be able to sign out and end up on a public goodbye page."
+        )
+        truth = (
+            "Step 1: Navigate to http://localhost:3000/.\n"
+            "Step 2: Click the visible 'Sign in' (or 'Log in') link/button on the landing page. "
+            "The browser must be redirected to a Scalekit-hosted login page (the URL host should contain 'scalekit').\n"
+            "Step 3: On the Scalekit hosted login page, enter the email address "
+            f"'{TEST_USER_EMAIL}' into the email field and click Continue / Submit. "
+            "If the page asks to choose an authentication method, pick Email OTP / verification code.\n"
+            f"Step 4: When the page prompts for a one-time code, enter '{TEST_USER_OTP}' and submit.\n"
+            "Step 5: The browser must be redirected back to http://localhost:3000/callback?code=... "
+            "and then onward to http://localhost:3000/dashboard.\n"
+            f"Step 6: On /dashboard, verify the page visibly contains ALL of: "
+            f"the email '{TEST_USER_EMAIL}', an `iat` label/text followed by an integer "
+            "(UNIX seconds), an `exp` label/text followed by an integer (UNIX seconds), "
+            "a visible 'Refresh access token' control, and a visible 'Sign out' / 'Logout' control.\n"
+            "Step 7: Carefully record the integer value displayed for `iat` (call it iat_before) "
+            "and the integer value displayed for `exp` (call it exp_before).\n"
+            "Step 8: Wait at least 2 seconds, then click the 'Refresh access token' control. "
+            "The browser must end up back at http://localhost:3000/dashboard.\n"
+            "Step 9: On the refreshed /dashboard, read the new integer values displayed "
+            "for `iat` (call it iat_after) and `exp` (call it exp_after).\n"
+            "Step 10: Verify that iat_after > iat_before (strictly greater) AND "
+            "exp_after >= exp_before (greater than or equal). The dashboard must still "
+            f"visibly contain the email '{TEST_USER_EMAIL}'.\n"
+            "Step 11: Click the visible 'Sign out' / 'Logout' control. The browser must end up at "
+            "http://localhost:3000/goodbye and the page must contain a clearly visible "
+            "'signed out' / 'goodbye' / 'logged out' confirmation message."
+        )
+    
+        result = browser_verifier.verify(
+            reason=reason,
+            truth=truth,
+            use_browser_agent=True,
+            trajectory_dir="/logs/verifier/pochi/test_end_to_end_signin_and_token_refresh",
+        )
+>       assert result.status == "pass", (
+            f"Browser verification failed: {getattr(result, 'reason', result)!r}"
+        )
+E       AssertionError: Browser verification failed: "The test failed at Step 11. While the integration with Scalekit for login and token refresh worked correctly (iat_before: 1779905368, iat_after: 1779905416, showing a successful refresh), the 'Sign out' process did not redirect the user to http://localhost:3000/goodbye as required. Instead, after clicking 'Sign out' and confirming on the Scalekit logout page, the browser was redirected back to the Scalekit login page. Although the /goodbye page exists and contains the correct message, the application failed to automatically navigate the user there upon logout."
+E       assert 'fail' == 'pass'
+E         - pass
+E         + fail
+
+tests/test_final_state.py:301: AssertionError
+==================================== PASSES ====================================
+______________________ test_landing_page_has_sign_in_link ______________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/saaskit_refresh_app$ npm start
+process 'saaskit_refresh_app' started pid=804
+saaskit_refresh_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_landing_page_has_sign_in_link
+PASSED tests/test_final_state.py::test_login_redirects_to_scalekit_authorize
+PASSED tests/test_final_state.py::test_dashboard_redirects_to_login_when_unauthenticated
+PASSED tests/test_final_state.py::test_refresh_session_redirects_to_login_when_no_refresh_token
+PASSED tests/test_final_state.py::test_goodbye_page_shows_signed_out_message
+FAILED tests/test_final_state.py::test_logout_redirects_to_scalekit_and_clears_cookies
+FAILED tests/test_final_state.py::test_end_to_end_signin_and_token_refresh - ...
+=================== 2 failed, 5 passed in 309.92s (0:05:09) ====================

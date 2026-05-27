@@ -1,0 +1,14 @@
+{
+  "name": "scalekit-express-sso",
+  "version": "1.0.0",
+  "description": "Express app demonstrating Scalekit SaaSKit SSO with Home Realm Discovery",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@scalekit-sdk/node": "^0.3.1",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2"
+  }
+}

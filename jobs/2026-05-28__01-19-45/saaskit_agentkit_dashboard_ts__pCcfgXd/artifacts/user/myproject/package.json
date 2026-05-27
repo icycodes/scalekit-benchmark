@@ -1,0 +1,14 @@
+{
+  "name": "scalekit-saaskit-agentkit-demo",
+  "version": "1.0.0",
+  "description": "Express.js app demonstrating Scalekit SaaSKit + AgentKit integration",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@scalekit-sdk/node": "latest",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.19.2"
+  }
+}

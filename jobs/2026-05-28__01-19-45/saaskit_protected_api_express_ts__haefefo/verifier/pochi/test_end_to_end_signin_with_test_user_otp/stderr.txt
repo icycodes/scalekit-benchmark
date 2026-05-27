@@ -1,0 +1,50 @@
+[37m2026-05-27 18:14:29.918[39m[0m[0m	[31m[1mERROR[22m[39m[0m[0m	[37m$bunfs/root/pochi:437624[39m[0m[0m[1m[37m	LiveChatKit[39m[22m[0m[0m	onError
+
+[97m[101m[1m Error [22m[49m[39m[0m[0m The operation timed out., 434396, 49, 434396, 49, /$bunfs/root/pochi[0m[0m
+error stack:
+  • [33mpochi[39m[0m[0m	<anonymous>[0m[0m
+	[37m$bunfs/root/pochi:434396[39m[0m[0m
+  • [33mpochi[39m[0m[0m	<anonymous>[0m[0m
+	[37m$bunfs/root/pochi:433913[39m[0m[0m
+  • [33mpochi[39m[0m[0m	<anonymous>[0m[0m
+	[37m$bunfs/root/pochi:437080[39m[0m[0m
+  • [33mpochi[39m[0m[0m	<anonymous>[0m[0m
+	[37m$bunfs/root/pochi:437078[39m[0m[0m
+  • [33mpochi[39m[0m[0m	processQueue[0m[0m
+	[37m$bunfs/root/pochi:437071[39m[0m[0m
+  • [33mpochi[39m[0m[0m	processQueue[0m[0m
+	[37m$bunfs/root/pochi:437065[39m[0m[0m
+  • [33mpochi[39m[0m[0m	<anonymous>[0m[0m
+	[37m$bunfs/root/pochi:437086[39m[0m[0m
+  • [33mnative[39m[0m[0m	new Promise[0m[0m
+	[37mnative:1[39m[0m[0m
+  • [33mpochi[39m[0m[0m	run[0m[0m
+	[37m$bunfs/root/pochi:437077[39m[0m[0m
+  • [33mpochi[39m[0m[0m	run[0m[0m
+	[37m$bunfs/root/pochi:437076[39m[0m[0m
+  • [33mpochi[39m[0m[0m	transform[0m[0m
+	[37m$bunfs/root/pochi:433913[39m[0m[0m
+  • [33mpochi[39m[0m[0m	transform[0m[0m
+	[37m$bunfs/root/pochi:433912[39m[0m[0m
+  • [33mnative[39m[0m[0m	<anonymous>[0m[0m
+	[37mnative:1[39m[0m[0m
+  • [33mnative[39m[0m[0m	<anonymous>[0m[0m
+	[37mnative:1[39m[0m[0m
+  • [33mnative[39m[0m[0m	<anonymous>[0m[0m
+	[37mnative:1[39m[0m[0m
+  • [33mnative[39m[0m[0m	<anonymous>[0m[0m
+	[37mnative:1[39m[0m[0m
+  • [33mnative[39m[0m[0m	<anonymous>[0m[0m
+	[37mnative:1[39m[0m[0m
+  • [33mnative[39m[0m[0m	<anonymous>[0m[0m
+	[37mnative:1[39m[0m[0m
+  • [33mnative[39m[0m[0m	<anonymous>[0m[0m
+	[37mnative:1[39m[0m[0m
+  • [33mnative[39m[0m[0m	<anonymous>[0m[0m
+	[37mnative:7[39m[0m[0m
+  • [33mnative[39m[0m[0m	processTicksAndRejections[0m[0m
+	[37mnative:7[39m[0m[0m[0m[0m
+[37m2026-05-27 18:14:35.948[39m[0m[0m	[31m[1mERROR[22m[39m[0m[0m	[37m$bunfs/root/pochi:520601[39m[0m[0m[1m[37m	TaskRunner[39m[22m[0m[0m	Task is failed, trying to resend last message to resume it. {
+  kind: [32m'InternalError'[39m,
+  message: [32m'The operation timed out.'[39m
+}

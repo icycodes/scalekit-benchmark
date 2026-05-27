@@ -1,0 +1,14 @@
+{
+  "name": "scalekit-express-refresh",
+  "version": "1.0.0",
+  "description": "Express app for Scalekit SaaSKit auth with refresh",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@scalekit-sdk/node": "^1.0.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2"
+  }
+}
