@@ -1,0 +1,15 @@
+{
+  "name": "scalekit-sso-app",
+  "version": "1.0.0",
+  "description": "Express.js Web App driving Enterprise SSO via Scalekit SaaSKit",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@scalekit-sdk/node": "^2.6.2",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.2.1"
+  }
+}

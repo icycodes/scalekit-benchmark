@@ -1,0 +1,82 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 6,
+            "passed": 5,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780985173648,
+            "stop": 1780985562412
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_landing_page_has_sign_in_link",
+                "status": "passed",
+                "duration": 188168,
+                "start": 1780985173735,
+                "stop": 1780985361903,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_login_redirects_to_scalekit_authorize",
+                "status": "passed",
+                "duration": 10,
+                "start": 1780985361904,
+                "stop": 1780985361914,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_dashboard_redirects_to_login_when_unauthenticated",
+                "status": "passed",
+                "duration": 7,
+                "start": 1780985361914,
+                "stop": 1780985361921,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_goodbye_page_shows_signed_out_message",
+                "status": "passed",
+                "duration": 6,
+                "start": 1780985361922,
+                "stop": 1780985361928,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_logout_redirects_to_scalekit_and_clears_cookies",
+                "status": "passed",
+                "duration": 10,
+                "start": 1780985361929,
+                "stop": 1780985361939,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_end_to_end_signin_dashboard_shows_repo",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 200472,
+                "start": 1780985361939,
+                "stop": 1780985562411,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\nbrowser_verifier = <pochi_verifier.verifier.PochiVerifier object at 0x7fdaf74c7650>\nknown_github_repo = {'name': 'encore-rest-api-starter', 'nameWithOwner': 'zealt-user01/encore-rest-api-starter', 'url': 'https://github.com/zealt-user01/encore-rest-api-starter'}\n\n    def test_end_to_end_signin_dashboard_shows_repo(\n        start_app, browser_verifier, known_github_repo\n    ):\n        \"\"\"Drive Scalekit's hosted login with the test user + static OTP, then\n        verify the dashboard surfaces the signed-in email plus a real GitHub\n        repository fetched via Scalekit AgentKit, and finally the sign-out flow\n        lands on /goodbye.\"\"\"\n    \n        repo_full_name = known_github_repo[\"nameWithOwner\"]\n        repo_url = known_github_repo[\"url\"]\n    \n        reason = (\n            \"The Express app must combine Scalekit SaaSKit and AgentKit end-to-end. \"\n            \"Starting from the landing page, a user must be able to sign in through \"\n            \"Scalekit's hosted login using the preconfigured test user and static OTP, \"\n            \"land on a protected dashboard that shows their email AND a live list of \"\n            \"their AgentKit-connected GitHub repositories, and then sign out and end up \"\n            \"on the goodbye page.\"\n        )\n        truth = (\n            \"Step 1: Navigate to http://localhost:3000/.\\n\"\n            \"Step 2: Click the visible 'Sign in' (or 'Log in') link/button on the \"\n            \"landing page. The browser must be redirected to a Scalekit-hosted login \"\n            \"page (URL host should contain 'scalekit').\\n\"\n            f\"Step 3: On the Scalekit hosted login page, enter the email '{TEST_USER_EMAIL}' \"\n            \"into the email field and click Continue / Submit. If the page asks to \"\n            \"choose an authentication method, pick Email OTP / verification code.\\n\"\n            f\"Step 4: When the page prompts for a one-time code, enter '{TEST_USER_OTP}' \"\n            \"and submit.\\n\"\n            \"Step 5: The browser must be redirected back to \"\n            \"http://localhost:3000/callback?code=... and then onward to \"\n            \"http://localhost:3000/dashboard.\\n\"\n            f\"Step 6: Verify the /dashboard page visibly contains the email \"\n            f\"'{TEST_USER_EMAIL}' somewhere in its content.\\n\"\n            f\"Step 7: Verify the /dashboard page visibly contains the GitHub repository \"\n            f\"identifier '{repo_full_name}' (or its URL '{repo_url}'). This proves \"\n            \"the dashboard fetched the repo list via Scalekit AgentKit on behalf of \"\n            \"the preconfigured identifier 'zealt-user01' through the 'github-test' \"\n            \"connection.\\n\"\n            \"Step 8: Verify that a visible 'Sign out' / 'Logout' link or button is \"\n            \"present on /dashboard.\\n\"\n            \"Step 9: Click the 'Sign out' / 'Logout' control. The browser must end up \"\n            \"at http://localhost:3000/goodbye, and the page must show a clearly \"\n            \"visible 'signed out' / 'goodbye' / 'logged out' confirmation message.\"\n        )\n    \n        result = browser_verifier.verify(\n            reason=reason,\n            truth=truth,\n            use_browser_agent=True,\n            trajectory_dir=\"/logs/verifier/pochi/test_end_to_end_signin_dashboard_shows_repo\",\n        )\n>       assert result.status == \"pass\", (\n            f\"Browser verification failed: {getattr(result, 'reason', result)!r}\"\n        )\nE       AssertionError: Browser verification failed: \"The verification process failed at Step 7. While the login flow (Steps 1-5) and logout flow (Steps 8-9) worked as expected, the /dashboard page did not display the required GitHub repository identifier 'zealt-user01/encore-rest-api-starter'. Instead, it showed 'No repositories found.' Additionally, for Step 6, the email 'zealt-user01+sktest@test.com' was present on the dashboard, but without the 'mailto:' prefix mentioned in the prompt.\"\nE       assert 'fail' == 'pass'\nE         - pass\nE         + fail\n\ntests/test_final_state.py:352: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

@@ -1,0 +1,70 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780985974592,
+            "stop": 1780985976310
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_script_file_exists_and_uses_scalekit_sdk",
+                "status": "passed",
+                "duration": 30,
+                "start": 1780985974608,
+                "stop": 1780985974638,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_script_does_not_bypass_scalekit",
+                "status": "passed",
+                "duration": 1,
+                "start": 1780985974638,
+                "stop": 1780985974639,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_exists_with_expected_format",
+                "status": "passed",
+                "duration": 1,
+                "start": 1780985974639,
+                "stop": 1780985974640,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_github_repo_created_under_zealt_user01",
+                "status": "passed",
+                "duration": 1016,
+                "start": 1780985974640,
+                "stop": 1780985975656,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_github_repo_initialized_with_readme",
+                "status": "passed",
+                "duration": 653,
+                "start": 1780985975656,
+                "stop": 1780985976309,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

@@ -1,0 +1,112 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: Faker-25.8.0, anyio-4.13.0, json-ctrf-0.5.0
+collected 5 items
+
+tests/test_final_state.py .FFFF                                          [100%]
+
+=================================== FAILURES ===================================
+__________________ test_log_file_exists_with_expected_format ___________________
+
+    def test_log_file_exists_with_expected_format():
+>       assert os.path.isfile(LOG_FILE), (
+            f"Expected the log file {LOG_FILE} to exist after the task ran."
+        )
+E       AssertionError: Expected the log file /home/user/myproject/output.log to exist after the task ran.
+E       assert False
+E        +  where False = <function isfile at 0x793560e64220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x793560e64220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:67: AssertionError
+________________ test_slack_channel_created_with_expected_name _________________
+
+    def test_slack_channel_created_with_expected_name():
+        expected_name = _expected_channel_name()
+>       channels = _list_slack_channels()
+
+tests/test_final_state.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _list_slack_channels():
+        token = _slack_token()
+        result = subprocess.run(
+            [
+                "curl",
+                "-sS",
+                "-H",
+                f"Authorization: Bearer {token}",
+                "https://slack.com/api/conversations.list?limit=1000"
+                "&types=public_channel,private_channel"
+                "&exclude_archived=false",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0, (
+            f"Failed to call Slack conversations.list: {result.stderr}"
+        )
+        payload = json.loads(result.stdout)
+>       assert payload.get("ok") is True, (
+            f"Slack API returned an error response: {payload}"
+        )
+E       AssertionError: Slack API returned an error response: {'ok': False, 'error': 'invalid_auth'}
+E       assert False is True
+E        +  where False = <built-in method get of dict object at 0x79355f7796c0>('ok')
+E        +    where <built-in method get of dict object at 0x79355f7796c0> = {'error': 'invalid_auth', 'ok': False}.get
+
+tests/test_final_state.py:47: AssertionError
+___________________ test_slack_channel_is_public_and_active ____________________
+
+    def test_slack_channel_is_public_and_active():
+        expected_name = _expected_channel_name()
+>       channels = _list_slack_channels()
+
+tests/test_final_state.py:96: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _list_slack_channels():
+        token = _slack_token()
+        result = subprocess.run(
+            [
+                "curl",
+                "-sS",
+                "-H",
+                f"Authorization: Bearer {token}",
+                "https://slack.com/api/conversations.list?limit=1000"
+                "&types=public_channel,private_channel"
+                "&exclude_archived=false",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0, (
+            f"Failed to call Slack conversations.list: {result.stderr}"
+        )
+        payload = json.loads(result.stdout)
+>       assert payload.get("ok") is True, (
+            f"Slack API returned an error response: {payload}"
+        )
+E       AssertionError: Slack API returned an error response: {'ok': False, 'error': 'invalid_auth'}
+E       assert False is True
+E        +  where False = <built-in method get of dict object at 0x79355f618f00>('ok')
+E        +    where <built-in method get of dict object at 0x79355f618f00> = {'error': 'invalid_auth', 'ok': False}.get
+
+tests/test_final_state.py:47: AssertionError
+____________________ test_log_channel_id_matches_slack_api _____________________
+
+    def test_log_channel_id_matches_slack_api():
+        expected_name = _expected_channel_name()
+>       with open(LOG_FILE, "r", encoding="utf-8") as fh:
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/user/myproject/output.log'
+
+tests/test_final_state.py:118: FileNotFoundError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_script_file_exists_and_uses_scalekit_sdk
+FAILED tests/test_final_state.py::test_log_file_exists_with_expected_format
+FAILED tests/test_final_state.py::test_slack_channel_created_with_expected_name
+FAILED tests/test_final_state.py::test_slack_channel_is_public_and_active - A...
+FAILED tests/test_final_state.py::test_log_channel_id_matches_slack_api - Fil...
+========================= 4 failed, 1 passed in 0.78s ==========================

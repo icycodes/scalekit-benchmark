@@ -1,0 +1,90 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0, xprocess-1.0.2
+collected 6 items
+
+tests/test_final_state.py .....F                                         [100%]
+
+=================================== FAILURES ===================================
+_________________ test_end_to_end_signin_dashboard_shows_repo __________________
+
+start_app = None
+browser_verifier = <pochi_verifier.verifier.PochiVerifier object at 0x7fdaf74c7650>
+known_github_repo = {'name': 'encore-rest-api-starter', 'nameWithOwner': 'zealt-user01/encore-rest-api-starter', 'url': 'https://github.com/zealt-user01/encore-rest-api-starter'}
+
+    def test_end_to_end_signin_dashboard_shows_repo(
+        start_app, browser_verifier, known_github_repo
+    ):
+        """Drive Scalekit's hosted login with the test user + static OTP, then
+        verify the dashboard surfaces the signed-in email plus a real GitHub
+        repository fetched via Scalekit AgentKit, and finally the sign-out flow
+        lands on /goodbye."""
+    
+        repo_full_name = known_github_repo["nameWithOwner"]
+        repo_url = known_github_repo["url"]
+    
+        reason = (
+            "The Express app must combine Scalekit SaaSKit and AgentKit end-to-end. "
+            "Starting from the landing page, a user must be able to sign in through "
+            "Scalekit's hosted login using the preconfigured test user and static OTP, "
+            "land on a protected dashboard that shows their email AND a live list of "
+            "their AgentKit-connected GitHub repositories, and then sign out and end up "
+            "on the goodbye page."
+        )
+        truth = (
+            "Step 1: Navigate to http://localhost:3000/.\n"
+            "Step 2: Click the visible 'Sign in' (or 'Log in') link/button on the "
+            "landing page. The browser must be redirected to a Scalekit-hosted login "
+            "page (URL host should contain 'scalekit').\n"
+            f"Step 3: On the Scalekit hosted login page, enter the email '{TEST_USER_EMAIL}' "
+            "into the email field and click Continue / Submit. If the page asks to "
+            "choose an authentication method, pick Email OTP / verification code.\n"
+            f"Step 4: When the page prompts for a one-time code, enter '{TEST_USER_OTP}' "
+            "and submit.\n"
+            "Step 5: The browser must be redirected back to "
+            "http://localhost:3000/callback?code=... and then onward to "
+            "http://localhost:3000/dashboard.\n"
+            f"Step 6: Verify the /dashboard page visibly contains the email "
+            f"'{TEST_USER_EMAIL}' somewhere in its content.\n"
+            f"Step 7: Verify the /dashboard page visibly contains the GitHub repository "
+            f"identifier '{repo_full_name}' (or its URL '{repo_url}'). This proves "
+            "the dashboard fetched the repo list via Scalekit AgentKit on behalf of "
+            "the preconfigured identifier 'zealt-user01' through the 'github-test' "
+            "connection.\n"
+            "Step 8: Verify that a visible 'Sign out' / 'Logout' link or button is "
+            "present on /dashboard.\n"
+            "Step 9: Click the 'Sign out' / 'Logout' control. The browser must end up "
+            "at http://localhost:3000/goodbye, and the page must show a clearly "
+            "visible 'signed out' / 'goodbye' / 'logged out' confirmation message."
+        )
+    
+        result = browser_verifier.verify(
+            reason=reason,
+            truth=truth,
+            use_browser_agent=True,
+            trajectory_dir="/logs/verifier/pochi/test_end_to_end_signin_dashboard_shows_repo",
+        )
+>       assert result.status == "pass", (
+            f"Browser verification failed: {getattr(result, 'reason', result)!r}"
+        )
+E       AssertionError: Browser verification failed: "The verification process failed at Step 7. While the login flow (Steps 1-5) and logout flow (Steps 8-9) worked as expected, the /dashboard page did not display the required GitHub repository identifier 'zealt-user01/encore-rest-api-starter'. Instead, it showed 'No repositories found.' Additionally, for Step 6, the email 'zealt-user01+sktest@test.com' was present on the dashboard, but without the 'mailto:' prefix mentioned in the prompt."
+E       assert 'fail' == 'pass'
+E         - pass
+E         + fail
+
+tests/test_final_state.py:352: AssertionError
+==================================== PASSES ====================================
+______________________ test_landing_page_has_sign_in_link ______________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/saaskit_agentkit_dashboard_app$ npm start
+process 'saaskit_agentkit_dashboard_app' started pid=1318
+saaskit_agentkit_dashboard_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_landing_page_has_sign_in_link
+PASSED tests/test_final_state.py::test_login_redirects_to_scalekit_authorize
+PASSED tests/test_final_state.py::test_dashboard_redirects_to_login_when_unauthenticated
+PASSED tests/test_final_state.py::test_goodbye_page_shows_signed_out_message
+PASSED tests/test_final_state.py::test_logout_redirects_to_scalekit_and_clears_cookies
+FAILED tests/test_final_state.py::test_end_to_end_signin_dashboard_shows_repo
+=================== 1 failed, 5 passed in 388.76s (0:06:28) ====================

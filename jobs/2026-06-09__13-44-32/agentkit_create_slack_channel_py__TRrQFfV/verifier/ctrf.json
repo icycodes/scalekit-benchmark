@@ -1,0 +1,82 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 1,
+            "failed": 4,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780984793483,
+            "stop": 1780984794297
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_script_file_exists_and_uses_scalekit_sdk",
+                "status": "passed",
+                "duration": 30,
+                "start": 1780984793505,
+                "stop": 1780984793535,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_exists_with_expected_format",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 16,
+                "start": 1780984793535,
+                "stop": 1780984793551,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_exists_with_expected_format():\n        assert os.path.isfile(LOG_FILE), (\n            f\"Expected the log file {LOG_FILE} to exist after the task ran.\"\n        )\n        expected_name = _expected_channel_name()\n        pattern = re.compile(\n            rf\"^Channel:\\s+{re.escape(expected_name)}\\s+\\((C[A-Z0-9]+)\\)\\s*$\",\n            re.MULTILINE,\n        )\n        with open(LOG_FILE, \"r\", encoding=\"utf-8\") as fh:\n            contents = fh.read()\n        match = pattern.search(contents)\n>       assert match, (\n            f\"Expected {LOG_FILE} to contain a line in the format \"\n            f\"'Channel: {expected_name} (C<id>)', but log contents were: {contents!r}\"\n        )\nE       AssertionError: Expected /home/user/myproject/output.log to contain a line in the format 'Channel: agentkit-task-zr-trrqffv (C<id>)', but log contents were: 'Channel:  ()\\n'\nE       assert None\n\ntests/test_final_state.py:78: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_slack_channel_created_with_expected_name",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 412,
+                "start": 1780984793551,
+                "stop": 1780984793963,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_slack_channel_created_with_expected_name():\n        expected_name = _expected_channel_name()\n>       channels = _list_slack_channels()\n\ntests/test_final_state.py:86: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _list_slack_channels():\n        token = _slack_token()\n        result = subprocess.run(\n            [\n                \"curl\",\n                \"-sS\",\n                \"-H\",\n                f\"Authorization: Bearer {token}\",\n                \"https://slack.com/api/conversations.list?limit=1000\"\n                \"&types=public_channel,private_channel\"\n                \"&exclude_archived=false\",\n            ],\n            capture_output=True,\n            text=True,\n        )\n        assert result.returncode == 0, (\n            f\"Failed to call Slack conversations.list: {result.stderr}\"\n        )\n        payload = json.loads(result.stdout)\n>       assert payload.get(\"ok\") is True, (\n            f\"Slack API returned an error response: {payload}\"\n        )\nE       AssertionError: Slack API returned an error response: {'ok': False, 'error': 'invalid_auth'}\nE       assert False is True\nE        +  where False = <built-in method get of dict object at 0x7ae45358a240>('ok')\nE        +    where <built-in method get of dict object at 0x7ae45358a240> = {'error': 'invalid_auth', 'ok': False}.get\n\ntests/test_final_state.py:47: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_slack_channel_is_public_and_active",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 326,
+                "start": 1780984793963,
+                "stop": 1780984794289,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_slack_channel_is_public_and_active():\n        expected_name = _expected_channel_name()\n>       channels = _list_slack_channels()\n\ntests/test_final_state.py:96: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _list_slack_channels():\n        token = _slack_token()\n        result = subprocess.run(\n            [\n                \"curl\",\n                \"-sS\",\n                \"-H\",\n                f\"Authorization: Bearer {token}\",\n                \"https://slack.com/api/conversations.list?limit=1000\"\n                \"&types=public_channel,private_channel\"\n                \"&exclude_archived=false\",\n            ],\n            capture_output=True,\n            text=True,\n        )\n        assert result.returncode == 0, (\n            f\"Failed to call Slack conversations.list: {result.stderr}\"\n        )\n        payload = json.loads(result.stdout)\n>       assert payload.get(\"ok\") is True, (\n            f\"Slack API returned an error response: {payload}\"\n        )\nE       AssertionError: Slack API returned an error response: {'ok': False, 'error': 'invalid_auth'}\nE       assert False is True\nE        +  where False = <built-in method get of dict object at 0x7ae45343d680>('ok')\nE        +    where <built-in method get of dict object at 0x7ae45343d680> = {'error': 'invalid_auth', 'ok': False}.get\n\ntests/test_final_state.py:47: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_channel_id_matches_slack_api",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 6,
+                "start": 1780984794290,
+                "stop": 1780984794296,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_channel_id_matches_slack_api():\n        expected_name = _expected_channel_name()\n        with open(LOG_FILE, \"r\", encoding=\"utf-8\") as fh:\n            contents = fh.read()\n        log_match = re.search(\n            rf\"Channel:\\s+{re.escape(expected_name)}\\s+\\((C[A-Z0-9]+)\\)\",\n            contents,\n        )\n>       assert log_match, (\n            f\"Could not extract a channel id from {LOG_FILE}; contents: {contents!r}\"\n        )\nE       AssertionError: Could not extract a channel id from /home/user/myproject/output.log; contents: 'Channel:  ()\\n'\nE       assert None\n\ntests/test_final_state.py:124: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "scalekit-saaskit-app",
+  "version": "1.0.0",
+  "description": "Scalekit SaaSKit Express App with Token-Validated Protected JSON API",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@scalekit-sdk/node": "^2.6.2",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2"
+  }
+}

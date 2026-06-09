@@ -1,0 +1,7 @@
+{
+  "library_name": "Scalekit",
+  "task_name": "list_scoped_tools_ts",
+  "complexity_level": "simple set of 2-5 commands",
+  "research_plan_path": "plan.md",
+  "output_dir": "tasks/"
+}

@@ -1,0 +1,125 @@
+- Initializing MCP connections...
+You
+# Provision a Per-User Scalekit MCP Server (Python) ## Background Scalekit AgentKit can publish a **Model Context Protocol (MCP) server** that proxies tool calls to third-party SaaS apps using each user's stored credentials. The pattern has two pieces: * An **MCP config** declares which connections (and optionally which specific tools) the MCP server exposes. It is created once. * An **MCP instance** is the per-user instantiation of a config; calling `ensure_instance` returns a pre-authenticated MCP URL that any MCP-compatible client (Claude Desktop, Cursor, LangChain, etc.) can connect to. In this task you will use the Scalekit Python SDK to provision an MCP config that exposes both the `github-test` and the `slack-test` connections, then ensure a per-user MCP instance for the user `zealt-user01`, and write the resulting URL to a log file. The Scalekit credentials (`SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`, `SCALEKIT_ENV_URL`) are already present in the environment. The two connections and the `zealt-user01` connected accounts are already `ACTIVE`, so no OAuth flow is required. ## Requirements * Write the program at `/home/user/myproject/run.py`. * The program MUST use the Scalekit Python SDK (`scalekit-sdk-python`) and the AgentKit MCP API (`actions.mcp.create_config` and `actions.mcp.ensure_instance`). It MUST NOT shell out, call the Scalekit HTTP API directly, or mock these methods. * Create an MCP config whose `name` is `agentkit-mcp-${run-id}`, where `run-id` is read at runtime from the `ZEALT_RUN_ID` environment variable. Do NOT hardcode the run-id. * The MCP config MUST expose BOTH the `github-test` and the `slack-test` connections (the connection list inside the config must contain entries for both). * After creating the config, call `ensure_instance` against the same config name with `zealt-user01` as the user identifier to obtain that user's MCP URL. * After a successful ensure\_instance call, the program MUST append exactly three lines to the log file in the format described in the Acceptance Criteria. ## Implementation Hints * Initialize `ScalekitClient` with the three Scalekit environment variables (`SCALEKIT_ENV_URL`, `SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`). * The Scalekit dashboard connection names are exactly `github-test` and `slack-test`, and the user identifier is exactly `zealt-user01`. These are workspace-specific names that must be hardcoded as string literals — no extra environment variables exist for them. * The MCP config API lives under `scalekit_client.actions.mcp`. You will need `McpConfigConnectionToolMapping` (importable from `scalekit.actions.types`) when building the `connection_tool_mappings` argument to `create_config`. * It is fine to omit the `tools` field in a `McpConfigConnectionToolMapping` to expose every tool of that connection. * `ensure_instance` is idempotent: calling it again for the same `(config_name, user_identifier)` pair returns the same instance, so it is safe to re-run. * The returned instance object exposes the MCP URL (commonly `instance.mcp_url`, or `instance.url` depending on the SDK version). Either is acceptable as long as the URL written to the log file is the URL returned by the SDK. * Read `ZEALT_RUN_ID` from the environment at runtime; do not hardcode the run-id anywhere in the script. ## Acceptance Criteria * Project path: /home/user/myproject * Script path: /home/user/myproject/run.py * Log file: /home/user/myproject/output.log * Ensure the script is actually executed against the live Scalekit environment and the MCP config + instance are really created via the Scalekit Python SDK (no mocks, no stubs, no direct HTTP calls to the Scalekit API). * The MCP config MUST be named `agentkit-mcp-${run-id}` (run-id read from `ZEALT_RUN_ID`). * The MCP config MUST be registered with `actions.mcp.create_config` and expose both the `github-test` and the `slack-test` connections. * A per-user MCP instance MUST be ensured for `zealt-user01` against that config. * The log file MUST contain exactly the following three lines, each on its own line and in this exact label format: * `Config: agentkit-mcp-<run-id>` * `Identifier: zealt-user01` * `MCP URL: <https url returned by ensure_instance>` * The value on the `MCP URL:` line MUST be an `https://` URL that points to a Scalekit-hosted host (host contains `scalekit`).   
+
+Pochi
+I'll start by examining the project directory and understanding the Scalekit SDK structure.   
+📂 Listing files in /home/user/myproject recursively ✔ 
+💫 Executing pip show scalekit-sdk-python 2>/dev/null || pip show scalekit 2>/dev/null ✔ 
+💫 Executing python3 -c "import scalekit; print(dir(scalekit))" 2>&1 ✔ 
+💫 Executing python3 -c "from scalekit.actions import mcp; print(dir(mcp))" 2>&1 ✖ "Command exited with code 1"
+💫 Executing python3 -c "import scalekit.actions; print(dir(scalekit.actions))" 2>&1 ✔ 
+💫 Executing python3 -c "from scalekit import mcp; print(dir(mcp))" 2>&1 ✔ 
+💫 Executing python3 -c "
+from scalekit import mcp
+print('=== EnsureMcpInstanceRequest fields ===')
+print(mcp.EnsureMcpInstanceRequest.DESCRIPTOR.fields_by_name.keys())
+print()
+print('=== EnsureMcpInstanceResponse fields ===')
+print(mcp.EnsureMcpInstanceResponse.DESCRIPTOR.fields_by_name.keys())
+print()
+print('=== CreateMcpConfigRequest fields ===')
+print(mcp.CreateMcpConfigRequest.DESCRIPTOR.fields_by_name.keys())
+print()
+print('=== CreateMcpConfigResponse fields ===')
+print(mcp.CreateMcpConfigResponse.DESCRIPTOR.fields_by_name.keys())
+print()
+print('=== McpConfigConnectionToolMapping fields ===')
+print(mcp.McpConfigConnectionToolMapping.DESCRIPTOR.fields_by_name.keys())
+print()
+print('=== McpInstance fields ===')
+print(mcp.McpInstance.DESCRIPTOR.fields_by_name.keys())
+print()
+print('=== McpConfig fields ===')
+print(mcp.McpConfig.DESCRIPTOR.fields_by_name.keys())
+" 2>&1 ✔ 
+💫 Executing python3 -c "
+from scalekit import ScalekitClient
+import inspect
+# Look at the actions attribute
+c = ScalekitClient.__init__
+print(inspect.signature(c))
+" 2>&1 ✔ 
+💫 Executing python3 -c "
+from scalekit import ScalekitClient
+c = ScalekitClient('http://localhost', 'id', 'secret')
+print(type(c.actions))
+print(dir(c.actions))
+" 2>&1 ✖ "Command exited with code 1"
+That's expected — the client tries to authenticate on init. Let me check the SDK structure more carefully without instantiating the client.   
+💫 Executing python3 -c "
+from scalekit.actions.actions import ActionClient
+import inspect
+print(inspect.signature(ActionClient.__init__))
+print()
+methods = [m for m in dir(ActionClient) if not m.startswith('_')]
+print(methods)
+" 2>&1 ✔ 
+💫 Executing python3 -c "
+from scalekit.actions.actions import ActionClient
+import inspect
+sig = inspect.signature(ActionClient.create_config)
+print('create_config:', sig)
+sig = inspect.signature(ActionClient.ensure_instance)
+print('ensure_instance:', sig)
+" 2>&1 ✔ 
+💫 Executing python3 -c "
+from scalekit.actions.models.mcp_config import McpConfigConnectionToolMapping
+import inspect
+sig = inspect.signature(McpConfigConnectionToolMapping.__init__)
+print('McpConfigConnectionToolMapping:', sig)
+print()
+# Check the response models
+from scalekit.actions.models.responses.create_mcp_config_response import CreateMcpConfigResponse
+from scalekit.actions.models.responses.ensure_mcp_instance_response import EnsureMcpInstanceResponse
+print('CreateMcpConfigResponse fields:', [f.name for f in CreateMcpConfigResponse.model_fields.values()])
+print('EnsureMcpInstanceResponse fields:', [f.name for f in EnsureMcpInstanceResponse.model_fields.values()])
+" 2>&1 ✖ "Command exited with code 1"
+💫 Executing python3 -c "
+from scalekit.actions.models.responses.create_mcp_config_response import CreateMcpConfigResponse
+from scalekit.actions.models.responses.ensure_mcp_instance_response import EnsureMcpInstanceResponse
+print('CreateMcpConfigResponse fields:', list(CreateMcpConfigResponse.model_fields.keys()))
+print('EnsureMcpInstanceResponse fields:', list(EnsureMcpInstanceResponse.model_fields.keys()))
+" 2>&1 ✔ 
+💫 Executing python3 -c "
+from scalekit.actions.models.mcp_config import McpConfigConnectionToolMapping
+print('McpConfigConnectionToolMapping fields:', list(McpConfigConnectionToolMapping.model_fields.keys()))
+# Check instance model
+from scalekit.actions.models.mcp_instance import McpInstance
+print('McpInstance fields:', list(McpInstance.model_fields.keys()))
+# Check config model
+from scalekit.actions.models.mcp_config import McpConfig
+print('McpConfig fields:', list(McpConfig.model_fields.keys()))
+" 2>&1 ✔ 
+Now I have a clear picture of the SDK API. Let me also check the ScalekitClient to understand how `actions` is exposed:   
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/client.py ✔ 
+Now I have a complete understanding. Let me check the environment variables:   
+💫 Executing echo "ZEALT_RUN_ID=$ZEALT_RUN_ID" && echo "SCALEKIT_ENV_URL=$SCALEKIT_ENV_URL" && echo "SCALEKIT_CLIENT_ID=$SCALEKIT_CLIENT_ID" && echo "SCALEKIT_CLIENT_SECRET=${SCALEKIT_CLIENT_SECRET:0:8}..." ✔ 
+Now I have everything I need. Let me create the script:   
+📋 Updating todo list (3 items) ✔ 
+✏️  Writing /home/user/myproject/run.py ✔ 
+📋 Updating todo list (3 items) ✔ 
+💫 Executing cd /home/user/myproject && python3 run.py ✔ 
+The script executed successfully. Let me verify the output log:   
+📖 Reading /home/user/myproject/output.log ✔ 
+📋 Updating todo list (3 items) ✔ 
+🎉 Task Completed
+The Scalekit MCP server has been provisioned successfully.
+
+**Script:** `/home/user/myproject/run.py`
+**Log file:** `/home/user/myproject/output.log`
+
+**What was done:**
+1. Created an MCP config named `agentkit-mcp-zr-qznogtr` (run-id read from `ZEALT_RUN_ID`) exposing both `github-test` and `slack-test` connections via `client.actions.mcp.create_config`
+2. Ensured a per-user MCP instance for `zealt-user01` via `client.actions.mcp.ensure_instance`
+3. Wrote the three-line log file to `output.log`
+
+**Log file contents:**
+```
+Config: agentkit-mcp-zr-qznogtr
+Identifier: zealt-user01
+MCP URL: https://tabbyml.scalekit.dev/mcp/v2/servers/cc20592e-9dcb-4167-b9a3-112f5ae24e2e
+```
+
+The MCP URL is an `https://` URL pointing to a Scalekit-hosted host (`tabbyml.scalekit.dev`), meeting all acceptance criteria.   
+  

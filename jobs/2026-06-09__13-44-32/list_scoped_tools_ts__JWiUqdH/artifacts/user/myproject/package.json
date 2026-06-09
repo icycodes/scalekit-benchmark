@@ -1,0 +1,18 @@
+{
+  "name": "scalekit-scoped-tools-enumerator",
+  "version": "1.0.0",
+  "description": "Enumerate Scalekit Scoped Tools",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@scalekit-sdk/node": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "tsx": "^4.0.0"
+  }
+}

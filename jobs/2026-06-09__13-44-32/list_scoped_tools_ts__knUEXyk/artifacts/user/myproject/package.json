@@ -1,0 +1,16 @@
+{
+  "name": "scalekit-tool-enumerator",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@scalekit-sdk/node": "^2.6.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "tsx": "^4.15.0"
+  }
+}

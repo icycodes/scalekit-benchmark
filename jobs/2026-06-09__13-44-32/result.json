@@ -1,0 +1,126 @@
+{
+    "id": "8bfbbddb-0315-4686-a74e-03d8725437fa",
+    "started_at": "2026-06-09T13:44:32.194743",
+    "updated_at": "2026-06-09T14:25:44.378208",
+    "finished_at": "2026-06-09T14:25:44.378208",
+    "n_total_trials": 30,
+    "stats": {
+        "n_completed_trials": 30,
+        "n_errored_trials": 9,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gemini-3.5-flash__tasks": {
+                "n_trials": 9,
+                "n_errors": 2,
+                "metrics": [
+                    {
+                        "mean": 0.6
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "agentkit_authorization_link_py__z9YEGsG",
+                            "agentkit_create_slack_channel_py__gpTkFBa",
+                            "saaskit_agentkit_dashboard_ts__ZBq6cKL"
+                        ],
+                        "1.0": [
+                            "saaskit_token_refresh_express_ts__2T5Qi7S",
+                            "saaskit_protected_api_express_ts__LYAFnAJ",
+                            "list_scoped_tools_ts__JWiUqdH",
+                            "saaskit_login_express_ts__MgZMnQZ",
+                            "agentkit_create_github_repo_py__7mw8wjB",
+                            "agentkit_mcp_instance_py__iurCm4i"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "VerifierTimeoutError": [
+                        "saaskit_sso_hrd_express_ts__QxkhbzR"
+                    ],
+                    "AgentTimeoutError": [
+                        "agentkit_create_slack_channel_py__gpTkFBa"
+                    ]
+                }
+            },
+            "pochi__gpt-5.5__tasks": {
+                "n_trials": 9,
+                "n_errors": 1,
+                "metrics": [
+                    {
+                        "mean": 0.5
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "agentkit_authorization_link_py__52eza5t",
+                            "agentkit_create_slack_channel_py__mRMzws6",
+                            "saaskit_protected_api_express_ts__QzadCPH",
+                            "saaskit_login_express_ts__L5wGXDA"
+                        ],
+                        "1.0": [
+                            "saaskit_agentkit_dashboard_ts__xPTGDk6",
+                            "saaskit_token_refresh_express_ts__c5zL53A",
+                            "list_scoped_tools_ts__NM7pwEq",
+                            "agentkit_create_github_repo_py__SuU3nEh",
+                            "agentkit_mcp_instance_py__FFecvz7"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "VerifierTimeoutError": [
+                        "saaskit_sso_hrd_express_ts__8K4PA6e"
+                    ]
+                }
+            },
+            "pochi__deepseek-4-pro__tasks": {
+                "n_trials": 10,
+                "n_errors": 6,
+                "metrics": [
+                    {
+                        "mean": 0.4
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "saaskit_sso_hrd_express_ts__Nj9zJHt",
+                            "saaskit_protected_api_express_ts__uS8mh6g",
+                            "saaskit_login_express_ts__b5832fy",
+                            "agentkit_mcp_instance_py__qzNogTR"
+                        ],
+                        "0.0": [
+                            "agentkit_authorization_link_py__WM88ctK",
+                            "agentkit_create_slack_channel_py__TRrQFfV",
+                            "saaskit_agentkit_dashboard_ts__LwDeqMc",
+                            "saaskit_token_refresh_express_ts__n4vBjJB",
+                            "list_scoped_tools_ts__knUEXyk",
+                            "agentkit_create_github_repo_py__ggiTnXF"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "agentkit_create_slack_channel_py__TRrQFfV",
+                        "saaskit_agentkit_dashboard_ts__LwDeqMc",
+                        "saaskit_token_refresh_express_ts__n4vBjJB",
+                        "saaskit_protected_api_express_ts__uS8mh6g",
+                        "list_scoped_tools_ts__knUEXyk",
+                        "agentkit_create_github_repo_py__ggiTnXF"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 1171070,
+        "cost_usd": null
+    }
+}
