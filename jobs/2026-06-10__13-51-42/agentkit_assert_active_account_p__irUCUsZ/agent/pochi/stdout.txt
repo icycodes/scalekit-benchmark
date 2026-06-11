@@ -1,0 +1,139 @@
+- Initializing MCP connections...
+You
+# Scalekit AgentKit: Verify an Existing Connected Account is ACTIVE (Python) ## Background Before an AI agent can call third-party SaaS APIs on behalf of a user, the corresponding Scalekit `connected account` must reach the `ACTIVE` state. A common pre-flight check in production code is: given a `(connection, identifier)` pair, confirm that Scalekit has already stored valid credentials so the agent can proceed straight to tool calls instead of generating an authorization link. In this task you will use the Scalekit Python SDK to perform that pre-flight check against the dashboard fixture: the `github-test` connection has a pre-configured connected account for the test user `zealt-user01` that is already in the `ACTIVE` state. Your script must fetch that connected account via the SDK, assert the status is `ACTIVE`, and persist a small log artifact that the verifier can inspect. ## Requirements * Use the Scalekit Python SDK (`scalekit-sdk-python`) and read `SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`, and `SCALEKIT_ENV_URL` from environment variables. * Use the exact connection name `github-test` and the exact identifier `zealt-user01` as registered in the dashboard fixture. Do **NOT** introduce new environment variables for these names. * Use `get_or_create_connected_account` to fetch the connected account (it is idempotent and the safe default when the account may or may not already exist). * If the returned status is not `ACTIVE`, fail loudly (non-zero exit) instead of silently proceeding. * Persist a small log artifact so the verifier can inspect the result. ## Implementation Hints * Initialize `ScalekitClient` with the three environment variables. The Python SDK accepts keyword arguments like `env_url=...`, `client_id=...`, `client_secret=...`. * The `connection_name` is workspace-specific and case-sensitive — use `github-test` exactly. Do not pass the provider slug `github`. * The Scalekit response object exposes the connected account on `response.connected_account` (snake\_case). Its `status` field carries the state (compare against `"ACTIVE"` or the equivalent enum). * Do **NOT** generate an authorization link and do **NOT** call any third-party API directly — only use the Scalekit SDK to read the connected account. * Write the log file with UTF-8 text and one record per line. ## Acceptance Criteria * Project path: /home/user/myproject * Ensure the script is actually executed against the live Scalekit environment and the log artifact exists (no mocking). * Log file: /home/user/myproject/output.log * The script MUST exit with status 0 if the connected account is `ACTIVE`, and exit with a non-zero status otherwise. * The log file MUST contain the following four lines, each on its own line and in this exact label format: * `Connection: github-test` * `Identifier: zealt-user01` * `Status: ACTIVE` * `Connected Account ID: <non-empty connected-account id>` * The Scalekit-side state of the `(github-test, zealt-user01)` connected account MUST still be `ACTIVE` after the script runs (the script must not mutate it).   
+
+Pochi
+💭 Thinking for 395 characters   
+📋 Updating todo list (3 items) ✔ 
+📂 Listing files in /home/user/myproject ✔ 
+💭 Thinking for 453 characters   
+💫 Executing python --version && python -c "import scalekit; print('scalekit import ok')" ✔ 
+💫 Executing python - <<'PY'
+import os
+for k in ('SCALEKIT_CLIENT_ID','SCALEKIT_CLIENT_SECRET','SCALEKIT_ENV_URL'):
+    v=os.environ.get(k)
+    print(f'{k}={"set" if v else "missing"}')
+PY ✔ 
+📋 Updating todo list (3 items) ✔ 
+💭 Thinking for 435 characters   
+💫 Executing python - <<'PY'
+import inspect
+from scalekit import ScalekitClient
+print(ScalekitClient)
+print(inspect.signature(ScalekitClient))
+for name in dir(ScalekitClient):
+    if 'connected' in name.lower() or 'account' in name.lower():
+        print(name, getattr(ScalekitClient,name))
+PY ✔ 
+💫 Executing python - <<'PY'
+from scalekit import ScalekitClient
+import inspect
+for name in dir(ScalekitClient):
+    if not name.startswith('_'):
+        attr=getattr(ScalekitClient,name)
+        if callable(attr):
+            try: sig=inspect.signature(attr)
+            except Exception: sig='?'
+            print(name, sig)
+PY ✔ 
+💫 Executing python - <<'PY'
+import scalekit, pkgutil
+print(scalekit.__file__)
+mods=[]
+for m in pkgutil.walk_packages(scalekit.__path__, scalekit.__name__+'.'):
+    if 'connect' in m.name or 'account' in m.name or 'agent' in m.name:
+        mods.append(m.name)
+print('\n'.join(mods))
+PY ✔ 
+💫 Executing python - <<'PY'
+import inspect
+import scalekit.connected_accounts as ca
+print(ca)
+for name in dir(ca):
+    if not name.startswith('_'):
+        obj=getattr(ca,name)
+        print(name, obj)
+        if inspect.isclass(obj) or inspect.isfunction(obj):
+            try: print(' sig', inspect.signature(obj))
+            except: pass
+PY ✔ 
+💫 Executing python - <<'PY'
+from scalekit.connected_accounts import ConnectedAccountsClient
+import inspect
+for name in dir(ConnectedAccountsClient):
+    if not name.startswith('_'):
+        attr=getattr(ConnectedAccountsClient,name)
+        if callable(attr):
+            print(name, inspect.signature(attr))
+            try: print(inspect.getsource(attr))
+            except Exception as e: print(e)
+PY ✔ 
+💫 Executing python - <<'PY'
+import pkgutil, importlib, inspect, scalekit
+for m in pkgutil.walk_packages(scalekit.__path__, scalekit.__name__+'.'):
+    if 'action' in m.name or 'agent' in m.name or 'tool' in m.name:
+        print('MOD', m.name)
+PY ✔ 
+💫 Executing python - <<'PY'
+import inspect
+import scalekit.actions.actions as actions
+for name in dir(actions):
+    if not name.startswith('_'):
+        obj=getattr(actions,name)
+        if inspect.isclass(obj):
+            print('CLASS', name, inspect.signature(obj))
+            for mn in dir(obj):
+                if not mn.startswith('_') and callable(getattr(obj,mn)):
+                    try: sig=inspect.signature(getattr(obj,mn))
+                    except: sig='?'
+                    if 'account' in mn or 'connect' in mn or 'auth' in mn:
+                        print(' ', mn, sig)
+PY ✖ "Command exited with code 1"
+💫 Executing python - <<'PY'
+from scalekit import ScalekitClient
+from scalekit.actions.actions import ActionClient
+import inspect
+print(inspect.getsource(ScalekitClient.__init__))
+for name in dir(ScalekitClient('x','y','z')):
+    if 'action' in name or 'connect' in name or 'account' in name:
+        print(name)
+PY ✖ "Command exited with code 1"
+💫 Executing python - <<'PY'
+from scalekit.actions.models.responses.get_connected_account_auth_response import ConnectedAccount
+import inspect
+print(ConnectedAccount)
+print(getattr(ConnectedAccount,'model_fields',None))
+PY ✔ 
+💭 Thinking for 509 characters   
+✏️  Writing /home/user/myproject/verify_connected_account.py ✔ 
+✏️  Writing /home/user/myproject/requirements.txt ✔ 
+📋 Updating todo list (3 items) ✔ 
+💫 Executing python verify_connected_account.py && cat output.log ✔ 
+💭 Thinking for 401 characters   
+💫 Executing python - <<'PY'
+from pathlib import Path
+p = Path('output.log')
+print(f'exists={p.exists()} size={p.stat().st_size if p.exists() else 0}')
+print(p.read_text(encoding='utf-8'))
+PY ✔ 
+📋 Updating todo list (3 items) ✔ 
+Implemented and executed the Scalekit connected account pre-flight check in `/home/user/myproject`. Files created: - `/home/user/myproject/verify_connected_account.py` - `/home/user/myproject/requirements.txt` - `/home/user/myproject/output.log` The script: - Reads `SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`, and `SCALEKIT_ENV_URL` from the environment. - Uses `ScalekitClient`. - Calls `client.actions.get_or_create_connected_account(...)`. - Uses the exact connection name `github-test`. - Uses the exact identifier `zealt-user01`. - Fails with a non-zero exit if the connected account is not `ACTIVE`. - Writes the required UTF-8 log artifact. Execution succeeded with status `0`. `output.log` contains: ```text Connection: github-test Identifier: zealt-user01 Status: ACTIVE Connected Account ID: ca_127046882881963526 ```   
+🎉 Task Completed
+Implemented and executed the Scalekit connected account pre-flight check in `/home/user/myproject`.
+
+Files created:
+- `/home/user/myproject/verify_connected_account.py`
+- `/home/user/myproject/requirements.txt`
+- `/home/user/myproject/output.log`
+
+The script reads the required Scalekit environment variables, initializes `ScalekitClient`, calls `client.actions.get_or_create_connected_account(connection_name="github-test", identifier="zealt-user01")`, asserts the returned connected account status is `ACTIVE`, and writes the required UTF-8 log artifact.
+
+Execution completed successfully with exit status `0`.
+
+`/home/user/myproject/output.log` contains:
+
+Connection: github-test
+Identifier: zealt-user01
+Status: ACTIVE
+Connected Account ID: ca_127046882881963526   
+  

@@ -1,0 +1,91 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 7,
+            "passed": 6,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780985394939,
+            "stop": 1780985564316
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_landing_page_has_sign_in_link",
+                "status": "passed",
+                "duration": 55234,
+                "start": 1780985395028,
+                "stop": 1780985450262,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_login_redirects_to_scalekit_authorize",
+                "status": "passed",
+                "duration": 10,
+                "start": 1780985450263,
+                "stop": 1780985450273,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_dashboard_redirects_to_login_when_unauthenticated",
+                "status": "passed",
+                "duration": 6,
+                "start": 1780985450274,
+                "stop": 1780985450280,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_refresh_session_redirects_to_login_when_no_refresh_token",
+                "status": "passed",
+                "duration": 5,
+                "start": 1780985450281,
+                "stop": 1780985450286,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_goodbye_page_shows_signed_out_message",
+                "status": "passed",
+                "duration": 4,
+                "start": 1780985450287,
+                "stop": 1780985450291,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_logout_redirects_to_scalekit_and_clears_cookies",
+                "status": "passed",
+                "duration": 8,
+                "start": 1780985450292,
+                "stop": 1780985450300,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_end_to_end_signin_and_token_refresh",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 114016,
+                "start": 1780985450300,
+                "stop": 1780985564316,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\nbrowser_verifier = <pochi_verifier.verifier.PochiVerifier object at 0x77f1564f73b0>\n\n    def test_end_to_end_signin_and_token_refresh(start_app, browser_verifier):\n        \"\"\"Drive Scalekit's hosted login flow with the preconfigured test user and\n        static OTP, verify the dashboard shows iat/exp claims of the access token,\n        click the 'Refresh access token' control, and verify the iat value\n        strictly increases (proving a brand-new access token was issued via\n        scalekit.refreshAccessToken).\"\"\"\n        reason = (\n            \"The Express.js app must integrate Scalekit SaaSKit end-to-end. After a \"\n            \"successful login the dashboard must display the access token's iat and \"\n            \"exp claim values. Clicking the visible 'Refresh access token' control \"\n            \"must invoke Scalekit's refreshAccessToken SDK call and re-render the \"\n            \"dashboard with a strictly newer iat value, proving that a freshly \"\n            \"issued access token has replaced the previous one. The user must then \"\n            \"be able to sign out and end up on a public goodbye page.\"\n        )\n        truth = (\n            \"Step 1: Navigate to http://localhost:3000/.\\n\"\n            \"Step 2: Click the visible 'Sign in' (or 'Log in') link/button on the landing page. \"\n            \"The browser must be redirected to a Scalekit-hosted login page (the URL host should contain 'scalekit').\\n\"\n            \"Step 3: On the Scalekit hosted login page, enter the email address \"\n            f\"'{TEST_USER_EMAIL}' into the email field and click Continue / Submit. \"\n            \"If the page asks to choose an authentication method, pick Email OTP / verification code.\\n\"\n            f\"Step 4: When the page prompts for a one-time code, enter '{TEST_USER_OTP}' and submit.\\n\"\n            \"Step 5: The browser must be redirected back to http://localhost:3000/callback?code=... \"\n            \"and then onward to http://localhost:3000/dashboard.\\n\"\n            f\"Step 6: On /dashboard, verify the page visibly contains ALL of: \"\n            f\"the email '{TEST_USER_EMAIL}', an `iat` label/text followed by an integer \"\n            \"(UNIX seconds), an `exp` label/text followed by an integer (UNIX seconds), \"\n            \"a visible 'Refresh access token' control, and a visible 'Sign out' / 'Logout' control.\\n\"\n            \"Step 7: Carefully record the integer value displayed for `iat` (call it iat_before) \"\n            \"and the integer value displayed for `exp` (call it exp_before).\\n\"\n            \"Step 8: Wait at least 2 seconds, then click the 'Refresh access token' control. \"\n            \"The browser must end up back at http://localhost:3000/dashboard.\\n\"\n            \"Step 9: On the refreshed /dashboard, read the new integer values displayed \"\n            \"for `iat` (call it iat_after) and `exp` (call it exp_after).\\n\"\n            \"Step 10: Verify that iat_after > iat_before (strictly greater) AND \"\n            \"exp_after >= exp_before (greater than or equal). The dashboard must still \"\n            f\"visibly contain the email '{TEST_USER_EMAIL}'.\\n\"\n            \"Step 11: Click the visible 'Sign out' / 'Logout' control. The browser must end up at \"\n            \"http://localhost:3000/goodbye and the page must contain a clearly visible \"\n            \"'signed out' / 'goodbye' / 'logged out' confirmation message.\"\n        )\n    \n        result = browser_verifier.verify(\n            reason=reason,\n            truth=truth,\n            use_browser_agent=True,\n            trajectory_dir=\"/logs/verifier/pochi/test_end_to_end_signin_and_token_refresh\",\n        )\n>       assert result.status == \"pass\", (\n            f\"Browser verification failed: {getattr(result, 'reason', result)!r}\"\n        )\nE       AssertionError: Browser verification failed: \"The test failed at Step 2. While the landing page at http://localhost:3000/ loaded successfully and the 'Sign in' link was clicked, the subsequent redirect to the Scalekit-hosted login page (test.scalekit.com) resulted in a DNS error (DNS_PROBE_FINISHED_NXDOMAIN). Consequently, the verification could not proceed to the login, dashboard, or refresh token steps.\"\nE       assert 'fail' == 'pass'\nE         - pass\nE         + fail\n\ntests/test_final_state.py:301: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

@@ -1,0 +1,101 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-11T08:18:18.326286+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 8,
+            "passed": 8,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781165890767,
+            "stop": 1781165898326
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_exists",
+                "status": "passed",
+                "duration": 32,
+                "start": 1781165891085,
+                "stop": 1781165891117,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_created_line",
+                "status": "passed",
+                "duration": 0,
+                "start": 1781165891118,
+                "stop": 1781165891118,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_listed_before_delete_line",
+                "status": "passed",
+                "duration": 0,
+                "start": 1781165891119,
+                "stop": 1781165891119,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_deleted_line",
+                "status": "passed",
+                "duration": 1,
+                "start": 1781165891119,
+                "stop": 1781165891120,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_listed_after_delete_line",
+                "status": "passed",
+                "duration": 0,
+                "start": 1781165891120,
+                "stop": 1781165891120,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_lines_are_in_expected_order",
+                "status": "passed",
+                "duration": 0,
+                "start": 1781165891121,
+                "stop": 1781165891121,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_dynamic_connected_account_was_deleted",
+                "status": "passed",
+                "duration": 6065,
+                "start": 1781165891121,
+                "stop": 1781165897186,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_fixture_connected_account_is_untouched",
+                "status": "passed",
+                "duration": 1138,
+                "start": 1781165897187,
+                "stop": 1781165898325,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

@@ -1,0 +1,87 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0, xprocess-1.0.2
+collected 7 items
+
+tests/test_final_state.py ......F                                        [100%]
+
+=================================== FAILURES ===================================
+___________________ test_end_to_end_signin_and_token_refresh ___________________
+
+start_app = None
+browser_verifier = <pochi_verifier.verifier.PochiVerifier object at 0x77f1564f73b0>
+
+    def test_end_to_end_signin_and_token_refresh(start_app, browser_verifier):
+        """Drive Scalekit's hosted login flow with the preconfigured test user and
+        static OTP, verify the dashboard shows iat/exp claims of the access token,
+        click the 'Refresh access token' control, and verify the iat value
+        strictly increases (proving a brand-new access token was issued via
+        scalekit.refreshAccessToken)."""
+        reason = (
+            "The Express.js app must integrate Scalekit SaaSKit end-to-end. After a "
+            "successful login the dashboard must display the access token's iat and "
+            "exp claim values. Clicking the visible 'Refresh access token' control "
+            "must invoke Scalekit's refreshAccessToken SDK call and re-render the "
+            "dashboard with a strictly newer iat value, proving that a freshly "
+            "issued access token has replaced the previous one. The user must then "
+            "be able to sign out and end up on a public goodbye page."
+        )
+        truth = (
+            "Step 1: Navigate to http://localhost:3000/.\n"
+            "Step 2: Click the visible 'Sign in' (or 'Log in') link/button on the landing page. "
+            "The browser must be redirected to a Scalekit-hosted login page (the URL host should contain 'scalekit').\n"
+            "Step 3: On the Scalekit hosted login page, enter the email address "
+            f"'{TEST_USER_EMAIL}' into the email field and click Continue / Submit. "
+            "If the page asks to choose an authentication method, pick Email OTP / verification code.\n"
+            f"Step 4: When the page prompts for a one-time code, enter '{TEST_USER_OTP}' and submit.\n"
+            "Step 5: The browser must be redirected back to http://localhost:3000/callback?code=... "
+            "and then onward to http://localhost:3000/dashboard.\n"
+            f"Step 6: On /dashboard, verify the page visibly contains ALL of: "
+            f"the email '{TEST_USER_EMAIL}', an `iat` label/text followed by an integer "
+            "(UNIX seconds), an `exp` label/text followed by an integer (UNIX seconds), "
+            "a visible 'Refresh access token' control, and a visible 'Sign out' / 'Logout' control.\n"
+            "Step 7: Carefully record the integer value displayed for `iat` (call it iat_before) "
+            "and the integer value displayed for `exp` (call it exp_before).\n"
+            "Step 8: Wait at least 2 seconds, then click the 'Refresh access token' control. "
+            "The browser must end up back at http://localhost:3000/dashboard.\n"
+            "Step 9: On the refreshed /dashboard, read the new integer values displayed "
+            "for `iat` (call it iat_after) and `exp` (call it exp_after).\n"
+            "Step 10: Verify that iat_after > iat_before (strictly greater) AND "
+            "exp_after >= exp_before (greater than or equal). The dashboard must still "
+            f"visibly contain the email '{TEST_USER_EMAIL}'.\n"
+            "Step 11: Click the visible 'Sign out' / 'Logout' control. The browser must end up at "
+            "http://localhost:3000/goodbye and the page must contain a clearly visible "
+            "'signed out' / 'goodbye' / 'logged out' confirmation message."
+        )
+    
+        result = browser_verifier.verify(
+            reason=reason,
+            truth=truth,
+            use_browser_agent=True,
+            trajectory_dir="/logs/verifier/pochi/test_end_to_end_signin_and_token_refresh",
+        )
+>       assert result.status == "pass", (
+            f"Browser verification failed: {getattr(result, 'reason', result)!r}"
+        )
+E       AssertionError: Browser verification failed: "The test failed at Step 2. While the landing page at http://localhost:3000/ loaded successfully and the 'Sign in' link was clicked, the subsequent redirect to the Scalekit-hosted login page (test.scalekit.com) resulted in a DNS error (DNS_PROBE_FINISHED_NXDOMAIN). Consequently, the verification could not proceed to the login, dashboard, or refresh token steps."
+E       assert 'fail' == 'pass'
+E         - pass
+E         + fail
+
+tests/test_final_state.py:301: AssertionError
+==================================== PASSES ====================================
+______________________ test_landing_page_has_sign_in_link ______________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/saaskit_refresh_app$ npm start
+process 'saaskit_refresh_app' started pid=1258
+saaskit_refresh_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_landing_page_has_sign_in_link
+PASSED tests/test_final_state.py::test_login_redirects_to_scalekit_authorize
+PASSED tests/test_final_state.py::test_dashboard_redirects_to_login_when_unauthenticated
+PASSED tests/test_final_state.py::test_refresh_session_redirects_to_login_when_no_refresh_token
+PASSED tests/test_final_state.py::test_goodbye_page_shows_signed_out_message
+PASSED tests/test_final_state.py::test_logout_redirects_to_scalekit_and_clears_cookies
+FAILED tests/test_final_state.py::test_end_to_end_signin_and_token_refresh - ...
+=================== 1 failed, 6 passed in 169.37s (0:02:49) ====================

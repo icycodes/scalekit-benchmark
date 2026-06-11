@@ -1,0 +1,68 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-10T07:05:04.176486+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 3,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781075102982,
+            "stop": 1781075104176
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_healthz_endpoint",
+                "status": "passed",
+                "duration": 1052,
+                "start": 1781075103052,
+                "stop": 1781075104104,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_login_returns_302_redirect",
+                "status": "passed",
+                "duration": 7,
+                "start": 1781075104105,
+                "stop": 1781075104112,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_login_redirect_target_prefix_and_path",
+                "status": "passed",
+                "duration": 5,
+                "start": 1781075104112,
+                "stop": 1781075104117,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_login_redirect_query_parameters",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 58,
+                "start": 1781075104118,
+                "stop": 1781075104176,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_login_redirect_query_parameters(start_app):\n        \"\"\"Verify the Location URL contains the expected OAuth query parameters.\"\"\"\n        expected_client_id = os.environ.get(\"SCALEKIT_CLIENT_ID\", \"\")\n        assert expected_client_id, (\n            \"SCALEKIT_CLIENT_ID environment variable is not set in the verifier env.\"\n        )\n    \n        response = requests.get(LOGIN_URL, allow_redirects=False, timeout=10)\n        location = response.headers.get(\"Location\", \"\")\n        parsed = urlparse(location)\n        params = parse_qs(parsed.query)\n    \n        client_id_values = params.get(\"client_id\", [])\n        assert client_id_values == [expected_client_id], (\n            f\"Expected client_id query param to equal SCALEKIT_CLIENT_ID ({expected_client_id!r}), got {client_id_values!r}\"\n        )\n    \n        redirect_uri_values = params.get(\"redirect_uri\", [])\n        assert redirect_uri_values == [EXPECTED_REDIRECT_URI], (\n            f\"Expected redirect_uri query param to be {EXPECTED_REDIRECT_URI!r}, got {redirect_uri_values!r}\"\n        )\n    \n        response_type_values = params.get(\"response_type\", [])\n        assert response_type_values == [\"code\"], (\n            f\"Expected response_type query param to be 'code', got {response_type_values!r}\"\n        )\n    \n        scope_values = params.get(\"scope\", [])\n        assert len(scope_values) == 1, (\n            f\"Expected exactly one 'scope' query parameter, got {scope_values!r}\"\n        )\n        scope_tokens = set(scope_values[0].split())\n        missing = REQUIRED_SCOPES - scope_tokens\n>       assert not missing, (\n            f\"Expected scope to include {sorted(REQUIRED_SCOPES)}, missing: {sorted(missing)} (full scope: {scope_values[0]!r})\"\n        )\nE       AssertionError: Expected scope to include ['email', 'offline_access', 'openid', 'profile'], missing: ['email', 'offline_access', 'openid', 'profile'] (full scope: 'o p e n i d   p r o f i l e   e m a i l   o f f l i n e _ a c c e s s')\nE       assert not {'email', 'offline_access', 'openid', 'profile'}\n\ntests/test_final_state.py:115: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

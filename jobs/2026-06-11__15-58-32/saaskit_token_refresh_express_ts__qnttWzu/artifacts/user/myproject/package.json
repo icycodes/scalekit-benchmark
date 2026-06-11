@@ -1,0 +1,14 @@
+{
+  "name": "scalekit-saaskit-demo",
+  "version": "1.0.0",
+  "description": "Express.js app with Scalekit SaaSKit authentication and explicit token refresh",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@scalekit-sdk/node": "latest",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2"
+  }
+}

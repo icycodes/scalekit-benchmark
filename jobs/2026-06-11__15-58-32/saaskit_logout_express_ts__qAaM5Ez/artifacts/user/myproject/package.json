@@ -1,0 +1,22 @@
+{
+  "name": "scalekit-logout-demo",
+  "version": "1.0.0",
+  "description": "Express + TypeScript app with Scalekit SaaSKit logout endpoint",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@scalekit-sdk/node": "latest",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0"
+  }
+}

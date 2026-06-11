@@ -1,0 +1,74 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-11T08:23:46.361290+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781166223624,
+            "stop": 1781166226361
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_exists",
+                "status": "passed",
+                "duration": 31,
+                "start": 1781166223639,
+                "stop": 1781166223670,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_target_repository_exists",
+                "status": "passed",
+                "duration": 1041,
+                "start": 1781166223671,
+                "stop": 1781166224712,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_target_repository_is_public",
+                "status": "passed",
+                "duration": 536,
+                "start": 1781166224713,
+                "stop": 1781166225249,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_issue_created_with_expected_title",
+                "status": "passed",
+                "duration": 586,
+                "start": 1781166225249,
+                "stop": 1781166225835,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_expected_issue_url",
+                "status": "passed",
+                "duration": 524,
+                "start": 1781166225836,
+                "stop": 1781166226360,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

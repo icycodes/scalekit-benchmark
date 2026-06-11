@@ -1,0 +1,83 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-10T06:29:41.709579+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 2,
+            "failed": 3,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781072978890,
+            "stop": 1781072981709
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_exists",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 48,
+                "start": 1781072978904,
+                "stop": 1781072978952,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_exists():\n>       assert os.path.isfile(LOG_FILE), f\"Expected log file at {LOG_FILE} but it was not found.\"\nE       AssertionError: Expected log file at /home/user/myproject/output.log but it was not found.\nE       assert False\nE        +  where False = <function isfile at 0x7e8bea2a0220>('/home/user/myproject/output.log')\nE        +    where <function isfile at 0x7e8bea2a0220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:28: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_target_repository_exists",
+                "status": "passed",
+                "duration": 994,
+                "start": 1781072978952,
+                "stop": 1781072979946,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_target_repository_is_public",
+                "status": "passed",
+                "duration": 582,
+                "start": 1781072979946,
+                "stop": 1781072980528,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_issue_created_with_expected_title",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 638,
+                "start": 1781072980529,
+                "stop": 1781072981167,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_issue_created_with_expected_title():\n        expected_title = f\"{ISSUE_TITLE_BASE} {_run_id()}\"\n        result = subprocess.run(\n            [\n                \"gh\",\n                \"issue\",\n                \"list\",\n                \"--repo\",\n                _repo_slug(),\n                \"--state\",\n                \"all\",\n                \"--json\",\n                \"title,url,number\",\n                \"--limit\",\n                \"50\",\n            ],\n            capture_output=True,\n            text=True,\n        )\n        assert result.returncode == 0, f\"'gh issue list' failed: {result.stderr}\"\n        issues = json.loads(result.stdout)\n        matching = [i for i in issues if i.get(\"title\") == expected_title]\n>       assert matching, (\n            f\"Expected at least one issue titled {expected_title!r} on {_repo_slug()}; \"\n            f\"found titles: {[i.get('title') for i in issues]}\"\n        )\nE       AssertionError: Expected at least one issue titled 'AgentKit Test Issue zr-nwslutn' on zealt-user01/agentkit-issue-target-zr-nwslutn; found titles: []\nE       assert []\n\ntests/test_final_state.py:83: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_expected_issue_url",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 541,
+                "start": 1781072981167,
+                "stop": 1781072981708,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_expected_issue_url():\n        # Read the actual issue URL from GitHub and confirm the log file references it.\n        expected_title = f\"{ISSUE_TITLE_BASE} {_run_id()}\"\n        result = subprocess.run(\n            [\n                \"gh\",\n                \"issue\",\n                \"list\",\n                \"--repo\",\n                _repo_slug(),\n                \"--state\",\n                \"all\",\n                \"--json\",\n                \"title,url,number\",\n                \"--limit\",\n                \"50\",\n            ],\n            capture_output=True,\n            text=True,\n        )\n        assert result.returncode == 0, f\"'gh issue list' failed: {result.stderr}\"\n        issues = json.loads(result.stdout)\n        matching = [i for i in issues if i.get(\"title\") == expected_title]\n>       assert matching, (\n            f\"No issue with title {expected_title!r} found on {_repo_slug()}; \"\n            f\"cannot verify URL in log.\"\n        )\nE       AssertionError: No issue with title 'AgentKit Test Issue zr-nwslutn' found on zealt-user01/agentkit-issue-target-zr-nwslutn; cannot verify URL in log.\nE       assert []\n\ntests/test_final_state.py:112: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

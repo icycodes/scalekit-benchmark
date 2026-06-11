@@ -1,0 +1,22 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0, xprocess-1.0.2
+collected 6 items
+
+tests/test_final_state.py ......                                         [100%]
+
+==================================== PASSES ====================================
+______________________ test_landing_page_has_sign_in_link ______________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/saaskit_express_app$ npm start
+process 'saaskit_express_app' started pid=1590
+saaskit_express_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_landing_page_has_sign_in_link
+PASSED tests/test_final_state.py::test_login_redirects_to_scalekit_authorize
+PASSED tests/test_final_state.py::test_dashboard_redirects_to_login_when_unauthenticated
+PASSED tests/test_final_state.py::test_goodbye_page_shows_signed_out_message
+PASSED tests/test_final_state.py::test_logout_redirects_to_scalekit_and_clears_cookies
+PASSED tests/test_final_state.py::test_end_to_end_signin_with_test_user_otp
+======================== 6 passed in 161.82s (0:02:41) =========================

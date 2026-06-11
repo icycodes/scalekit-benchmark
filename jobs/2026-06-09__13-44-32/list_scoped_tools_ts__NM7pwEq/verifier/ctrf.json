@@ -1,0 +1,61 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780985257073,
+            "stop": 1780985257107
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_tools_json_top_level_shape",
+                "status": "passed",
+                "duration": 2,
+                "start": 1780985257098,
+                "stop": 1780985257100,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_github_tools_listed_correctly",
+                "status": "passed",
+                "duration": 2,
+                "start": 1780985257100,
+                "stop": 1780985257102,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_slack_tools_listed_correctly",
+                "status": "passed",
+                "duration": 2,
+                "start": 1780985257102,
+                "stop": 1780985257104,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_summary_lines",
+                "status": "passed",
+                "duration": 2,
+                "start": 1780985257104,
+                "stop": 1780985257106,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

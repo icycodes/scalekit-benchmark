@@ -1,0 +1,84 @@
+Skipping image OS validation for hb__agentkit_create_github_issue_py: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.14 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-cj7ero8 > /logs/artifacts/run-id && echo agentkit_create_github_issue_py__Cj7Ero8 > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# AgentKit: Create a GitHub Issue Through Scalekit
+
+## Background
+Scalekit's AgentKit lets an LLM agent perform authenticated, scoped actions on third-party SaaS apps by injecting the user's stored credentials into pre-built "optimized tools". Your dashboard fixtures include a `github-test` connection with an `ACTIVE` connected account for the identifier `zealt-user01`.
+
+You will build a Python script that proves AgentKit can be driven end-to-end from code: it discovers the right GitHub issue-creation tool with `list_scoped_tools`, then invokes it with `execute_tool` to file a new issue on a repository the script itself just created.
+
+## Requirements
+- Implement the script at `/home/user/myproject/main.py`.
+- Read `run-id` from the `ZEALT_RUN_ID` environment variable. Append it to every named resource.
+- Create a brand-new public GitHub repository under `zealt-user01` named `agentkit-issue-target-${run-id}`, initialized with a README. Use the GitHub CLI for this step (the `GH_TOKEN` environment variable is already set up for `zealt-user01`).
+- Initialize the Scalekit SDK using only the provided environment variables (`SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`, `SCALEKIT_ENV_URL`). Hard-code the connection name `github-test` and identifier `zealt-user01` — these come from the dashboard fixtures and are not exposed as env vars.
+- Call AgentKit's scoped-tool listing to discover the GitHub tool that creates an issue. Use a `page_size` large enough that the GitHub connector's tool list is not silently truncated.
+- Use AgentKit's tool execution to file an issue on the new repository with:
+  - Title: `AgentKit Test Issue ${run-id}`
+  - Body: `Filed via Scalekit AgentKit for run ${run-id}`
+- Append the issue's HTML URL to `/home/user/myproject/output.log` on a line of the form `Issue URL: <issue_url>` (no trailing whitespace).
+
+## Implementation Hints
+- The Scalekit Python SDK is available as `scalekit-sdk-python`; initialize a client with `client_id`, `client_secret`, and `env_url`, then use `client.actions` for AgentKit calls.
+- Connection names are workspace-specific. Do not introduce a new env var for the connection name; use the literal string from the dashboard fixtures.
+- `list_scoped_tools` returns the JSON-Schema definitions for every tool the user is authorized to call. The default page size hides tools on connectors that ship many tools — pass `page_size=100`.
+- The tool you need has a name that begins with `github_` and clearly mentions issue creation. Pick it programmatically rather than hard-coding a guessed name; the dashboard's catalog is the source of truth.
+- `execute_tool` accepts either `(identifier + connection_name)` or `connected_account_id`. Either works.
+- Use the GitHub CLI (`gh`) to create the target repository before driving AgentKit. The CLI is preauthenticated as `zealt-user01`.
+
+## Acceptance Criteria
+- Project path: `/home/user/myproject`
+- Ensure the script is executed and the artifacts exist.
+- Log file: `/home/user/myproject/output.log`
+- The GitHub repository `zealt-user01/agentkit-issue-target-${run-id}` must exist and be public, where `${run-id}` is read from the `ZEALT_RUN_ID` environment variable.
+- The repository must contain an issue whose title is exactly `AgentKit Test Issue ${run-id}`.
+- The log file must contain a line of the form `Issue URL: https://github.com/zealt-user01/agentkit-issue-target-${run-id}/issues/<number>`.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

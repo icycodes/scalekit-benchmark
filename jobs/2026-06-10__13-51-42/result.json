@@ -1,0 +1,163 @@
+{
+    "id": "d62e75ad-38a0-40f6-b8de-f2f65ef41664",
+    "started_at": "2026-06-10T13:51:42.165827",
+    "updated_at": "2026-06-10T15:10:43.943249",
+    "finished_at": "2026-06-10T15:10:43.943249",
+    "n_total_trials": 54,
+    "stats": {
+        "n_completed_trials": 54,
+        "n_errored_trials": 22,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gemini-3.5-flash__tasks": {
+                "n_trials": 16,
+                "n_errors": 7,
+                "metrics": [
+                    {
+                        "mean": 0.4444444444444444
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "agentkit_delete_connected_accoun__Ygvt53D",
+                            "saaskit_create_organization_ts__SXDwpmr",
+                            "list_connected_accounts_ts__UVtaVm6",
+                            "agentkit_langchain_tools_py__jEhHf4M",
+                            "agentkit_create_github_issue_py__jMUQDox",
+                            "agentkit_assert_active_account_p__FZCaNPx",
+                            "agentkit_list_github_repos_ts__Ym3yoUN",
+                            "saaskit_login_flask_py__DbNY9HP"
+                        ],
+                        "0.0": [
+                            "agentkit_github_slack_notify_py__2LuFCsV",
+                            "saaskit_logout_express_ts__Hwm37vT",
+                            "saaskit_create_organization_py__byKziDw",
+                            "agentkit_get_or_create_account_t__5KSyuKV",
+                            "agentkit_post_slack_message_ts__Xy9YKhp",
+                            "agentkit_create_github_gist_py__cHxSKc3",
+                            "agentkit_post_slack_message_py__cJ6A3Je",
+                            "agentkit_list_scoped_tools_py__gWW22TR"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "InitialStateError": [
+                        "agentkit_create_slack_channel_ts__PXZoXQ6",
+                        "agentkit_create_github_repo_ts__Zskr3WU"
+                    ],
+                    "AgentTimeoutError": [
+                        "agentkit_github_slack_notify_py__2LuFCsV",
+                        "agentkit_post_slack_message_ts__Xy9YKhp",
+                        "agentkit_create_github_gist_py__cHxSKc3",
+                        "agentkit_post_slack_message_py__cJ6A3Je",
+                        "agentkit_list_scoped_tools_py__gWW22TR"
+                    ]
+                }
+            },
+            "pochi__gpt-5.5__tasks": {
+                "n_trials": 16,
+                "n_errors": 3,
+                "metrics": [
+                    {
+                        "mean": 0.4444444444444444
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "agentkit_delete_connected_accoun__LxgaBsU",
+                            "saaskit_create_organization_ts__hBQdLBZ",
+                            "list_connected_accounts_ts__t55SFo9",
+                            "agentkit_langchain_tools_py__jVfhKSE",
+                            "agentkit_create_github_issue_py__xcSszPD",
+                            "agentkit_assert_active_account_p__irUCUsZ",
+                            "agentkit_list_github_repos_ts__SVonyn6",
+                            "saaskit_login_flask_py__YAkuLGR"
+                        ],
+                        "0.0": [
+                            "agentkit_github_slack_notify_py__SHdEYmU",
+                            "saaskit_logout_express_ts__DgMg8Gz",
+                            "saaskit_create_organization_py__a8Gqirq",
+                            "agentkit_get_or_create_account_t__PEwwngY",
+                            "agentkit_post_slack_message_ts__nAPaEF4",
+                            "agentkit_create_github_gist_py__hMbjeWs",
+                            "agentkit_post_slack_message_py__aAiQytA",
+                            "agentkit_list_scoped_tools_py__meBc7tt"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "InitialStateError": [
+                        "agentkit_create_slack_channel_ts__pQGxn2L",
+                        "agentkit_create_github_repo_ts__wYQLHQq"
+                    ],
+                    "AgentTimeoutError": [
+                        "agentkit_github_slack_notify_py__SHdEYmU"
+                    ]
+                }
+            },
+            "pochi__deepseek-4-pro__tasks": {
+                "n_trials": 16,
+                "n_errors": 12,
+                "metrics": [
+                    {
+                        "mean": 0.3333333333333333
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "agentkit_delete_connected_accoun__aYnQQfo",
+                            "saaskit_create_organization_ts__eEXzHGV",
+                            "list_connected_accounts_ts__hsMdHoq",
+                            "agentkit_langchain_tools_py__DJFpLdm",
+                            "saaskit_logout_express_ts__z7PEM2V",
+                            "agentkit_assert_active_account_p__PEQbMUz"
+                        ],
+                        "0.0": [
+                            "agentkit_create_github_issue_py__nwSLUTN",
+                            "agentkit_github_slack_notify_py__56kYdDs",
+                            "saaskit_create_organization_py__WASgi5n",
+                            "agentkit_get_or_create_account_t__XUD7DeQ",
+                            "agentkit_list_github_repos_ts__zcEjqJD",
+                            "agentkit_post_slack_message_ts__rqQaNfV",
+                            "agentkit_create_github_gist_py__XFtjkvS",
+                            "agentkit_post_slack_message_py__ZLL8GMh",
+                            "saaskit_login_flask_py__QMnSCA4",
+                            "agentkit_list_scoped_tools_py__oYZSPWx"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "agentkit_delete_connected_accoun__aYnQQfo",
+                        "agentkit_create_github_issue_py__nwSLUTN",
+                        "agentkit_github_slack_notify_py__56kYdDs",
+                        "agentkit_assert_active_account_p__PEQbMUz",
+                        "agentkit_get_or_create_account_t__XUD7DeQ",
+                        "agentkit_list_github_repos_ts__zcEjqJD",
+                        "agentkit_post_slack_message_ts__rqQaNfV",
+                        "agentkit_create_github_gist_py__XFtjkvS",
+                        "agentkit_post_slack_message_py__ZLL8GMh",
+                        "agentkit_list_scoped_tools_py__oYZSPWx"
+                    ],
+                    "InitialStateError": [
+                        "agentkit_create_slack_channel_ts__Fd6WXb3",
+                        "agentkit_create_github_repo_ts__SQaidrQ"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 1863533,
+        "cost_usd": null
+    }
+}

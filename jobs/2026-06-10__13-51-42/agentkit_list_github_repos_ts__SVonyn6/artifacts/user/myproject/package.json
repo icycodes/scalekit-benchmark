@@ -1,0 +1,20 @@
+{
+  "name": "scalekit-github-repos",
+  "version": "1.0.0",
+  "description": "List GitHub repositories through Scalekit AgentKit executeTool.",
+  "main": "dist/list-repos.js",
+  "scripts": {
+    "start": "tsx src/list-repos.ts",
+    "build": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@scalekit-sdk/node": "^2.6.2",
+    "@types/node": "^25.9.2",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}

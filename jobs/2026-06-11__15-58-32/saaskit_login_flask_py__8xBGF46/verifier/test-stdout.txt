@@ -1,0 +1,20 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: Faker-25.8.0, anyio-4.13.0, json-ctrf-0.5.2, xprocess-1.0.2
+collected 4 items
+
+tests/test_final_state.py ....                                           [100%]
+
+==================================== PASSES ====================================
+____________________________ test_healthz_endpoint _____________________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/saaskit_login_flask_py$ python3 app.py
+process 'saaskit_login_flask_py' started pid=1123
+saaskit_login_flask_py process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_healthz_endpoint
+PASSED tests/test_final_state.py::test_login_returns_302_redirect
+PASSED tests/test_final_state.py::test_login_redirect_target_prefix_and_path
+PASSED tests/test_final_state.py::test_login_redirect_query_parameters
+============================== 4 passed in 1.36s ===============================

@@ -1,0 +1,56 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-11T08:37:10.321418+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781167030091,
+            "stop": 1781167030321
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_goodbye_route_returns_plain_text",
+                "status": "passed",
+                "duration": 120,
+                "start": 1781167030177,
+                "stop": 1781167030297,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_logout_with_cookies_redirects_to_scalekit",
+                "status": "passed",
+                "duration": 9,
+                "start": 1781167030298,
+                "stop": 1781167030307,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_logout_without_cookies_still_redirects",
+                "status": "passed",
+                "duration": 13,
+                "start": 1781167030307,
+                "stop": 1781167030320,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

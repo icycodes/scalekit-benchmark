@@ -1,0 +1,15 @@
+{
+  "name": "scalekit-saaskit-demo",
+  "version": "1.0.0",
+  "description": "Express.js web app with Scalekit SaaSKit token-validated protected JSON API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@scalekit-sdk/node": "^2.6.2",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.2.1"
+  }
+}

@@ -1,0 +1,83 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-10T06:41:41.725393+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 6,
+            "passed": 6,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781073699204,
+            "stop": 1781073701725
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_exists",
+                "status": "passed",
+                "duration": 29,
+                "start": 1781073699219,
+                "stop": 1781073699248,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_connection_line",
+                "status": "passed",
+                "duration": 0,
+                "start": 1781073699248,
+                "stop": 1781073699248,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_identifier_line",
+                "status": "passed",
+                "duration": 0,
+                "start": 1781073699249,
+                "stop": 1781073699249,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_active_status_line",
+                "status": "passed",
+                "duration": 1,
+                "start": 1781073699249,
+                "stop": 1781073699250,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_connected_account_id_line",
+                "status": "passed",
+                "duration": 1,
+                "start": 1781073699250,
+                "stop": 1781073699251,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_connected_account_is_active_via_sdk",
+                "status": "passed",
+                "duration": 2466,
+                "start": 1781073699251,
+                "stop": 1781073701717,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

@@ -1,0 +1,33 @@
+version = "1.0"
+
+[metadata]
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 10240
+gpus = 0
+allow_internet = true
+mcp_servers = []
+
+[environment.env]
+POCHI_API_KEY = "${POCHI_API_KEY}"
+SCALEKIT_CLIENT_ID = "${SCALEKIT_CLIENT_ID}"
+SCALEKIT_CLIENT_SECRET = "${SCALEKIT_CLIENT_SECRET}"
+SCALEKIT_ENV_URL = "${SCALEKIT_ENV_URL}"
+
+[agent]
+timeout_sec = 600.0
+
+[verifier]
+timeout_sec = 600.0
+
+[verifier.env]
+SCALEKIT_CLIENT_ID = "${SCALEKIT_CLIENT_ID}"
+SCALEKIT_CLIENT_SECRET = "${SCALEKIT_CLIENT_SECRET}"
+SCALEKIT_ENV_URL = "${SCALEKIT_ENV_URL}"
+POCHI_API_KEY = "${POCHI_API_KEY}"
+
+[solution.env]
+

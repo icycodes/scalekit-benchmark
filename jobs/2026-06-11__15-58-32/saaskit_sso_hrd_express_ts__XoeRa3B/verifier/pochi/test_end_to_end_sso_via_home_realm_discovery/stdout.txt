@@ -1,0 +1,43 @@
+- Initializing MCP connections...
+You
+You are a software tester assigned to verify a test case using the agent browser. ## Critical Instructions * You **must** use the agent browser to perform all verification steps. * **Do NOT** attempt to execute any system commands, scripts, or actions that start, open, terminate, or kill any process or service (including but not limited to starting servers, opening ports, killing background jobs). * **Do NOT** attempt to access, open, or modify network ports through any means, including indirect methods (such as running programs that bind to ports). * If the verification steps reference a URL or port that cannot be accessed via the agent browser, immediately return a `"fail"` status. * If you encounter any verification step that you cannot execute, or are unsure how to proceed at any point, immediately return a `"fail"` status. * For example: If you see a login page but no login step exists in the instructions, stop and return `"fail"`. ## Reason for this test The Express.js app must integrate Scalekit SaaSKit Enterprise SSO with Home Realm Discovery. Starting from the landing page, entering an email whose domain matches the test organization's registered domain must cause Scalekit to redirect the browser to its IdP Simulator, complete authentication there, and land the user on a protected dashboard that shows their email address AND a Scalekit organization id (an `org_*` value). A visible Sign out control on the dashboard must then sign the user out and land them on the goodbye page. ## Verification Steps Follow these steps precisely and in order: Step 1: Navigate to http://localhost:3000/. Step 2: Click the visible 'Sign in with SSO' (or 'Sign in' / 'Log in') link or button on the landing page. The browser must be redirected to a Scalekit-hosted login page (the URL host should contain 'scalekit'). Step 3: On the Scalekit hosted login page, enter the email address 'mailto:jane@example.com' into the email field and click Continue / Submit / Next. Step 4: Because the `example.com` domain is registered to the Test Organization in Scalekit and that organization has an SSO connection wired to Scalekit's IdP Simulator, Home Realm Discovery must redirect the browser to a page identifying itself as the IdP Simulator / Test Identity Provider / SSO simulator (look for text such as 'IdP Simulator', 'Test Identity Provider', or a Scalekit-branded SSO authentication form). Step 5: On the IdP Simulator page, accept any default values and click the primary action button to complete the simulated SSO authentication (typical button labels include 'Sign in', 'Continue', 'Authorize', 'Approve', 'Submit'). If the simulator requires an email, use 'mailto:jane@example.com'. Step 6: After the simulator completes authentication, the browser must be redirected back through http://localhost:3000/callback?code=... and onward to http://localhost:3000/dashboard. Step 7: Verify that the /dashboard page visibly displays BOTH (a) an email address belonging to the example.com domain (matching the pattern `<localpart>@example.com`), AND (b) a Scalekit organization id whose value starts with `org_` (for example `org_12345678901234567`). Both values must be visible to a human looking at the page. Step 8: Verify that a visible 'Sign out' / 'Logout' link or button is present on /dashboard. Step 9: Click the 'Sign out' / 'Logout' control. The browser must end up at http://localhost:3000/goodbye and the page must show a clearly visible 'signed out' / 'goodbye' / 'logged out' confirmation message. ## Result Format At the end of the test, respond with the following JSON: { "status": "pass" | "fail", "reason": "A detailed explanation describing why the test passed or failed." }   
+
+Pochi
+💭 Thinking for 585 characters   
+📋 Updating todo list (3 items) ✔ 
+❯ Verify Scalekit SSO integration with Home Realm Discovery on http://localhost:3000/ (browser)
+| 📖 Reading unknown
+| 📖 Reading pochi://config.jsonc
+| 💫 Executing agent-browser --version
+| 💫 Executing npm install -g agent-browser@0.24.0 && agent-browser --version
+| 📋 Updating todo list (0 items)
+| 📋 Updating todo list (9 items)
+| 💫 Executing agent-browser set viewport 1280 720 && agent-browser open http://localhost:3000/
+| 💫 Executing agent-browser snapshot -i
+| 📋 Updating todo list (0 items)
+| 📋 Updating todo list (9 items)
+| 💫 Executing agent-browser click @e2 && agent-browser wait 2000 && agent-browser get url && agent-browser snapshot -i
+| 💫 Executing agent-browser snapshot
+| 📋 Updating todo list (0 items)
+| 📋 Updating todo list (9 items)
+| 💫 Executing agent-browser fill @e4 "jane@example.com" && agent-browser click @e5 && agent-browser wait 2000 && agent-browser get url && agent-browser snapshot
+| 💫 Executing agent-browser fill @e5 "jane@example.com" && agent-browser press Enter && agent-browser wait 2000 && agent-browser get url && agent-browser snapshot
+| 📋 Updating todo list (0 items)
+| 📋 Updating todo list (9 items)
+| 💫 Executing agent-browser fill @e13 "jane" && agent-browser click @e11 && agent-browser wait 3000 && agent-browser get url && agent-browser snapshot
+| 💫 Executing agent-browser fill @e13 "jane" && agent-browser fill @e14 "Jane" && agent-browser fill @e15 "Example" && agent-browser click @e11 && agent-browser wait 3000 && agent-browser get url && agent-browser snapshot
+| 📋 Updating todo list (0 items)
+| 📋 Updating todo list (9 items)
+| 💫 Executing agent-browser click @e2 && agent-browser wait 2000 && agent-browser get url && agent-browser snapshot
+| 📋 Updating todo list (0 items)
+| 📋 Updating todo list (9 items)
+| 💫 Executing agent-browser close
+✔ Verify Scalekit SSO integration with Home Realm Discovery on http://localhost:3000/ (browser)
+💭 Thinking for 186 characters   
+📋 Updating todo list (3 items) ✔ 
+🎉 Task Completed
+{
+  "status": "pass",
+  "reason": "All verification steps passed successfully:\n1. Navigated to http://localhost:3000/.\n2. Clicked 'Sign in with SSO' and redirected to Scalekit-hosted login page (https://tabbyml.scalekit.dev/a/auth/login).\n3. Entered 'jane@example.com' and submitted.\n4. Redirected to IdP Simulator (https://oidc.scalekit.dev/login).\n5. Completed SSO authentication on IdP Simulator using 'jane@example.com'.\n6. Redirected back to http://localhost:3000/dashboard.\n7. Verified 'jane@example.com' and organization ID starting with 'org_' (org_121384796642346762) are displayed on /dashboard.\n8. Verified 'Sign out' link is present on /dashboard.\n9. Clicked 'Sign out' and verified redirection to http://localhost:3000/goodbye with a 'You have signed out' message."
+}   
+  

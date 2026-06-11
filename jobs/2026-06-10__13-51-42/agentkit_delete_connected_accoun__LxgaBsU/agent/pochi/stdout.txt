@@ -1,0 +1,65 @@
+- Initializing MCP connections...
+You
+# Delete a Scalekit Connected Account (AgentKit, Node.js) ## Background In Scalekit AgentKit, a *connected account* is the per-user record that stores OAuth credentials for a given connection (e.g. `github-test`). When a user removes an integration from your app, you must clean up that record so the next sign-in starts from a clean slate. List and delete operations for connected accounts are exposed only through the Node.js SDK (`@scalekit-sdk/node`). Write a small Node.js / TypeScript program that creates a per-user record for a unique test identifier on the `github-test` connection, verifies it is listed, deletes it, and verifies it is gone. ## Requirements - Use the official `@scalekit-sdk/node` SDK and initialize it from the standard Scalekit environment variables (`SCALEKIT_ENV_URL`, `SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`). - Pick a stable test identifier derived from the `run-id` to avoid collisions with other concurrent trials (see Implementation Hints). - For that identifier on the `github-test` connection: 1. Use the idempotent "get or create" helper to ensure the connected account exists. 2. List connected accounts for the `github-test` connection and confirm the new identifier appears. 3. Delete that connected account using the SDK's delete helper. 4. List connected accounts again and confirm the identifier is gone. - Append a structured log line for each of those four steps to a single log file (see Acceptance Criteria for the exact format). - The program must run end-to-end as a one-off job (no long-running server). Exit code `0` on success. ## Implementation Hints - Build the identifier as `zealt-cleanup-${run-id}` where `run-id` is read from the `ZEALT_RUN_ID` environment variable. - The connection name is `github-test` (case-sensitive — must match the dashboard exactly; do not use the provider slug `github`). - Initialize the client with `new ScalekitClient(envUrl, clientId, clientSecret)`. - Relevant SDK calls (all live under `scalekit.actions`): - `getOrCreateConnectedAccount({ connectionName, identifier })` - `listConnectedAccounts({ connectionName })` - `deleteConnectedAccount({ connectionName, identifier })` - `listConnectedAccounts` returns a paginated response; iterate or scan until you find the identifier (or confirm it is absent). Make sure your "after delete" check actually inspects every page. - A freshly created account is normally in `PENDING` status until the user completes OAuth — that is fine; you just need to prove it was created and then removed. - Use the Scalekit Node.js SDK only — do not call the GitHub API directly, and do not touch the existing `zealt-user01` connected account. ## Acceptance Criteria - Project path: `/home/user/myproject` - Run command: `npm start` (or whatever script your `package.json` defines for the one-off entrypoint). - Ensure the script is executed end-to-end and the log artifact below exists. - Log file: `/home/user/myproject/output.log` - The log file MUST contain, in this order, exactly one line for each step, using these prefixes (the identifier value is determined by `run-id`): - `Created account: connection=github-test identifier=<identifier> status=<status>` - `Listed before delete: present=true identifier=<identifier>` - `Deleted account: connection=github-test identifier=<identifier>` - `Listed after delete: present=false identifier=<identifier>` - The identifier MUST be `zealt-cleanup-${run-id}` where `run-id` is read from the `ZEALT_RUN_ID` environment variable. - After the program finishes, calling `listConnectedAccounts({ connectionName: 'github-test' })` on the Scalekit side MUST NOT return that identifier. - The pre-existing `zealt-user01` connected account on `github-test` MUST remain untouched.   
+
+Pochi
+💭 Thinking for 502 characters   
+📋 Updating todo list (4 items) ✔ 
+📂 Listing files in /home/user/myproject ✔ 
+📖 Reading home/user/myproject/package.json ✔ 
+📖 Reading home/user/myproject/package-lock.json ✔ 
+💭 Thinking for 426 characters   
+📋 Updating todo list (4 items) ✔ 
+🔍 Searching for **/*.{d.ts,js,json,md} in /home/user/myproject/node_modules/@scalekit-sdk/node ✔ 
+📖 Reading home/user/myproject/node_modules/@scalekit-sdk/node/lib/actions.d.ts ✔ 
+📖 Reading home/user/myproject/node_modules/@scalekit-sdk/node/lib/actions.js ✔ 
+📖 Reading home/user/myproject/node_modules/@scalekit-sdk/node/lib/index.d.ts ✔ 
+📖 Reading home/user/myproject/node_modules/@scalekit-sdk/node/lib/connected-accounts.d.ts ✔ 
+📖 Reading home/user/myproject/node_modules/@scalekit-sdk/node/lib/pkg/grpc/scalekit/v1/connected_accounts/connected_accounts_pb.d.ts ✔ 
+📖 Reading home/user/myproject/node_modules/@scalekit-sdk/node/lib/scalekit.d.ts ✔ 
+🔍 Searching for export type ConnectedAccount|identifier|status in *.d.ts files in /home/user/myproject/node_modules/@scalekit-sdk/node/lib/pkg/grpc/scalekit/v1/connected_accounts ✔ 
+📖 Reading home/user/myproject/node_modules/@scalekit-sdk/node/lib/pkg/grpc/scalekit/v1/connected_accounts/connected_accounts_pb.d.ts ✔ 
+💭 Thinking for 563 characters   
+💭 Thinking for 629 characters   
+💭 Thinking for 494 characters   
+🔍 Searching for getOrCreateConnectedAccount|listConnectedAccounts|ConnectedAccount in *.md files in /home/user/myproject/node_modules/@scalekit-sdk/node/README.md ✔ 
+📖 Reading home/user/myproject/node_modules/@scalekit-sdk/node/lib/connected-accounts.js ✔ 
+✏️  Writing home/user/myproject/src/index.ts ✔ 
+✏️  Writing home/user/myproject/tsconfig.json ✔ 
+🔧 Applying diff to home/user/myproject/package.json ✔ 
+💭 Thinking for 429 characters   
+📋 Updating todo list (4 items) ✔ 
+💫 Executing npm start ✖ "Command exited with code 1"
+💭 Thinking for 415 characters   
+🔧 Applying diff to home/user/myproject/tsconfig.json ✔ 
+💫 Executing npm start ✖ "Command exited with code 1"
+📖 Reading home/user/myproject/output.log ✔ 
+💫 Executing node -e "const {ScalekitClient}=require('@scalekit-sdk/node'); const s=new ScalekitClient(process.env.SCALEKIT_ENV_URL,process.env.SCALEKIT_CLIENT_ID,process.env.SCALEKIT_CLIENT_SECRET); s.actions.listConnectedAccounts({connectionName:'github-test'}).then(r=>console.log(JSON.stringify({count:r.connectedAccounts?.length,total:r.totalSize,next:r.nextPageToken,ids:r.connectedAccounts?.map(a=>a.identifier)},null,2))).catch(e=>{console.error(e.message); console.error(JSON.stringify(e._errDetails||e, null, 2)); process.exit(1);})" ✔ 
+💭 Thinking for 547 characters   
+🔧 Applying diff to home/user/myproject/src/index.ts ✔ 
+💫 Executing npm start ✔ 
+📋 Updating todo list (4 items) ✔ 
+📖 Reading home/user/myproject/output.log ✔ 
+💫 Executing node -e "const fs=require('fs'); const lines=fs.readFileSync('output.log','utf8').trimEnd().split('\\n'); console.log(lines.length);" ✔ 
+💫 Executing node -e "const {ScalekitClient}=require('@scalekit-sdk/node'); const id='zealt-cleanup-'+process.env.ZEALT_RUN_ID; const s=new ScalekitClient(process.env.SCALEKIT_ENV_URL,process.env.SCALEKIT_CLIENT_ID,process.env.SCALEKIT_CLIENT_SECRET); (async()=>{let token,found=false,pages=0; do { const r=await s.actions.listConnectedAccounts({connectionName:'github-test', ...(token?{pageToken:token}:{})}); pages++; found ||= (r.connectedAccounts||[]).some(a=>a.identifier===id); token=r.nextPageToken||undefined; } while(token); console.log(JSON.stringify({identifier:id,found,pages})); if(found) process.exit(1);})().catch(e=>{console.error(e); process.exit(1);});" ✔ 
+📋 Updating todo list (4 items) ✔ 
+Implemented and executed the one-off Scalekit AgentKit cleanup job in `/home/user/myproject`. Summary: - Added `src/index.ts` TypeScript entrypoint. - Added `tsconfig.json`. - Updated `package.json` with: - `start`: `ts-node src/index.ts` - Used `@scalekit-sdk/node` with: - `new ScalekitClient(SCALEKIT_ENV_URL, SCALEKIT_CLIENT_ID, SCALEKIT_CLIENT_SECRET)` - `scalekit.actions.getOrCreateConnectedAccount` - `scalekit.actions.listConnectedAccounts` - `scalekit.actions.deleteConnectedAccount` - Identifier used: - `zealt-cleanup-zr-lxgabsu` - Ran successfully with: - `npm start` Verified `/home/user/myproject/output.log` contains exactly 4 lines, in order: ```text Created account: connection=github-test identifier=zealt-cleanup-zr-lxgabsu status=PENDING_AUTH Listed before delete: present=true identifier=zealt-cleanup-zr-lxgabsu Deleted account: connection=github-test identifier=zealt-cleanup-zr-lxgabsu Listed after delete: present=false identifier=zealt-cleanup-zr-lxgabsu ``` Also verified via a final paginated SDK list scan that `zealt-cleanup-zr-lxgabsu` is no longer returned for `github-test`.   
+🎉 Task Completed
+The Scalekit connected-account cleanup job is complete.
+
+Completed items:
+- Implemented the TypeScript one-off script in `/home/user/myproject/src/index.ts`.
+- Added `npm start` as the entrypoint.
+- Ran the job end-to-end successfully.
+- Verified `/home/user/myproject/output.log` contains exactly the required four lines in order.
+- Verified the generated identifier is no longer listed after deletion.
+
+Final log artifact:
+
+```text
+Created account: connection=github-test identifier=zealt-cleanup-zr-lxgabsu status=PENDING_AUTH
+Listed before delete: present=true identifier=zealt-cleanup-zr-lxgabsu
+Deleted account: connection=github-test identifier=zealt-cleanup-zr-lxgabsu
+Listed after delete: present=false identifier=zealt-cleanup-zr-lxgabsu
+```   
+  

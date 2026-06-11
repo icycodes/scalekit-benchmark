@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.2, xprocess-1.0.2
+collected 3 items
+
+tests/test_final_state.py ...                                            [100%]
+
+==================================== PASSES ====================================
+____________________ test_goodbye_route_returns_plain_text _____________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/saaskit_logout_app$ npm start
+process 'saaskit_logout_app' started pid=903
+saaskit_logout_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_goodbye_route_returns_plain_text
+PASSED tests/test_final_state.py::test_logout_with_cookies_redirects_to_scalekit
+PASSED tests/test_final_state.py::test_logout_without_cookies_still_redirects
+============================== 3 passed in 0.23s ===============================

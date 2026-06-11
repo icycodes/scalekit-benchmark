@@ -1,0 +1,93 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: Faker-25.8.0, anyio-4.13.0, json-ctrf-0.5.2
+collected 5 items
+
+tests/test_final_state.py F..FF                                          [100%]
+
+=================================== FAILURES ===================================
+_____________________________ test_log_file_exists _____________________________
+
+    def test_log_file_exists():
+>       assert os.path.isfile(LOG_FILE), f"Expected log file at {LOG_FILE} but it was not found."
+E       AssertionError: Expected log file at /home/user/myproject/output.log but it was not found.
+E       assert False
+E        +  where False = <function isfile at 0x7e8bea2a0220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x7e8bea2a0220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:28: AssertionError
+____________________ test_issue_created_with_expected_title ____________________
+
+    def test_issue_created_with_expected_title():
+        expected_title = f"{ISSUE_TITLE_BASE} {_run_id()}"
+        result = subprocess.run(
+            [
+                "gh",
+                "issue",
+                "list",
+                "--repo",
+                _repo_slug(),
+                "--state",
+                "all",
+                "--json",
+                "title,url,number",
+                "--limit",
+                "50",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0, f"'gh issue list' failed: {result.stderr}"
+        issues = json.loads(result.stdout)
+        matching = [i for i in issues if i.get("title") == expected_title]
+>       assert matching, (
+            f"Expected at least one issue titled {expected_title!r} on {_repo_slug()}; "
+            f"found titles: {[i.get('title') for i in issues]}"
+        )
+E       AssertionError: Expected at least one issue titled 'AgentKit Test Issue zr-nwslutn' on zealt-user01/agentkit-issue-target-zr-nwslutn; found titles: []
+E       assert []
+
+tests/test_final_state.py:83: AssertionError
+__________________ test_log_file_contains_expected_issue_url ___________________
+
+    def test_log_file_contains_expected_issue_url():
+        # Read the actual issue URL from GitHub and confirm the log file references it.
+        expected_title = f"{ISSUE_TITLE_BASE} {_run_id()}"
+        result = subprocess.run(
+            [
+                "gh",
+                "issue",
+                "list",
+                "--repo",
+                _repo_slug(),
+                "--state",
+                "all",
+                "--json",
+                "title,url,number",
+                "--limit",
+                "50",
+            ],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0, f"'gh issue list' failed: {result.stderr}"
+        issues = json.loads(result.stdout)
+        matching = [i for i in issues if i.get("title") == expected_title]
+>       assert matching, (
+            f"No issue with title {expected_title!r} found on {_repo_slug()}; "
+            f"cannot verify URL in log."
+        )
+E       AssertionError: No issue with title 'AgentKit Test Issue zr-nwslutn' found on zealt-user01/agentkit-issue-target-zr-nwslutn; cannot verify URL in log.
+E       assert []
+
+tests/test_final_state.py:112: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_target_repository_exists
+PASSED tests/test_final_state.py::test_target_repository_is_public
+FAILED tests/test_final_state.py::test_log_file_exists - AssertionError: Expe...
+FAILED tests/test_final_state.py::test_issue_created_with_expected_title - As...
+FAILED tests/test_final_state.py::test_log_file_contains_expected_issue_url
+========================= 3 failed, 2 passed in 2.82s ==========================

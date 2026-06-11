@@ -1,0 +1,74 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-11T08:43:23.567013+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781167402324,
+            "stop": 1781167403566
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_exists_and_non_empty",
+                "status": "passed",
+                "duration": 1,
+                "start": 1781167402336,
+                "stop": 1781167402337,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_repo_lines",
+                "status": "passed",
+                "duration": 3,
+                "start": 1781167402338,
+                "stop": 1781167402341,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_total_matches_repo_lines",
+                "status": "passed",
+                "duration": 3,
+                "start": 1781167402341,
+                "stop": 1781167402344,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_agent_repos_are_subset_of_expected",
+                "status": "passed",
+                "duration": 1219,
+                "start": 1781167402344,
+                "stop": 1781167403563,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_project_uses_scalekit_sdk",
+                "status": "passed",
+                "duration": 2,
+                "start": 1781167403564,
+                "stop": 1781167403566,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}
