@@ -1,0 +1,74 @@
+- Initializing MCP connections...
+You
+# Delete a Scalekit Connected Account (AgentKit, Node.js) ## Background In Scalekit AgentKit, a *connected account* is the per-user record that stores OAuth credentials for a given connection (e.g. `github-test`). When a user removes an integration from your app, you must clean up that record so the next sign-in starts from a clean slate. List and delete operations for connected accounts are exposed only through the Node.js SDK (`@scalekit-sdk/node`). Write a small Node.js / TypeScript program that creates a per-user record for a unique test identifier on the `github-test` connection, verifies it is listed, deletes it, and verifies it is gone. ## Requirements - Use the official `@scalekit-sdk/node` SDK and initialize it from the standard Scalekit environment variables (`SCALEKIT_ENV_URL`, `SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`). - Pick a stable test identifier derived from the `run-id` to avoid collisions with other concurrent trials (see Implementation Hints). - For that identifier on the `github-test` connection: 1. Use the idempotent "get or create" helper to ensure the connected account exists. 2. List connected accounts for the `github-test` connection and confirm the new identifier appears. 3. Delete that connected account using the SDK's delete helper. 4. List connected accounts again and confirm the identifier is gone. - Append a structured log line for each of those four steps to a single log file (see Acceptance Criteria for the exact format). - The program must run end-to-end as a one-off job (no long-running server). Exit code `0` on success. ## Implementation Hints - Build the identifier as `zealt-cleanup-${run-id}` where `run-id` is read from the `ZEALT_RUN_ID` environment variable. - The connection name is `github-test` (case-sensitive — must match the dashboard exactly; do not use the provider slug `github`). - Initialize the client with `new ScalekitClient(envUrl, clientId, clientSecret)`. - Relevant SDK calls (all live under `scalekit.actions`): - `getOrCreateConnectedAccount({ connectionName, identifier })` - `listConnectedAccounts({ connectionName })` - `deleteConnectedAccount({ connectionName, identifier })` - `listConnectedAccounts` returns a paginated response; iterate or scan until you find the identifier (or confirm it is absent). Make sure your "after delete" check actually inspects every page. - A freshly created account is normally in `PENDING` status until the user completes OAuth — that is fine; you just need to prove it was created and then removed. - Use the Scalekit Node.js SDK only — do not call the GitHub API directly, and do not touch the existing `zealt-user01` connected account. ## Acceptance Criteria - Project path: `/home/user/myproject` - Run command: `npm start` (or whatever script your `package.json` defines for the one-off entrypoint). - Ensure the script is executed end-to-end and the log artifact below exists. - Log file: `/home/user/myproject/output.log` - The log file MUST contain, in this order, exactly one line for each step, using these prefixes (the identifier value is determined by `run-id`): - `Created account: connection=github-test identifier=<identifier> status=<status>` - `Listed before delete: present=true identifier=<identifier>` - `Deleted account: connection=github-test identifier=<identifier>` - `Listed after delete: present=false identifier=<identifier>` - The identifier MUST be `zealt-cleanup-${run-id}` where `run-id` is read from the `ZEALT_RUN_ID` environment variable. - After the program finishes, calling `listConnectedAccounts({ connectionName: 'github-test' })` on the Scalekit side MUST NOT return that identifier. - The pre-existing `zealt-user01` connected account on `github-test` MUST remain untouched.   
+
+Pochi
+💭 Thinking for 87 characters   
+📂 Listing files in /home/user/myproject ✔ 
+💫 Executing cat /home/user/myproject/package.json 2>/dev/null || echo "No package.json found" ✔ 
+💫 Executing ls /home/user/myproject/node_modules/@scalekit-sdk/node/ 2>/dev/null | head -20 ✔ 
+💫 Executing printenv | grep -E 'SCALEKIT|ZEALT' 2>/dev/null ✔ 
+💫 Executing cat /home/user/myproject/node_modules/@scalekit-sdk/node/package.json | grep -E '"main"|"types"|"exports"' | head -20 ✔ 
+💫 Executing ls /home/user/myproject/node_modules/@scalekit-sdk/node/lib/ ✔ 
+📖 Reading /home/user/myproject/node_modules/@scalekit-sdk/node/lib/connected-accounts.d.ts ✔ 
+📖 Reading /home/user/myproject/node_modules/@scalekit-sdk/node/lib/actions.d.ts ✔ 
+Now I have a clear picture of the SDK. Let me check the `ListConnectedAccountsResponse` type to understand pagination:   
+💫 Executing grep -r "ListConnectedAccountsResponse\|nextPageToken\|connectedAccounts\|ConnectedAccount" /home/user/myproject/node_modules/@scalekit-sdk/node/lib/pkg/grpc/scalekit/v1/connected_accounts/ --include="*.d.ts" | head -60 ✔ 
+💫 Executing grep -A 20 "ConnectedAccountForList\b" /home/user/myproject/node_modules/@scalekit-sdk/node/lib/pkg/grpc/scalekit/v1/connected_accounts/connected_accounts_pb.d.ts | head -40 ✔ 
+💫 Executing grep -E "ConnectedAccount\b|status|identifier" /home/user/myproject/node_modules/@scalekit-sdk/node/lib/pkg/grpc/scalekit/v1/connected_accounts/connected_accounts_pb.d.ts | grep -v "Request\|Response\|Schema\|Message\|Describe\|generated\|create\|Create\|Update\|Delete" | head -30 ✔ 
+💫 Executing grep -A 15 "ConnectedAccountForList\s*=" /home/user/myproject/node_modules/@scalekit-sdk/node/lib/pkg/grpc/scalekit/v1/connected_accounts/connected_accounts_pb.d.ts | head -40 ✔ 
+💫 Executing grep -E "ConnectorStatus|STATUS_" /home/user/myproject/node_modules/@scalekit-sdk/node/lib/pkg/grpc/scalekit/v1/connected_accounts/connected_accounts_pb.d.ts | head -20 ✔ 
+📖 Reading /home/user/myproject/node_modules/@scalekit-sdk/node/lib/index.d.ts ✔ 
+Now I have everything I need. Let me create the TypeScript program:   
+📋 Updating todo list (3 items) ✔ 
+✏️  Writing /home/user/myproject/index.ts ✔ 
+🔧 Applying diff to /home/user/myproject/package.json ✖ "File has not been read yet. Please read the file before editing it."
+📖 Reading /home/user/myproject/package.json ✔ 
+🔧 Applying diff to /home/user/myproject/package.json ✔ 
+📋 Updating todo list (3 items) ✔ 
+💫 Executing cd /home/user/myproject && npm start 2>&1 ✔ 
+The script ran but produced no output. Let me check for TypeScript config issues:   
+💫 Executing cd /home/user/myproject && npx ts-node index.ts 2>&1; echo "Exit: $?" ✔ 
+💫 Executing cd /home/user/myproject && node -e "require('ts-node').register(); require('./index.ts')" 2>&1; echo "Exit: $?" ✔ 
+The logic works. The status is coming back as integer `3` — I need to convert the enum value to its string name. Let me check:   
+💫 Executing grep -A 20 "ConnectorStatus\b" /home/user/myproject/node_modules/@scalekit-sdk/node/lib/pkg/grpc/scalekit/v1/connected_accounts/connected_accounts_pb.d.ts | head -30 ✔ 
+💫 Executing grep -A 15 "export declare enum ConnectorStatus" /home/user/myproject/node_modules/@scalekit-sdk/node/lib/pkg/grpc/scalekit/v1/connected_accounts/connected_accounts_pb.d.ts ✔ 
+💫 Executing grep -A 40 "export declare enum ConnectorStatus" /home/user/myproject/node_modules/@scalekit-sdk/node/lib/pkg/grpc/scalekit/v1/connected_accounts/connected_accounts_pb.d.ts | head -50 ✔ 
+Status `3` = `PENDING_AUTH`. The log format requirement says `status=<status>` — it doesn't specify the exact value format, but using a human-readable enum name is cleaner. Let me update the script to map the numeric enum to its name and also fix the `ts-node` issue (it seems silent when run via `npm start`):   
+💫 Executing cd /home/user/myproject && cat tsconfig.json 2>/dev/null || echo "no tsconfig" ✔ 
+💫 Executing cd /home/user/myproject && node -e "const ts = require('ts-node'); console.log(ts.VERSION || 'no version')" 2>&1 ✔ 
+✏️  Writing /home/user/myproject/tsconfig.json ✔ 
+Now update the script to resolve the status enum name properly:   
+✏️  Writing /home/user/myproject/index.ts ✔ 
+💫 Executing cd /home/user/myproject && npm start 2>&1; echo "Exit: $?" ✔ 
+🔧 Applying diff to /home/user/myproject/tsconfig.json ✔ 
+💫 Executing cd /home/user/myproject && npm start 2>&1; echo "Exit: $?" ✔ 
+All four steps passed. Let me verify the log file:   
+💫 Executing cat /home/user/myproject/output.log ✔ 
+📋 Updating todo list (3 items) ✔ 
+🎉 Task Completed
+The program is complete and ran successfully end-to-end.
+
+**Files created/modified:**
+- `/home/user/myproject/index.ts` — the TypeScript program
+- `/home/user/myproject/tsconfig.json` — TypeScript config (with `transpileOnly`, `ignoreDeprecations: "6.0"` for TS 6.x compat)
+- `/home/user/myproject/package.json` — added `"start": "ts-node index.ts"` script
+
+**What the program does:**
+1. Reads `SCALEKIT_ENV_URL`, `SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`, and `ZEALT_RUN_ID` from env, builds identifier `zealt-cleanup-${ZEALT_RUN_ID}`.
+2. Calls `scalekit.actions.getOrCreateConnectedAccount({ connectionName: 'github-test', identifier })`.
+3. Pages through all `listConnectedAccounts` results to confirm the identifier is present.
+4. Calls `scalekit.actions.deleteConnectedAccount({ connectionName: 'github-test', identifier })`.
+5. Pages through all `listConnectedAccounts` again to confirm the identifier is gone.
+6. Writes exactly four structured log lines to `output.log`.
+
+**`/home/user/myproject/output.log` contents:**
+```
+Created account: connection=github-test identifier=zealt-cleanup-zr-em8pbmj status=PENDING_AUTH
+Listed before delete: present=true identifier=zealt-cleanup-zr-em8pbmj
+Deleted account: connection=github-test identifier=zealt-cleanup-zr-em8pbmj
+Listed after delete: present=false identifier=zealt-cleanup-zr-em8pbmj
+```
+
+Exit code `0`. The `zealt-user01` connected account was not touched.   
+  

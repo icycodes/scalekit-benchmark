@@ -1,0 +1,131 @@
+{
+    "id": "16dc907f-6396-4009-b12a-9e6c162e2e60",
+    "started_at": "2026-06-11T15:58:32.780278",
+    "updated_at": "2026-06-11T16:53:30.092553",
+    "finished_at": "2026-06-11T16:53:30.092553",
+    "n_total_trials": 39,
+    "stats": {
+        "n_completed_trials": 39,
+        "n_errored_trials": 7,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__claude-4-6-sonnet__tasks": {
+                "n_trials": 13,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.6153846153846154
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "agentkit_delete_connected_accoun__em8PbmJ",
+                            "agentkit_create_github_issue_py__Cj7Ero8",
+                            "list_scoped_tools_ts__Xgczmy4",
+                            "saaskit_logout_express_ts__qAaM5Ez",
+                            "agentkit_assert_active_account_p__jQKrWVV",
+                            "agentkit_list_github_repos_ts__XtmkjEU",
+                            "agentkit_create_github_repo_py__SUV3PKE",
+                            "saaskit_login_flask_py__RFzb6NE"
+                        ],
+                        "0.0": [
+                            "saaskit_sso_hrd_express_ts__ZHPyYgR",
+                            "saaskit_agentkit_dashboard_ts__Yx5HLyd",
+                            "saaskit_token_refresh_express_ts__qnttWzu",
+                            "saaskit_protected_api_express_ts__jLSCCFr",
+                            "saaskit_login_express_ts__YzPPcAw"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            },
+            "pochi__gemini-3.1-pro__tasks": {
+                "n_trials": 13,
+                "n_errors": 4,
+                "metrics": [
+                    {
+                        "mean": 0.8461538461538461
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "agentkit_delete_connected_accoun__vN7VQ68",
+                            "agentkit_create_github_repo_py__jkYbfEv"
+                        ],
+                        "1.0": [
+                            "saaskit_sso_hrd_express_ts__upa26sW",
+                            "saaskit_agentkit_dashboard_ts__yskNLgb",
+                            "agentkit_create_github_issue_py__yFxqy8Z",
+                            "saaskit_token_refresh_express_ts__4PL4MEQ",
+                            "saaskit_protected_api_express_ts__WiYNJ6o",
+                            "list_scoped_tools_ts__hTSCkmL",
+                            "saaskit_login_express_ts__NkaXMcX",
+                            "saaskit_logout_express_ts__xLSwR5X",
+                            "agentkit_assert_active_account_p__xafdJ4s",
+                            "agentkit_list_github_repos_ts__ENbo7jP",
+                            "saaskit_login_flask_py__FD4fgbE"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "agentkit_delete_connected_accoun__vN7VQ68",
+                        "saaskit_agentkit_dashboard_ts__yskNLgb",
+                        "agentkit_create_github_repo_py__jkYbfEv"
+                    ],
+                    "NonZeroAgentExitCodeError": [
+                        "saaskit_protected_api_express_ts__WiYNJ6o"
+                    ]
+                }
+            },
+            "pochi__glm-5.1__tasks": {
+                "n_trials": 12,
+                "n_errors": 3,
+                "metrics": [
+                    {
+                        "mean": 0.6923076923076923
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "agentkit_delete_connected_accoun__Wtgu5dq",
+                            "saaskit_sso_hrd_express_ts__XoeRa3B",
+                            "agentkit_create_github_issue_py__29yogko",
+                            "saaskit_token_refresh_express_ts__CTBjVQB",
+                            "saaskit_protected_api_express_ts__seKqJQH",
+                            "list_scoped_tools_ts__WPpDkeJ",
+                            "agentkit_assert_active_account_p__YNTEDKb",
+                            "agentkit_list_github_repos_ts__2EEuTgi",
+                            "saaskit_login_flask_py__8xBGF46"
+                        ],
+                        "0.0": [
+                            "saaskit_login_express_ts__6wA6eik",
+                            "saaskit_logout_express_ts__EoaH6qQ",
+                            "agentkit_create_github_repo_py__bxAKYa8"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "saaskit_sso_hrd_express_ts__XoeRa3B",
+                        "saaskit_agentkit_dashboard_ts__iakCF7B",
+                        "agentkit_create_github_repo_py__bxAKYa8"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 1151664,
+        "cost_usd": null
+    }
+}

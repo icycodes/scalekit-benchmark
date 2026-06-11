@@ -1,0 +1,41 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: Faker-25.8.0, anyio-4.13.0, json-ctrf-0.5.0
+collected 5 items
+
+tests/test_final_state.py ..F..                                          [100%]
+
+=================================== FAILURES ===================================
+__________________ test_log_file_exists_with_expected_format ___________________
+
+    def test_log_file_exists_with_expected_format():
+        assert os.path.isfile(LOG_FILE), (
+            f"Expected the log file {LOG_FILE} to exist after the task ran."
+        )
+        expected_full = _expected_full_name()
+        expected_url = _expected_html_url()
+        pattern = re.compile(
+            rf"^Repository:\s+{re.escape(expected_full)}\s+{re.escape(expected_url)}\s*$",
+            re.MULTILINE,
+        )
+        with open(LOG_FILE, "r", encoding="utf-8") as fh:
+            contents = fh.read()
+>       assert pattern.search(contents), (
+            f"Expected {LOG_FILE} to contain a line in the format "
+            f"'Repository: {expected_full} {expected_url}', but log contents were: {contents!r}"
+        )
+E       AssertionError: Expected /home/user/myproject/output.log to contain a line in the format 'Repository: zealt-user01/agentkit-repo-zr-bxakya8 https://github.com/zealt-user01/agentkit-repo-zr-bxakya8', but log contents were: 'Repository:  \n'
+E       assert None
+E        +  where None = <built-in method search of re.Pattern object at 0x3804d230>('Repository:  \n')
+E        +    where <built-in method search of re.Pattern object at 0x3804d230> = re.compile('^Repository:\\s+zealt\\-user01/agentkit\\-repo\\-zr\\-bxakya8\\s+https://github\\.com/zealt\\-user01/agentkit\\-repo\\-zr\\-bxakya8\\s*$', re.MULTILINE).search
+
+tests/test_final_state.py:87: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_script_file_exists_and_uses_scalekit_sdk
+PASSED tests/test_final_state.py::test_script_does_not_bypass_scalekit
+PASSED tests/test_final_state.py::test_github_repo_created_under_zealt_user01
+PASSED tests/test_final_state.py::test_github_repo_initialized_with_readme
+FAILED tests/test_final_state.py::test_log_file_exists_with_expected_format
+========================= 1 failed, 4 passed in 1.75s ==========================

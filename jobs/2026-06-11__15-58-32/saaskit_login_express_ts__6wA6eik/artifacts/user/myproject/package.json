@@ -1,0 +1,14 @@
+{
+  "name": "scalekit-saaskit-app",
+  "version": "1.0.0",
+  "description": "Express.js app integrated with Scalekit SaaSKit for authentication",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@scalekit-sdk/node": "^1.0.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2"
+  }
+}

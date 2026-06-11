@@ -1,0 +1,73 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 4,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781167984501,
+            "stop": 1781167986248
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_script_file_exists_and_uses_scalekit_sdk",
+                "status": "passed",
+                "duration": 30,
+                "start": 1781167984518,
+                "stop": 1781167984548,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_script_does_not_bypass_scalekit",
+                "status": "passed",
+                "duration": 0,
+                "start": 1781167984549,
+                "stop": 1781167984549,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_exists_with_expected_format",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 39,
+                "start": 1781167984550,
+                "stop": 1781167984589,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_exists_with_expected_format():\n        assert os.path.isfile(LOG_FILE), (\n            f\"Expected the log file {LOG_FILE} to exist after the task ran.\"\n        )\n        expected_full = _expected_full_name()\n        expected_url = _expected_html_url()\n        pattern = re.compile(\n            rf\"^Repository:\\s+{re.escape(expected_full)}\\s+{re.escape(expected_url)}\\s*$\",\n            re.MULTILINE,\n        )\n        with open(LOG_FILE, \"r\", encoding=\"utf-8\") as fh:\n            contents = fh.read()\n>       assert pattern.search(contents), (\n            f\"Expected {LOG_FILE} to contain a line in the format \"\n            f\"'Repository: {expected_full} {expected_url}', but log contents were: {contents!r}\"\n        )\nE       AssertionError: Expected /home/user/myproject/output.log to contain a line in the format 'Repository: zealt-user01/agentkit-repo-zr-bxakya8 https://github.com/zealt-user01/agentkit-repo-zr-bxakya8', but log contents were: 'Repository:  \\n'\nE       assert None\nE        +  where None = <built-in method search of re.Pattern object at 0x3804d230>('Repository:  \\n')\nE        +    where <built-in method search of re.Pattern object at 0x3804d230> = re.compile('^Repository:\\\\s+zealt\\\\-user01/agentkit\\\\-repo\\\\-zr\\\\-bxakya8\\\\s+https://github\\\\.com/zealt\\\\-user01/agentkit\\\\-repo\\\\-zr\\\\-bxakya8\\\\s*$', re.MULTILINE).search\n\ntests/test_final_state.py:87: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_github_repo_created_under_zealt_user01",
+                "status": "passed",
+                "duration": 1084,
+                "start": 1781167984589,
+                "stop": 1781167985673,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_github_repo_initialized_with_readme",
+                "status": "passed",
+                "duration": 574,
+                "start": 1781167985674,
+                "stop": 1781167986248,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}
