@@ -1,0 +1,65 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-10T07:02:26.492618+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 0,
+            "failed": 3,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781074945134,
+            "stop": 1781074946492
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_contains_channel_and_message_lines",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 44,
+                "start": 1781074945149,
+                "stop": 1781074945193,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_channel_and_message_lines():\n>       log_content = _read_log_file()\n\ntests/test_final_state.py:62: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log_file() -> str:\n>       assert os.path.isfile(LOG_FILE), f\"Log file {LOG_FILE} not found.\"\nE       AssertionError: Log file /home/user/scalekit-task/output.log not found.\nE       assert False\nE        +  where False = <function isfile at 0x7a7588210220>('/home/user/scalekit-task/output.log')\nE        +    where <function isfile at 0x7a7588210220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:20: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_slack_channel_was_created",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 661,
+                "start": 1781074945193,
+                "stop": 1781074945854,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_slack_channel_was_created():\n        run_id = _get_run_id()\n        expected_channel_name = f\"{CHANNEL_BASENAME}-{run_id}\"\n    \n        data = _slack_api_call(\n            \"conversations.list?limit=200&types=public_channel,private_channel\"\n        )\n>       assert data.get(\"ok\"), f\"Slack conversations.list error: {data}\"\nE       AssertionError: Slack conversations.list error: {'ok': False, 'error': 'invalid_auth'}\nE       assert False\nE        +  where False = <built-in method get of dict object at 0x7a75869cc680>('ok')\nE        +    where <built-in method get of dict object at 0x7a75869cc680> = {'error': 'invalid_auth', 'ok': False}.get\n\ntests/test_final_state.py:82: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_slack_message_was_posted",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 637,
+                "start": 1781074945854,
+                "stop": 1781074946491,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_slack_message_was_posted():\n        run_id = _get_run_id()\n        expected_channel_name = f\"{CHANNEL_BASENAME}-{run_id}\"\n        expected_substring = f\"{MESSAGE_PREFIX} {run_id}\"\n    \n        list_data = _slack_api_call(\n            \"conversations.list?limit=200&types=public_channel,private_channel\"\n        )\n>       assert list_data.get(\"ok\"), f\"Slack conversations.list error: {list_data}\"\nE       AssertionError: Slack conversations.list error: {'ok': False, 'error': 'invalid_auth'}\nE       assert False\nE        +  where False = <built-in method get of dict object at 0x7a75869ccd00>('ok')\nE        +    where <built-in method get of dict object at 0x7a75869ccd00> = {'error': 'invalid_auth', 'ok': False}.get\n\ntests/test_final_state.py:111: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

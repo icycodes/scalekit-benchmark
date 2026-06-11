@@ -1,0 +1,927 @@
+- Initializing MCP connections...
+You
+# Create a GitHub Gist via Scalekit AgentKit (Python) ## Background Scalekit AgentKit lets your code act on behalf of a user against third-party SaaS apps without managing OAuth tokens directly. The Scalekit workspace already has a `github-test` connection with an `ACTIVE` connected account for the identifier `zealt-user01`. Write a Python script that uses the Scalekit Python SDK to create a new public GitHub gist on behalf of `zealt-user01`. ## Requirements * Use the Scalekit Python SDK (`scalekit-sdk-python`) to act as `zealt-user01` against the `github-test` connection. * Confirm the connected account is `ACTIVE` before invoking any tool. * Create one new **public** GitHub gist that contains a single Markdown file. The file name and the gist description must each include the current `run-id` so that parallel trials never collide. * After the gist is created, append the gist's public HTML URL to a log file in a stable, parseable format. * The Scalekit configuration values come from environment variables: `SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`, `SCALEKIT_ENV_URL`. The `run-id` comes from `ZEALT_RUN_ID`. ## Implementation Hints * Initialize the SDK with the three `SCALEKIT_*` environment variables and use the `actions` namespace exposed by the client. * Use `get_or_create_connected_account` to look up the existing connected account for the `github-test` connection and identifier `zealt-user01`, then inspect its status. * Discover the right GitHub gist creation tool name with `list_scoped_tools` (pass `page_size=100` and filter by connection name to avoid silently truncating the catalog). Execute it through `execute_tool`. * All hard-coded strings (connection name, identifier) must match the dashboard fixtures exactly. Connection names are case-sensitive. * Never introduce new environment-variable names; only consume the ones listed above. ## Acceptance Criteria * Project path: /home/user/myproject * Ensure the script is executed and the gist is actually created on GitHub; the verifier inspects GitHub directly. * Log file: /home/user/myproject/output.log * The gist must be created under the GitHub account associated with `zealt-user01` through the `github-test` connection. * The gist must be **public**. * The gist must contain exactly one file whose name is `scalekit-${run-id}.md` where `${run-id}` is read from the `ZEALT_RUN_ID` environment variable. * The gist's description must contain the substring `scalekit-agentkit-${run-id}`. * The log file must contain a line in the exact format `Gist URL: <gist_html_url>` where `<gist_html_url>` is the value of `html_url` returned by GitHub for the newly created gist.   
+
+Pochi
+💭 Thinking for 350 characters   
+📂 Listing files in /home/user/myproject ✔ 
+💫 Executing pip show scalekit-sdk-python ✔ 
+💭 Thinking for 346 characters   
+💫 Executing python3 -c "import scalekit; print(dir(scalekit))" ✔ 
+💫 Executing python3 -c "from scalekit import ScalekitClient; print(dir(ScalekitClient))" ✔ 
+💭 Thinking for 330 characters   
+📂 Listing files in /usr/local/lib/python3.12/dist-packages/scalekit recursively ✔ 
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/actions/__init__.py ✔ 
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py ✔ 
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py ✔ 
+🔍 Searching for get_or_create_connected_account in /usr/local/lib/python3.12/dist-packages/scalekit ✔ 
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py ✔ 
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/create_connected_account_response.py ✔ 
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/get_connected_account_auth_response.py ✔ 
+💭 Thinking for 276 characters   
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/client.py ✔ 
+💭 Thinking for 562 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+print('Client initialized successfully')
+try:
+    ca = client.actions.get_or_create_connected_account('github-test', 'zealt-user01')
+    print('Connected Account ID:', ca.connected_account.id if ca.connected_account else 'None')
+    print('Status:', ca.connected_account.status if ca.connected_account else 'None')
+except Exception as e:
+    print('Error:', e)
+" ✔ 
+💭 Thinking for 221 characters   
+🔍 Searching for list_scoped_tools in /usr/local/lib/python3.12/dist-packages/scalekit ✔ 
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/tools.py ✔ 
+🔍 Searching for ScopedToolFilter in /usr/local/lib/python3.12/dist-packages/scalekit ✔ 
+💭 Thinking for 220 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import ScopedToolFilter
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+scoped_filter = ScopedToolFilter(
+    connection_names=['github-test']
+)
+
+response = client.tools.list_scoped_tools(
+    identifier='zealt-user01',
+    filter=scoped_filter,
+    page_size=100
+)
+
+print('Number of tools found:', len(response.tools))
+for t in response.tools:
+    print(t.tool.id, t.tool.provider)
+" ✖ "Command exited with code 1"
+💭 Thinking for 298 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import ScopedToolFilter
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+scoped_filter = ScopedToolFilter(
+    connection_names=['github-test']
+)
+
+res = client.tools.list_scoped_tools(
+    identifier='zealt-user01',
+    filter=scoped_filter,
+    page_size=100
+)
+
+print('Type of res:', type(res))
+if isinstance(res, tuple):
+    response = res[0]
+else:
+    response = res
+
+print('Number of tools found:', len(response.tools))
+for t in response.tools:
+    print(t.tool.id, t.tool.provider)
+" ✔ 
+💭 Thinking for 284 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import ScopedToolFilter
+from google.protobuf.json_format import MessageToDict
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+scoped_filter = ScopedToolFilter(
+    connection_names=['github-test']
+)
+
+res = client.tools.list_scoped_tools(
+    identifier='zealt-user01',
+    filter=scoped_filter,
+    page_size=100
+)
+
+response = res[0]
+for t in response.tools:
+    tool_dict = MessageToDict(t.tool.definition)
+    print('Tool ID:', t.tool.id)
+    # Check what keys are in definition
+    print('Keys in definition:', tool_dict.keys())
+    if 'name' in tool_dict:
+        print('  Name:', tool_dict['name'])
+    if 'description' in tool_dict:
+        print('  Description:', tool_dict['description'])
+    print('-' * 40)
+" ✔ 
+💭 Thinking for 289 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from google.protobuf.json_format import MessageToDict
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+res = client.tools.list_scoped_tools(
+    identifier='zealt-user01',
+    page_size=100
+)
+
+response = res[0]
+print('Total tools without filter:', len(response.tools))
+for t in response.tools:
+    tool_dict = MessageToDict(t.tool.definition)
+    print(t.tool.id, tool_dict.get('name'))
+" ✖ "Command exited with code 1"
+💭 Thinking for 614 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import ScopedToolFilter
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+scoped_filter = ScopedToolFilter(
+    connection_names=['github-test']
+)
+
+res = client.tools.list_scoped_tools(
+    identifier='zealt-user01',
+    filter=scoped_filter,
+    page_size=100
+)
+
+response = res[0]
+print('Total size:', response.total_size)
+print('Next page token:', response.next_page_token)
+" ✔ 
+💭 Thinking for 326 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import ScopedToolFilter
+from google.protobuf.json_format import MessageToDict
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+scoped_filter = ScopedToolFilter(
+    providers=['GITHUB']
+)
+
+res = client.tools.list_scoped_tools(
+    identifier='zealt-user01',
+    filter=scoped_filter,
+    page_size=100
+)
+
+response = res[0]
+print('Total tools with GITHUB provider filter:', len(response.tools))
+for t in response.tools:
+    tool_dict = MessageToDict(t.tool.definition)
+    print(t.tool.id, tool_dict.get('name'))
+" ✔ 
+💭 Thinking for 254 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+try:
+    res = client.actions.list_connected_accounts(identifier='zealt-user01')
+    print('Connected Accounts:')
+    for ca in res.connected_accounts:
+        print(ca.id, ca.connector, ca.status)
+except Exception as e:
+    print('Error:', e)
+" ✔ 
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+res = client.actions.list_connected_accounts(identifier='zealt-user01')
+for ca in res.connected_accounts:
+    print(dir(ca))
+    print(ca)
+" ✔ 
+💭 Thinking for 199 characters   
+🔍 Searching for list_available_tools in /usr/local/lib/python3.12/dist-packages/scalekit ✔ 
+💭 Thinking for 313 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import ScopedToolFilter
+from google.protobuf.json_format import MessageToDict
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+scoped_filter = ScopedToolFilter(
+    connection_names=['github-test']
+)
+
+res = client.tools.list_scoped_tools(
+    identifier='zealt-user01',
+    filter=scoped_filter,
+    page_size=100
+)
+
+response = res[0]
+for t in response.tools:
+    tool_dict = MessageToDict(t.tool.definition)
+    tool_str = str(tool_dict).lower()
+    if 'gist' in tool_str:
+         print('Found in tool:', tool_dict.get('name'))
+" ✔ 
+💭 Thinking for 321 characters   
+📖 Reading /usr/local/lib/python3.12/dist-packages/scalekit/tools.py ✔ 
+💭 Thinking for 301 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import Filter
+from google.protobuf.json_format import MessageToDict
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+res = client.tools.list_tools(
+    filter=Filter(),
+    page_size=100
+)
+
+response = res[0]
+print('Total tools found in list_tools:', len(response.tools))
+for t in response.tools:
+    tool_dict = MessageToDict(t.definition)
+    print(t.id, tool_dict.get('name'))
+" ✔ 
+💭 Thinking for 285 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import Filter
+from google.protobuf.json_format import MessageToDict
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+res = client.tools.list_tools(
+    filter=Filter(provider='GITHUB'),
+    page_size=100
+)
+
+response = res[0]
+print('Total GITHUB tools found in list_tools:', len(response.tools))
+for t in response.tools:
+    tool_dict = MessageToDict(t.definition)
+    print(t.id, tool_dict.get('name'))
+" ✔ 
+💭 Thinking for 394 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+print(dir(client.connection))
+" ✔ 
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+res = client.connection.list_connections()
+print(res)
+" ✖ "Command exited with code 1"
+💭 Thinking for 383 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import Filter
+from google.protobuf.json_format import MessageToDict
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+page_token = None
+found = []
+while True:
+    res = client.tools.list_tools(
+        filter=Filter(),
+        page_size=100,
+        page_token=page_token
+    )
+    response = res[0]
+    for t in response.tools:
+        tool_dict = MessageToDict(t.definition)
+        name = tool_dict.get('name', '')
+        desc = tool_dict.get('description', '')
+        if 'gist' in name.lower() or 'gist' in desc.lower():
+            found.append((t.id, name, desc))
+    page_token = response.next_page_token
+    if not page_token:
+        break
+
+print('Found', len(found), 'tools containing \"gist\":')
+for f in found:
+    print(f)
+" ✖ "Command exited with code 1"
+💭 Thinking for 1388 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import ScopedToolFilter
+from google.protobuf.json_format import MessageToDict
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+scoped_filter = ScopedToolFilter(
+    connection_names=['github-test']
+)
+
+res = client.tools.list_scoped_tools(
+    identifier='zealt-user01',
+    filter=scoped_filter,
+    page_size=100
+)
+
+response = res[0]
+print('Number of tools:', len(response.tools))
+for i, t in enumerate(response.tools):
+    tool_dict = MessageToDict(t.tool.definition)
+    print(f'{i+1}. Name: {tool_dict.get(\"name\")}')
+" ✔ 
+💭 Thinking for 783 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import Filter
+from google.protobuf.wrappers_pb2 import BoolValue
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+page_token = None
+all_names = []
+while True:
+    res = client.tools.list_tools(
+        filter=Filter(summary=BoolValue(value=True)),
+        page_size=100,
+        page_token=page_token
+    )
+    response = res[0]
+    all_names.extend(response.tool_names)
+    page_token = response.next_page_token
+    if not page_token:
+        break
+
+print('Total tool names:', len(all_names))
+gist_names = [name for name in all_names if 'gist' in name.lower()]
+print('Gist tool names:', gist_names)
+" ✔ 
+💭 Thinking for 281 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import Filter
+from google.protobuf.wrappers_pb2 import BoolValue
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+res = client.tools.list_tools(
+    filter=Filter(provider='GITHUB', summary=BoolValue(value=True)),
+    page_size=100
+)
+response = res[0]
+print('GITHUB tools in list_tools (names):', response.tool_names)
+" ✔ 
+💭 Thinking for 362 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+print(dir(client.actions.mcp))
+" ✔ 
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+try:
+    print(client.actions.mcp.list_configs())
+except Exception as e:
+    print('Error:', e)
+" ✔ 
+💭 Thinking for 306 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import Filter
+from google.protobuf.wrappers_pb2 import BoolValue
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+page_token = None
+all_names = []
+while True:
+    res = client.tools.list_tools(
+        filter=Filter(summary=BoolValue(value=True)),
+        page_size=100,
+        page_token=page_token
+    )
+    response = res[0]
+    all_names.extend(response.tool_names)
+    page_token = response.next_page_token
+    if not page_token:
+        break
+
+gist_names = [name for name in all_names if 'gist' in name.lower() and 'regist' not in name.lower()]
+print('Gist tool names:', gist_names)
+" ✔ 
+💭 Thinking for 295 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import Filter
+from google.protobuf.wrappers_pb2 import BoolValue
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+page_token = None
+all_names = []
+while True:
+    res = client.tools.list_tools(
+        filter=Filter(summary=BoolValue(value=True)),
+        page_size=100,
+        page_token=page_token
+    )
+    response = res[0]
+    all_names.extend(response.tool_names)
+    page_token = response.next_page_token
+    if not page_token:
+        break
+
+github_names = [name for name in all_names if 'github' in name.lower()]
+print('Github tool names:', github_names)
+" ✔ 
+💭 Thinking for 736 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from google.protobuf.json_format import MessageToDict
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+res = client.tools.list_scoped_tools(
+    identifier='zealt-user01',
+    page_size=100
+)
+
+response = res[0]
+print('Total scoped tools:', len(response.tools))
+for t in response.tools:
+    tool_dict = MessageToDict(t.tool.definition)
+    print(t.tool.id, tool_dict.get('name'), t.connected_account_id)
+" ✖ "Command exited with code 1"
+💭 Thinking for 301 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import ScopedToolFilter
+from google.protobuf.json_format import MessageToDict
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+scoped_filter = ScopedToolFilter(
+    connection_names=['github-test', 'slack-test']
+)
+
+res = client.tools.list_scoped_tools(
+    identifier='zealt-user01',
+    filter=scoped_filter,
+    page_size=100
+)
+
+response = res[0]
+print('Total scoped tools:', len(response.tools))
+for t in response.tools:
+    tool_dict = MessageToDict(t.tool.definition)
+    print(t.tool.id, tool_dict.get('name'), t.connected_account_id)
+" ✔ 
+💭 Thinking for 1275 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import Filter
+from google.protobuf.wrappers_pb2 import BoolValue
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+res = client.tools.list_tools(
+    filter=Filter(query='gist', summary=BoolValue(value=True)),
+    page_size=100
+)
+response = res[0]
+print('Tools with query \"gist\":', response.tool_names)
+" ✔ 
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import Filter
+from google.protobuf.wrappers_pb2 import BoolValue
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+res = client.tools.list_tools(
+    filter=Filter(query='gists', summary=BoolValue(value=True)),
+    page_size=100
+)
+response = res[0]
+print('Tools with query \"gists\":', response.tool_names)
+" ✔ 
+💭 Thinking for 1131 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+try:
+    print(client.organization.list_organizations())
+except Exception as e:
+    print('Error:', e)
+" ✔ 
+💭 Thinking for 617 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import ScopedToolFilter
+from google.protobuf.json_format import MessageToDict
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+scoped_filter = ScopedToolFilter(
+    connection_names=['github-test']
+)
+
+res = client.tools.list_scoped_tools(
+    identifier='zealt-user01',
+    filter=scoped_filter,
+    page_size=100
+)
+
+response = res[0]
+for i, t in enumerate(response.tools):
+    tool_dict = MessageToDict(t.tool.definition)
+    print(f'=== Tool {i+1}: {tool_dict.get(\"name\")} ===')
+    print('Description:', tool_dict.get('description'))
+    print('Input Schema:', tool_dict.get('input_schema'))
+" ✔ 
+💭 Thinking for 1051 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+orgs = [
+    'org_129194727340769538',
+    'org_129192117812593154',
+    'org_129190958137868546',
+    'org_129190820816355586',
+    'org_127226551782605570',
+    'org_121384796642346762'
+]
+
+for org_id in orgs:
+    try:
+        res = client.connection.list_connections(organization_id=org_id)
+        print(f'Org {org_id} connections:')
+        for conn in res.connections:
+            print(f'  {conn.id} - {conn.name} ({conn.provider})')
+    except Exception as e:
+        print(f'Error for {org_id}: {e}')
+" ✔ 
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+orgs = [
+    'org_129194727340769538',
+    'org_129192117812593154',
+    'org_129190958137868546',
+    'org_129190820816355586',
+    'org_127226551782605570',
+    'org_121384796642346762'
+]
+
+for org_id in orgs:
+    try:
+        res = client.connection.list_connections(organization_id=org_id)
+        response = res[0]
+        print(f'Org {org_id} connections:')
+        for conn in response.connections:
+            print(f'  {conn.id} - {conn.name} ({conn.provider})')
+    except Exception as e:
+        print(f'Error for {org_id}: {e}')
+" ✔ 
+💭 Thinking for 274 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+org_id = 'org_121384796642346762'
+try:
+    res = client.connection.list_connections(organization_id=org_id)
+    response = res[0]
+    for conn in response.connections:
+        print(dir(conn))
+        print(conn)
+except Exception as e:
+    print('Error:', e)
+" ✔ 
+💭 Thinking for 1324 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import ScopedToolFilter
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+for conn_name in ['github-test', 'github', 'GITHUB', 'github_test', 'github-mcp', 'githubmcp']:
+    try:
+        scoped_filter = ScopedToolFilter(connection_names=[conn_name])
+        res = client.tools.list_scoped_tools(
+            identifier='zealt-user01',
+            filter=scoped_filter,
+            page_size=100
+        )
+        print(f'{conn_name}: {len(res[0].tools)} tools')
+    except Exception as e:
+        print(f'{conn_name}: Error: {e}')
+" ✔ 
+💭 Thinking for 558 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+configs = client.actions.mcp.list_configs().configs
+for cfg in configs:
+    print(f'Config: {cfg.id} - {cfg.name}')
+    for mapping in cfg.connection_tool_mappings:
+        print(f'  Connection: {mapping.connection_name} ({mapping.provider})')
+        print(f'    Tools: {mapping.tools}')
+" ✔ 
+💭 Thinking for 960 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+try:
+    print(client.actions.mcp.list_mcp_connected_accounts())
+except Exception as e:
+    print('Error:', e)
+" ✔ 
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+configs = client.actions.mcp.list_configs().configs
+for cfg in configs:
+    try:
+        res = client.actions.mcp.list_mcp_connected_accounts(config_id=cfg.id, identifier='zealt-user01')
+        print(f'Config {cfg.id} ({cfg.name}) connected accounts:')
+        print(res)
+    except Exception as e:
+        print(f'Error for {cfg.id}: {e}')
+" ✔ 
+💭 Thinking for 1461 characters   
+🔍 Searching for list_scoped_tools in /usr/local/lib/python3.12/dist-packages/scalekit/actions ✔ 
+💭 Thinking for 2538 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+from scalekit.v1.tools.tools_pb2 import Filter
+from google.protobuf.wrappers_pb2 import BoolValue
+from google.protobuf.json_format import MessageToDict
+
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+
+page_token = None
+providers = set()
+while True:
+    res = client.tools.list_tools(
+        filter=Filter(),
+        page_size=100,
+        page_token=page_token
+    )
+    response = res[0]
+    for t in response.tools:
+        providers.add(t.provider)
+    page_token = response.next_page_token
+    if not page_token:
+        break
+
+print('Unique providers:', sorted(list(providers)))
+" ✖ "Command exited with code 1"
+💭 Thinking for 1682 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+print(dir(client.connected_accounts))
+" ✔ 
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+help(client.connected_accounts.list_connected_accounts)
+" ✔ 
+💭 Thinking for 326 characters   
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+res = client.connected_accounts.list_connected_accounts(page_size=100)
+response = res[0]
+print('Total connected accounts:', len(response.connected_accounts))
+for ca in response.connected_accounts:
+    print(ca.id, ca.identifier, ca.connector, ca.status)
+" ✖ "Command exited with code 1"
+💫 Executing python3 -c "
+import os
+from scalekit import ScalekitClient
+client = ScalekitClient(
+    env_url=os.environ.get('SCALEKIT_ENV_URL'),
+    client_id=os.environ.get('SCALEKIT_CLIENT_ID'),
+    client_secret=os.environ.get('SCALEKIT_CLIENT_SECRET')
+)
+try:
+    res = client.connected_accounts.list_connected_accounts(page_size=50)
+    response = res[0]
+    print('Total connected accounts:', len(response.connected_accounts))
+    for ca in response.connected_accounts:
+        print(ca.id, ca.identifier, ca.connector, ca.status)
+except Exception as e:
+    print('Error:', e)
+" ✔ 

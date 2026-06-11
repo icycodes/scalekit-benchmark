@@ -1,0 +1,95 @@
+- Initializing MCP connections...
+You
+# Scalekit AgentKit: Verify an Existing Connected Account is ACTIVE (Python) ## Background Before an AI agent can call third-party SaaS APIs on behalf of a user, the corresponding Scalekit `connected account` must reach the `ACTIVE` state. A common pre-flight check in production code is: given a `(connection, identifier)` pair, confirm that Scalekit has already stored valid credentials so the agent can proceed straight to tool calls instead of generating an authorization link. In this task you will use the Scalekit Python SDK to perform that pre-flight check against the dashboard fixture: the `github-test` connection has a pre-configured connected account for the test user `zealt-user01` that is already in the `ACTIVE` state. Your script must fetch that connected account via the SDK, assert the status is `ACTIVE`, and persist a small log artifact that the verifier can inspect. ## Requirements * Use the Scalekit Python SDK (`scalekit-sdk-python`) and read `SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`, and `SCALEKIT_ENV_URL` from environment variables. * Use the exact connection name `github-test` and the exact identifier `zealt-user01` as registered in the dashboard fixture. Do **NOT** introduce new environment variables for these names. * Use `get_or_create_connected_account` to fetch the connected account (it is idempotent and the safe default when the account may or may not already exist). * If the returned status is not `ACTIVE`, fail loudly (non-zero exit) instead of silently proceeding. * Persist a small log artifact so the verifier can inspect the result. ## Implementation Hints * Initialize `ScalekitClient` with the three environment variables. The Python SDK accepts keyword arguments like `env_url=...`, `client_id=...`, `client_secret=...`. * The `connection_name` is workspace-specific and case-sensitive — use `github-test` exactly. Do not pass the provider slug `github`. * The Scalekit response object exposes the connected account on `response.connected_account` (snake\_case). Its `status` field carries the state (compare against `"ACTIVE"` or the equivalent enum). * Do **NOT** generate an authorization link and do **NOT** call any third-party API directly — only use the Scalekit SDK to read the connected account. * Write the log file with UTF-8 text and one record per line. ## Acceptance Criteria * Project path: /home/user/myproject * Ensure the script is actually executed against the live Scalekit environment and the log artifact exists (no mocking). * Log file: /home/user/myproject/output.log * The script MUST exit with status 0 if the connected account is `ACTIVE`, and exit with a non-zero status otherwise. * The log file MUST contain the following four lines, each on its own line and in this exact label format: * `Connection: github-test` * `Identifier: zealt-user01` * `Status: ACTIVE` * `Connected Account ID: <non-empty connected-account id>` * The Scalekit-side state of the `(github-test, zealt-user01)` connected account MUST still be `ACTIVE` after the script runs (the script must not mutate it).   
+
+Pochi
+I'll start by exploring the project directory and understanding the environment setup.   
+📋 Updating todo list (4 items) ✔ 
+📂 Listing files in /home/user/myproject ✔ 
+💫 Executing printenv | grep -E 'SCALEKIT_' || echo "No SCALEKIT env vars found" ✔ 
+Environment variables are set. The project directory is empty. Let me check what Python is available and install the SDK.   
+📋 Updating todo list (4 items) ✔ 
+💫 Executing python3 --version && pip install scalekit-sdk-python 2>&1 ✖ "Command exited with code 1"
+Need to use a virtual environment.   
+💫 Executing python3 -m venv /home/user/myproject/.venv && /home/user/myproject/.venv/bin/pip install scalekit-sdk-python 2>&1 ✖ "Command exited with code 1"
+💫 Executing apt-get update -qq && apt-get install -y -qq python3.12-venv 2>&1 | tail -5 ✔ 
+💫 Executing python3 -m venv /home/user/myproject/.venv && /home/user/myproject/.venv/bin/pip install scalekit-sdk-python 2>&1 ✖ "Command execution timed out after 60 seconds."
+The install timed out but likely completed. Let me verify the SDK is installed.   
+💫 Executing /home/user/myproject/.venv/bin/pip list 2>&1 | grep -i scalekit ✔ 
+SDK is installed. Now let me explore the SDK to understand the API surface for `get_or_create_connected_account`.   
+📋 Updating todo list (4 items) ✔ 
+💫 Executing /home/user/myproject/.venv/bin/python -c "import scalekit; print(dir(scalekit))" 2>&1 ✔ 
+💫 Executing /home/user/myproject/.venv/bin/python -c "from scalekit import ScalekitClient; help(ScalekitClient.get_or_create_connected_account)" 2>&1 ✖ "Command exited with code 1"
+💫 Executing /home/user/myproject/.venv/bin/python -c "from scalekit import ScalekitClient; c = ScalekitClient.__dict__; print([k for k in c.keys() if not k.startswith('_')])" 2>&1 ✔ 
+The `get_or_create_connected_account` is on the `connected_accounts` sub-object. Let me check.   
+💫 Executing /home/user/myproject/.venv/bin/python -c "from scalekit.connected_accounts import ConnectedAccounts; print([k for k in ConnectedAccounts.__dict__.keys() if not k.startswith('_')])" 2>&1 ✖ "Command exited with code 1"
+💫 Executing /home/user/myproject/.venv/bin/python -c "from scalekit.connected_accounts import ConnectedAccountsClient; print([k for k in ConnectedAccountsClient.__dict__.keys() if not k.startswith('_')])" 2>&1 ✔ 
+Hmm, I don't see `get_or_create_connected_account` directly. Let me check the client initialization pattern and look for the SDK source to understand how it's accessed.   
+💫 Executing /home/user/myproject/.venv/bin/python -c "
+from scalekit import ScalekitClient
+c = ScalekitClient(client_id='test', client_secret='test', env_url='https://example.com')
+print(type(c.connected_accounts))
+print(dir(c.connected_accounts))
+" 2>&1 ✖ "Command exited with code 1"
+OK, that's expected with a fake URL. Let me check the actual SDK source to find how `get_or_create_connected_account` is exposed.   
+💫 Executing grep -r "get_or_create_connected_account" /home/user/myproject/.venv/lib/python3.12/site-packages/scalekit/ 2>&1 ✔ 
+It's in the `actions` module. Let me look at how the client exposes it.   
+💫 Executing grep -rn "get_or_create_connected_account\|actions\|connected_account" /home/user/myproject/.venv/lib/python3.12/site-packages/scalekit/client.py 2>&1 ✔ 
+So it's `client.connect.get_or_create_connected_account(...)` or `client.actions.get_or_create_connected_account(...)`.   
+💫 Executing /home/user/myproject/.venv/bin/python -c "
+from scalekit.actions import ActionClient
+import inspect
+sig = inspect.signature(ActionClient.get_or_create_connected_account)
+print(sig)
+" 2>&1 ✔ 
+💫 Executing /home/user/myproject/.venv/bin/python -c "
+from scalekit.actions.models.responses.create_connected_account_response import CreateConnectedAccountResponse
+print([k for k in CreateConnectedAccountResponse.__dict__.keys() if not k.startswith('_')])
+import inspect
+sig = inspect.signature(CreateConnectedAccountResponse.__init__)
+print(sig)
+" 2>&1 ✔ 
+💫 Executing /home/user/myproject/.venv/bin/python -c "
+from scalekit.actions.models.responses.create_connected_account_response import CreateConnectedAccountResponse
+print(CreateConnectedAccountResponse.model_fields.keys())
+" 2>&1 ✔ 
+💫 Executing /home/user/myproject/.venv/bin/python -c "
+from scalekit.connected_accounts import ConnectedAccount
+print(ConnectedAccount.model_fields.keys())
+" 2>&1 ✖ "Command exited with code 1"
+💫 Executing grep -rn "class ConnectedAccount" /home/user/myproject/.venv/lib/python3.12/site-packages/scalekit/ 2>&1 ✔ 
+💫 Executing grep -rn "class CreateConnectedAccountResponse\|class ConnectedAccount" /home/user/myproject/.venv/lib/python3.12/site-packages/scalekit/actions/ 2>&1 ✔ 
+📖 Reading /home/user/myproject/.venv/lib/python3.12/site-packages/scalekit/actions/models/responses/create_connected_account_response.py ✔ 
+📖 Reading /home/user/myproject/.venv/lib/python3.12/site-packages/scalekit/actions/models/responses/get_connected_account_auth_response.py ✔ 
+Now I have a clear picture of the API. The `ConnectedAccount` model has `id`, `identifier`, `provider`, `status` fields. The response is accessed via `response.connected_account`. Now let me write the script.   
+✏️  Writing /home/user/myproject/verify_connected_account.py ✔ 
+📋 Updating todo list (4 items) ✔ 
+💫 Executing /home/user/myproject/.venv/bin/python /home/user/myproject/verify_connected_account.py 2>&1 ✔ 
+The script ran successfully. Let me verify the log file and the exit code.   
+💫 Executing /home/user/myproject/.venv/bin/python /home/user/myproject/verify_connected_account.py; echo "EXIT_CODE=$?" ✔ 
+📖 Reading /home/user/myproject/output.log ✔ 
+All acceptance criteria are met: - Exit code is 0 (ACTIVE status) - Log file contains exactly the four required lines: - `Connection: github-test` - `Identifier: zealt-user01` - `Status: ACTIVE` - `Connected Account ID: ca_127046882881963526` (non-empty) - The script does not mutate the Scalekit-side state (it only reads via `get_or_create_connected_account`)   
+📋 Updating todo list (4 items) ✔ 
+🎉 Task Completed
+The verification script has been created and executed successfully against the live Scalekit environment.
+
+**Script:** `/home/user/myproject/verify_connected_account.py`
+
+**What it does:**
+1. Reads `SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`, and `SCALEKIT_ENV_URL` from environment variables
+2. Initializes `ScalekitClient` with those credentials
+3. Calls `client.connect.get_or_create_connected_account(connection_name="github-test", identifier="zealt-user01")` — idempotent, safe read-only operation
+4. Asserts the returned `connected_account.status` is `"ACTIVE"`, exiting non-zero if not
+5. Asserts the `connected_account.id` is non-empty
+6. Writes the log artifact to `/home/user/myproject/output.log`
+
+**Log file contents (`/home/user/myproject/output.log`):**
+```
+Connection: github-test
+Identifier: zealt-user01
+Status: ACTIVE
+Connected Account ID: ca_127046882881963526
+```
+
+**Exit code:** 0 (ACTIVE status confirmed).   
+  

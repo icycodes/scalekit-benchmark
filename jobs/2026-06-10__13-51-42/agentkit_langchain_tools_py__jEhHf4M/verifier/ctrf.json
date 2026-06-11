@@ -1,0 +1,92 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-10T06:11:21.242562+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 7,
+            "passed": 7,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781071879227,
+            "stop": 1781071881242
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_script_file_exists",
+                "status": "passed",
+                "duration": 34,
+                "start": 1781071879262,
+                "stop": 1781071879296,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_script_uses_scalekit_langchain_adapter",
+                "status": "passed",
+                "duration": 0,
+                "start": 1781071879297,
+                "stop": 1781071879297,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_script_does_not_bypass_sdk",
+                "status": "passed",
+                "duration": 1,
+                "start": 1781071879297,
+                "stop": 1781071879298,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_tools_json_exists_and_has_expected_shape",
+                "status": "passed",
+                "duration": 1,
+                "start": 1781071879298,
+                "stop": 1781071879299,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_tools_entries_are_well_formed_and_github_prefixed",
+                "status": "passed",
+                "duration": 0,
+                "start": 1781071879299,
+                "stop": 1781071879299,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_output_log_contains_summary_lines",
+                "status": "passed",
+                "duration": 1,
+                "start": 1781071879299,
+                "stop": 1781071879300,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_langchain_adapter_live_returns_basetool_objects_matching_catalog",
+                "status": "passed",
+                "duration": 1936,
+                "start": 1781071879300,
+                "stop": 1781071881236,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

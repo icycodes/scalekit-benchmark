@@ -1,0 +1,4 @@
+Adapter: langchain
+Connection: github-test
+Identifier: zealt-user01
+Tool count: 12

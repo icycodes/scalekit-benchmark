@@ -1,0 +1,209 @@
+[37m2026-06-10 06:42:35.835[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m[39m[0m[0m[1m[37m	Pochi[39m[22m[0m[0m	pochi v0.6.14
+[37m2026-06-10 06:42:36.351[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37mnative:7[39m[0m[0m[1m[37m	BuiltInBundle[39m[22m[0m[0m	Materializing 16 built-in files to /tmp/pochi-builtin-5f7c1b2d4157fa59
+[37m2026-06-10 06:42:36.545[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:517730[39m[0m[0m[1m[37m	loadAgents[39m[22m[0m[0m	Loaded 6 custom agents (6 valid, 0 invalid)
+[37m2026-06-10 06:42:36.627[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:517731[39m[0m[0m[1m[37m	loadSkills[39m[22m[0m[0m	Loaded 3 skills (3 valid, 0 invalid)
+[37m2026-06-10 06:42:36.651[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:442311[39m[0m[0m[1m[37m	PochiVendor[39m[22m[0m[0m	JWT is expiring or missing, fetching a new one
+[37m2026-06-10 06:42:39.291[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:418456[39m[0m[0m[1m[37m	MCPHub[39m[22m[0m[0m	MCP servers configuration changed via signal:
+[37m2026-06-10 06:42:39.292[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:418568[39m[0m[0m[1m[37m	MCPHub[39m[22m[0m[0m	Build MCPHub Status
+[37m2026-06-10 06:42:39.685[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37mnative:7[39m[0m[0m[1m[37m	Pochi[39m[22m[0m[0m	Starting task runner...
+[37m2026-06-10 06:42:39.762[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:508502[39m[0m[0m[1m[37m	generateTaskTitle[39m[22m[0m[0m	Generating task title, old: null, new: # Create a GitHub Gist via Scalekit AgentKit (Python)
+[37m2026-06-10 06:42:49.499[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516111[39m[0m[0m[1m[37m	listFiles[39m[22m[0m[0m	handling listFile with dirPath /home/user/myproject and recursive [90mundefined[39m
+[37m2026-06-10 06:42:52.001[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:508502[39m[0m[0m[1m[37m	generateTaskTitle[39m[22m[0m[0m	Generating task title, old: # Create a GitHub Gist via Scalekit AgentKit (Python), new: Create a GitHub Gist via Scalekit AgentKit in Python
+[37m2026-06-10 06:43:04.400[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516111[39m[0m[0m[1m[37m	listFiles[39m[22m[0m[0m	handling listFile with dirPath /usr/local/lib/python3.12/dist-packages/scalekit and recursive [33mtrue[39m
+[37m2026-06-10 06:43:07.536[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: path="/usr/local/lib/python3.12/dist-packages/scalekit/actions/__init__.py" resolvedPath="/usr/local/lib/python3.12/dist-packages/scalekit/actions/__init__.py" isVirtual=false cacheExists=true shouldCache=true startLine=undefined endLine=undefined
+[37m2026-06-10 06:43:07.537[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: existingState=undefined
+[37m2026-06-10 06:43:07.540[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: populating cache for "/usr/local/lib/python3.12/dist-packages/scalekit/actions/__init__.py" mtime=1781069640337 contentLen=68
+[37m2026-06-10 06:43:12.572[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: path="/usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py" resolvedPath="/usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py" isVirtual=false cacheExists=true shouldCache=true startLine=1 endLine=120
+[37m2026-06-10 06:43:12.573[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: existingState=undefined
+[37m2026-06-10 06:43:12.575[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: populating cache for "/usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py" mtime=1781069640338 contentLen=5304
+[37m2026-06-10 06:43:17.796[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: path="/usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py" resolvedPath="/usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py" isVirtual=false cacheExists=true shouldCache=true startLine=121 endLine=240
+[37m2026-06-10 06:43:17.797[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: existingState={startLine=1, endLine=120, timestamp=1781069640338}
+[37m2026-06-10 06:43:17.799[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: populating cache for "/usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py" mtime=1781069640338 contentLen=4743
+[37m2026-06-10 06:43:21.039[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	searchFiles /usr/local/lib/python3.12/dist-packages/scalekit get_or_create_connected_account [90mundefined[39m
+[37m2026-06-10 06:43:21.040[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	command "/usr/bin/rg" --json --case-sensitive --binary --sortr modified 'get_or_create_connected_account' '/usr/local/lib/python3.12/dist-packages/scalekit'
+[37m2026-06-10 06:43:21.076[39m[0m[0m	[31m[1mERROR[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	Failed to parse rg JSON output line: {"type":"match","data":{"path":{"text":"/usr/local/lib/python3.12/dist-packages/scalekit/actions/__pycache__/actions.cpython-312.pyc"},"lines":{"bytes":"2h9nZXRfb3JfY3JlYXRlX2Nvbm5lY3RlZF9hY2NvdW50eixBY3Rpb25DbGllbnQuZ2V0X29yX2NyZWF0ZV9jb25uZWN0ZWRfYWNjb3VudPACCg=="},"line_number":5504,"absolute_offset":27072,"submatches":[{"match":{"text":"get_or_create_connected_account"},"start":2,"end":33},{"match":{"text":"get_or_create_connected_account"},"start":48,"end":79}]}}
+
+[97m[101m[1m TypeError [22m[49m[39m[0m[0m undefined is not an object (evaluating 'matchData.lines.text.replace'), 463327, 42, 463327, 42, /$bunfs/root/pochi[0m[0m
+error stack:
+  • [33mpochi[39m[0m[0m	searchFilesWithRipgrep[0m[0m
+	[37m$bunfs/root/pochi:463327[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async <anonymous>[0m[0m
+	[37m$bunfs/root/pochi:516831[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCall2[0m[0m
+	[37m$bunfs/root/pochi:516941[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCallItem[0m[0m
+	[37m$bunfs/root/pochi:517333[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async runToolCall[0m[0m
+	[37m$bunfs/root/pochi:517312[39m[0m[0m
+  • [33mnative[39m[0m[0m	processTicksAndRejections[0m[0m
+	[37mnative:7[39m[0m[0m[0m[0m
+[37m2026-06-10 06:43:24.739[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: path="/usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py" resolvedPath="/usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py" isVirtual=false cacheExists=true shouldCache=true startLine=740 endLine=800
+[37m2026-06-10 06:43:24.739[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: existingState={startLine=121, endLine=240, timestamp=1781069640338}
+[37m2026-06-10 06:43:24.742[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: populating cache for "/usr/local/lib/python3.12/dist-packages/scalekit/actions/actions.py" mtime=1781069640338 contentLen=2577
+[37m2026-06-10 06:43:29.218[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: path="/usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/create_connected_account_response.py" resolvedPath="/usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/create_connected_account_response.py" isVirtual=false cacheExists=true shouldCache=true startLine=undefined endLine=undefined
+[37m2026-06-10 06:43:29.218[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: existingState=undefined
+[37m2026-06-10 06:43:29.221[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: populating cache for "/usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/create_connected_account_response.py" mtime=1781069640343 contentLen=1674
+[37m2026-06-10 06:43:31.910[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: path="/usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/get_connected_account_auth_response.py" resolvedPath="/usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/get_connected_account_auth_response.py" isVirtual=false cacheExists=true shouldCache=true startLine=undefined endLine=undefined
+[37m2026-06-10 06:43:31.910[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: existingState=undefined
+[37m2026-06-10 06:43:31.915[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: populating cache for "/usr/local/lib/python3.12/dist-packages/scalekit/actions/models/responses/get_connected_account_auth_response.py" mtime=1781069640345 contentLen=7817
+[37m2026-06-10 06:43:35.771[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: path="/usr/local/lib/python3.12/dist-packages/scalekit/client.py" resolvedPath="/usr/local/lib/python3.12/dist-packages/scalekit/client.py" isVirtual=false cacheExists=true shouldCache=true startLine=1 endLine=100
+[37m2026-06-10 06:43:35.772[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: existingState=undefined
+[37m2026-06-10 06:43:35.777[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: populating cache for "/usr/local/lib/python3.12/dist-packages/scalekit/client.py" mtime=1781069640332 contentLen=3948
+[37m2026-06-10 06:43:47.117[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	searchFiles /usr/local/lib/python3.12/dist-packages/scalekit list_scoped_tools [90mundefined[39m
+[37m2026-06-10 06:43:47.118[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	command "/usr/bin/rg" --json --case-sensitive --binary --sortr modified 'list_scoped_tools' '/usr/local/lib/python3.12/dist-packages/scalekit'
+[37m2026-06-10 06:43:47.135[39m[0m[0m	[31m[1mERROR[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	Failed to parse rg JSON output line: {"type":"match","data":{"path":{"text":"/usr/local/lib/python3.12/dist-packages/scalekit/__pycache__/tools.cpython-312.pyc"},"lines":{"bytes":"2hFsaXN0X3Njb3BlZF90b29sc3odVG9vbHNDbGllbnQubGlzdF9zY29wZWRfdG9vbHM8Cg=="},"line_number":644,"absolute_offset":2825,"submatches":[{"match":{"text":"list_scoped_tools"},"start":2,"end":19},{"match":{"text":"list_scoped_tools"},"start":33,"end":50}]}}
+
+[97m[101m[1m TypeError [22m[49m[39m[0m[0m undefined is not an object (evaluating 'matchData.lines.text.replace'), 463327, 42, 463327, 42, /$bunfs/root/pochi[0m[0m
+error stack:
+  • [33mpochi[39m[0m[0m	searchFilesWithRipgrep[0m[0m
+	[37m$bunfs/root/pochi:463327[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async <anonymous>[0m[0m
+	[37m$bunfs/root/pochi:516831[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCall2[0m[0m
+	[37m$bunfs/root/pochi:516941[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCallItem[0m[0m
+	[37m$bunfs/root/pochi:517333[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async runToolCall[0m[0m
+	[37m$bunfs/root/pochi:517312[39m[0m[0m
+  • [33mnative[39m[0m[0m	processTicksAndRejections[0m[0m
+	[37mnative:7[39m[0m[0m[0m[0m
+[37m2026-06-10 06:43:47.136[39m[0m[0m	[31m[1mERROR[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	Failed to parse rg JSON output line: {"type":"match","data":{"path":{"text":"/usr/local/lib/python3.12/dist-packages/scalekit/actions/frameworks/__pycache__/langchain.cpython-312.pyc"},"lines":{"bytes":"2hFsaXN0X3Njb3BlZF90b29sc9ogX2NvbnZlcnRfdG9vbF90b19zdHJ1Y3R1cmVkX3Rvb2zaBHRvb2zaFGNvbm5lY3RlZF9hY2NvdW50X2lk2gZhcHBlbmQpDXITCg=="},"line_number":455,"absolute_offset":1975,"submatches":[{"match":{"text":"list_scoped_tools"},"start":2,"end":19}]}}
+
+[97m[101m[1m TypeError [22m[49m[39m[0m[0m undefined is not an object (evaluating 'matchData.lines.text.replace'), 463327, 42, 463327, 42, /$bunfs/root/pochi[0m[0m
+error stack:
+  • [33mpochi[39m[0m[0m	searchFilesWithRipgrep[0m[0m
+	[37m$bunfs/root/pochi:463327[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async <anonymous>[0m[0m
+	[37m$bunfs/root/pochi:516831[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCall2[0m[0m
+	[37m$bunfs/root/pochi:516941[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCallItem[0m[0m
+	[37m$bunfs/root/pochi:517333[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async runToolCall[0m[0m
+	[37m$bunfs/root/pochi:517312[39m[0m[0m
+  • [33mnative[39m[0m[0m	processTicksAndRejections[0m[0m
+	[37mnative:7[39m[0m[0m[0m[0m
+[37m2026-06-10 06:43:47.137[39m[0m[0m	[31m[1mERROR[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	Failed to parse rg JSON output line: {"type":"match","data":{"path":{"text":"/usr/local/lib/python3.12/dist-packages/scalekit/actions/frameworks/__pycache__/google_adk.cpython-312.pyc"},"lines":{"bytes":"2hFsaXN0X3Njb3BlZF90b29sc9ogX2NvbnZlcnRfdG9vbF90b19nb29nbGVfYWRrX3Rvb2zaBHRvb2zaFGNvbm5lY3RlZF9hY2NvdW50X2lk2gZhcHBlbmQpDXIVCg=="},"line_number":456,"absolute_offset":2091,"submatches":[{"match":{"text":"list_scoped_tools"},"start":2,"end":19}]}}
+
+[97m[101m[1m TypeError [22m[49m[39m[0m[0m undefined is not an object (evaluating 'matchData.lines.text.replace'), 463327, 42, 463327, 42, /$bunfs/root/pochi[0m[0m
+error stack:
+  • [33mpochi[39m[0m[0m	searchFilesWithRipgrep[0m[0m
+	[37m$bunfs/root/pochi:463327[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async <anonymous>[0m[0m
+	[37m$bunfs/root/pochi:516831[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCall2[0m[0m
+	[37m$bunfs/root/pochi:516941[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCallItem[0m[0m
+	[37m$bunfs/root/pochi:517333[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async runToolCall[0m[0m
+	[37m$bunfs/root/pochi:517312[39m[0m[0m
+  • [33mnative[39m[0m[0m	processTicksAndRejections[0m[0m
+	[37mnative:7[39m[0m[0m[0m[0m
+[37m2026-06-10 06:43:50.255[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: path="/usr/local/lib/python3.12/dist-packages/scalekit/tools.py" resolvedPath="/usr/local/lib/python3.12/dist-packages/scalekit/tools.py" isVirtual=false cacheExists=true shouldCache=true startLine=50 endLine=120
+[37m2026-06-10 06:43:50.255[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: existingState=undefined
+[37m2026-06-10 06:43:50.258[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: populating cache for "/usr/local/lib/python3.12/dist-packages/scalekit/tools.py" mtime=1781069640337 contentLen=2417
+[37m2026-06-10 06:43:53.095[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	searchFiles /usr/local/lib/python3.12/dist-packages/scalekit ScopedToolFilter [90mundefined[39m
+[37m2026-06-10 06:43:53.096[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	command "/usr/bin/rg" --json --case-sensitive --binary --sortr modified 'ScopedToolFilter' '/usr/local/lib/python3.12/dist-packages/scalekit'
+[37m2026-06-10 06:43:53.115[39m[0m[0m	[31m[1mERROR[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	Failed to parse rg JSON output line: {"type":"match","data":{"path":{"text":"/usr/local/lib/python3.12/dist-packages/scalekit/v1/tools/__pycache__/tools_pb2.cpython-312.pyc"},"lines":{"bytes":"BmZpbHRlchgCIAEoCzIjLnNjYWxla2l0LnYxLnRvb2xzLlNjb3BlZFRvb2xGaWx0ZXJCNZJBLDIqRmlsdGVyIHBhcmFtZXRlcnMgZm9yIGxpc3Rpbmcgc2NvcGVkIHRvb2xzukgDyAEBUgZmaWx0ZXISGwo="},"line_number":4831,"absolute_offset":14235,"submatches":[{"match":{"text":"ScopedToolFilter"},"start":34,"end":50}]}}
+
+[97m[101m[1m TypeError [22m[49m[39m[0m[0m undefined is not an object (evaluating 'matchData.lines.text.replace'), 463327, 42, 463327, 42, /$bunfs/root/pochi[0m[0m
+error stack:
+  • [33mpochi[39m[0m[0m	searchFilesWithRipgrep[0m[0m
+	[37m$bunfs/root/pochi:463327[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async <anonymous>[0m[0m
+	[37m$bunfs/root/pochi:516831[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCall2[0m[0m
+	[37m$bunfs/root/pochi:516941[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCallItem[0m[0m
+	[37m$bunfs/root/pochi:517333[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async runToolCall[0m[0m
+	[37m$bunfs/root/pochi:517312[39m[0m[0m
+  • [33mnative[39m[0m[0m	processTicksAndRejections[0m[0m
+	[37mnative:7[39m[0m[0m[0m[0m
+[37m2026-06-10 06:43:53.115[39m[0m[0m	[31m[1mERROR[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	Failed to parse rg JSON output line: {"type":"match","data":{"path":{"text":"/usr/local/lib/python3.12/dist-packages/scalekit/__pycache__/tools.cpython-312.pyc"},"lines":{"bytes":"2hBTY29wZWRUb29sRmlsdGVy2hdMaXN0U2NvcGVkVG9vbHNSZXNwb25zZXIgCg=="},"line_number":950,"absolute_offset":4515,"submatches":[{"match":{"text":"ScopedToolFilter"},"start":2,"end":18}]}}
+
+[97m[101m[1m TypeError [22m[49m[39m[0m[0m undefined is not an object (evaluating 'matchData.lines.text.replace'), 463327, 42, 463327, 42, /$bunfs/root/pochi[0m[0m
+error stack:
+  • [33mpochi[39m[0m[0m	searchFilesWithRipgrep[0m[0m
+	[37m$bunfs/root/pochi:463327[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async <anonymous>[0m[0m
+	[37m$bunfs/root/pochi:516831[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCall2[0m[0m
+	[37m$bunfs/root/pochi:516941[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCallItem[0m[0m
+	[37m$bunfs/root/pochi:517333[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async runToolCall[0m[0m
+	[37m$bunfs/root/pochi:517312[39m[0m[0m
+  • [33mnative[39m[0m[0m	processTicksAndRejections[0m[0m
+	[37mnative:7[39m[0m[0m[0m[0m
+[37m2026-06-10 06:43:53.115[39m[0m[0m	[31m[1mERROR[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	Failed to parse rg JSON output line: {"type":"match","data":{"path":{"text":"/usr/local/lib/python3.12/dist-packages/scalekit/actions/frameworks/__pycache__/langchain.cpython-312.pyc"},"lines":{"bytes":"KQXaCE9wdGlvbmFs2gNBbnnaBERpY3TaBExpc3TaCENhbGxhYmxlKQHaDlN0cnVjdHVyZWRUb29sKQHaC1Rvb2xzQ2xpZW50KQHaEFNjb3BlZFRvb2xGaWx0ZXIpAdoVZXh0cmFjdF90b29sX21ldGFkYXRhYwo="},"line_number":56,"absolute_offset":149,"submatches":[{"match":{"text":"ScopedToolFilter"},"start":76,"end":92}]}}
+
+[97m[101m[1m TypeError [22m[49m[39m[0m[0m undefined is not an object (evaluating 'matchData.lines.text.replace'), 463327, 42, 463327, 42, /$bunfs/root/pochi[0m[0m
+error stack:
+  • [33mpochi[39m[0m[0m	searchFilesWithRipgrep[0m[0m
+	[37m$bunfs/root/pochi:463327[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async <anonymous>[0m[0m
+	[37m$bunfs/root/pochi:516831[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCall2[0m[0m
+	[37m$bunfs/root/pochi:516941[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCallItem[0m[0m
+	[37m$bunfs/root/pochi:517333[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async runToolCall[0m[0m
+	[37m$bunfs/root/pochi:517312[39m[0m[0m
+  • [33mnative[39m[0m[0m	processTicksAndRejections[0m[0m
+	[37mnative:7[39m[0m[0m[0m[0m
+[37m2026-06-10 06:43:53.115[39m[0m[0m	[31m[1mERROR[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	Failed to parse rg JSON output line: {"type":"match","data":{"path":{"text":"/usr/local/lib/python3.12/dist-packages/scalekit/actions/frameworks/__pycache__/google_adk.cpython-312.pyc"},"lines":{"bytes":"KQXaCE9wdGlvbmFs2gNBbnnaBERpY3TaBExpc3TaCENhbGxhYmxlKQHaC1Rvb2xzQ2xpZW50KQLaBkZpbHRlctoQU2NvcGVkVG9vbEZpbHRlcikB2hVTY2FsZWtpdEdvb2dsZUFka1Rvb2wpAtoYYnVpbGRfbWNwX3Rvb2xfZnJvbV9zcGVj2g5zdHJ1Y3RfdG9fZGljdGMK"},"line_number":57,"absolute_offset":157,"submatches":[{"match":{"text":"ScopedToolFilter"},"start":66,"end":82}]}}
+
+[97m[101m[1m TypeError [22m[49m[39m[0m[0m undefined is not an object (evaluating 'matchData.lines.text.replace'), 463327, 42, 463327, 42, /$bunfs/root/pochi[0m[0m
+error stack:
+  • [33mpochi[39m[0m[0m	searchFilesWithRipgrep[0m[0m
+	[37m$bunfs/root/pochi:463327[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async <anonymous>[0m[0m
+	[37m$bunfs/root/pochi:516831[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCall2[0m[0m
+	[37m$bunfs/root/pochi:516941[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCallItem[0m[0m
+	[37m$bunfs/root/pochi:517333[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async runToolCall[0m[0m
+	[37m$bunfs/root/pochi:517312[39m[0m[0m
+  • [33mnative[39m[0m[0m	processTicksAndRejections[0m[0m
+	[37mnative:7[39m[0m[0m[0m[0m
+[37m2026-06-10 06:45:12.359[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	searchFiles /usr/local/lib/python3.12/dist-packages/scalekit list_available_tools [90mundefined[39m
+[37m2026-06-10 06:45:12.361[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	command "/usr/bin/rg" --json --case-sensitive --binary --sortr modified 'list_available_tools' '/usr/local/lib/python3.12/dist-packages/scalekit'
+[37m2026-06-10 06:45:36.025[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: path="/usr/local/lib/python3.12/dist-packages/scalekit/tools.py" resolvedPath="/usr/local/lib/python3.12/dist-packages/scalekit/tools.py" isVirtual=false cacheExists=true shouldCache=true startLine=1 endLine=59
+[37m2026-06-10 06:45:36.025[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: existingState={startLine=50, endLine=120, timestamp=1781069640337}
+[37m2026-06-10 06:45:36.033[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516783[39m[0m[0m[1m[37m	FileStateCache[39m[22m[0m[0m	withReadFileCache: populating cache for "/usr/local/lib/python3.12/dist-packages/scalekit/tools.py" mtime=1781069640337 contentLen=1575
+[37m2026-06-10 06:51:29.440[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	searchFiles /usr/local/lib/python3.12/dist-packages/scalekit/actions list_scoped_tools [90mundefined[39m
+[37m2026-06-10 06:51:29.440[39m[0m[0m	[32m[1mDEBUG[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	command "/usr/bin/rg" --json --case-sensitive --binary --sortr modified 'list_scoped_tools' '/usr/local/lib/python3.12/dist-packages/scalekit/actions'
+[37m2026-06-10 06:51:29.463[39m[0m[0m	[31m[1mERROR[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	Failed to parse rg JSON output line: {"type":"match","data":{"path":{"text":"/usr/local/lib/python3.12/dist-packages/scalekit/actions/frameworks/__pycache__/langchain.cpython-312.pyc"},"lines":{"bytes":"2hFsaXN0X3Njb3BlZF90b29sc9ogX2NvbnZlcnRfdG9vbF90b19zdHJ1Y3R1cmVkX3Rvb2zaBHRvb2zaFGNvbm5lY3RlZF9hY2NvdW50X2lk2gZhcHBlbmQpDXITCg=="},"line_number":455,"absolute_offset":1975,"submatches":[{"match":{"text":"list_scoped_tools"},"start":2,"end":19}]}}
+
+[97m[101m[1m TypeError [22m[49m[39m[0m[0m undefined is not an object (evaluating 'matchData.lines.text.replace'), 463327, 42, 463327, 42, /$bunfs/root/pochi[0m[0m
+error stack:
+  • [33mpochi[39m[0m[0m	searchFilesWithRipgrep[0m[0m
+	[37m$bunfs/root/pochi:463327[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async <anonymous>[0m[0m
+	[37m$bunfs/root/pochi:516831[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCall2[0m[0m
+	[37m$bunfs/root/pochi:516941[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCallItem[0m[0m
+	[37m$bunfs/root/pochi:517333[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async runToolCall[0m[0m
+	[37m$bunfs/root/pochi:517312[39m[0m[0m
+  • [33mnative[39m[0m[0m	processTicksAndRejections[0m[0m
+	[37mnative:7[39m[0m[0m[0m[0m
+[37m2026-06-10 06:51:29.463[39m[0m[0m	[31m[1mERROR[22m[39m[0m[0m	[37m$bunfs/root/pochi:516831[39m[0m[0m[1m[37m	RipgrepUtils[39m[22m[0m[0m	Failed to parse rg JSON output line: {"type":"match","data":{"path":{"text":"/usr/local/lib/python3.12/dist-packages/scalekit/actions/frameworks/__pycache__/google_adk.cpython-312.pyc"},"lines":{"bytes":"2hFsaXN0X3Njb3BlZF90b29sc9ogX2NvbnZlcnRfdG9vbF90b19nb29nbGVfYWRrX3Rvb2zaBHRvb2zaFGNvbm5lY3RlZF9hY2NvdW50X2lk2gZhcHBlbmQpDXIVCg=="},"line_number":456,"absolute_offset":2091,"submatches":[{"match":{"text":"list_scoped_tools"},"start":2,"end":19}]}}
+
+[97m[101m[1m TypeError [22m[49m[39m[0m[0m undefined is not an object (evaluating 'matchData.lines.text.replace'), 463327, 42, 463327, 42, /$bunfs/root/pochi[0m[0m
+error stack:
+  • [33mpochi[39m[0m[0m	searchFilesWithRipgrep[0m[0m
+	[37m$bunfs/root/pochi:463327[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async <anonymous>[0m[0m
+	[37m$bunfs/root/pochi:516831[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCall2[0m[0m
+	[37m$bunfs/root/pochi:516941[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async executeToolCallItem[0m[0m
+	[37m$bunfs/root/pochi:517333[39m[0m[0m
+  • [33mpochi[39m[0m[0m	async runToolCall[0m[0m
+	[37m$bunfs/root/pochi:517312[39m[0m[0m
+  • [33mnative[39m[0m[0m	processTicksAndRejections[0m[0m
+	[37mnative:7[39m[0m[0m[0m[0m

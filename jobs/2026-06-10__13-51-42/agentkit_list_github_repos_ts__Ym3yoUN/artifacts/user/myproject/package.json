@@ -1,0 +1,19 @@
+{
+  "name": "scalekit-github-list",
+  "version": "1.0.0",
+  "description": "List GitHub repositories using Scalekit Node SDK",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@scalekit-sdk/node": "^2.6.2",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

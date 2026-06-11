@@ -1,0 +1,79 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.2, xprocess-1.0.2
+collected 3 items
+
+tests/test_final_state.py .FF                                            [100%]
+
+=================================== FAILURES ===================================
+________________ test_logout_with_cookies_redirects_to_scalekit ________________
+
+start_app = None
+
+    def test_logout_with_cookies_redirects_to_scalekit(start_app):
+        """The /logout route must 302 to Scalekit's /oidc/logout with correct query params and clear cookies."""
+        expected_origin = _scalekit_env_origin()
+        id_token_value = "fake-id-token-zr-test"
+        cookies = {
+            "idToken": id_token_value,
+            "accessToken": "fake-access-token",
+            "refreshToken": "fake-refresh-token",
+        }
+        resp = requests.get(
+            f"{BASE_URL}/logout",
+            cookies=cookies,
+            allow_redirects=False,
+            timeout=10,
+        )
+    
+        assert resp.status_code == 302, \
+            f"GET /logout expected status 302, got {resp.status_code}. Body: {resp.text!r}"
+    
+        location = resp.headers.get("Location", "")
+        assert location, "GET /logout response is missing a Location header."
+    
+        parsed = urlparse(location)
+        actual_origin = f"{parsed.scheme}://{parsed.netloc}"
+>       assert actual_origin == expected_origin, (
+            f"Logout redirect origin mismatch. Expected {expected_origin}, "
+            f"got {actual_origin}. Full Location: {location}"
+        )
+E       AssertionError: Logout redirect origin mismatch. Expected https://tabbyml.scalekit.dev, got https://example.scalekit.com. Full Location: https://example.scalekit.com/oidc/logout?id_token_hint=fake-id-token-zr-test&post_logout_redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fgoodbye
+E       assert 'https://example.scalekit.com' == 'https://tabbyml.scalekit.dev'
+E         - https://tabbyml.scalekit.dev
+E         ?         ^ ---            ^^^
+E         + https://example.scalekit.com
+E         ?         ^^  + +          ^^^
+
+tests/test_final_state.py:94: AssertionError
+_________________ test_logout_without_cookies_still_redirects __________________
+
+start_app = None
+
+    def test_logout_without_cookies_still_redirects(start_app):
+        """If no idToken cookie is present, /logout still redirects to Scalekit's logout endpoint."""
+        expected_origin = _scalekit_env_origin()
+        resp = requests.get(
+            f"{BASE_URL}/logout",
+            allow_redirects=False,
+            timeout=10,
+        )
+>       assert resp.status_code == 302, \
+            f"GET /logout (no cookies) expected status 302, got {resp.status_code}."
+E       AssertionError: GET /logout (no cookies) expected status 302, got 400.
+E       assert 400 == 302
+E        +  where 400 = <Response [400]>.status_code
+
+tests/test_final_state.py:151: AssertionError
+==================================== PASSES ====================================
+____________________ test_goodbye_route_returns_plain_text _____________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/saaskit_logout_app$ npm start
+process 'saaskit_logout_app' started pid=1215
+saaskit_logout_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_goodbye_route_returns_plain_text
+FAILED tests/test_final_state.py::test_logout_with_cookies_redirects_to_scalekit
+FAILED tests/test_final_state.py::test_logout_without_cookies_still_redirects
+========================= 2 failed, 1 passed in 0.24s ==========================

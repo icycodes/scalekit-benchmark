@@ -1,0 +1,85 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collected 5 items
+
+tests/test_final_state.py FFFF.                                          [100%]
+
+=================================== FAILURES ===================================
+______________________ test_log_file_exists_and_non_empty ______________________
+
+    def test_log_file_exists_and_non_empty():
+>       _read_log()
+
+tests/test_final_state.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log() -> str:
+>       assert os.path.isfile(LOG_FILE), f"Log file {LOG_FILE} does not exist."
+E       AssertionError: Log file /home/user/myproject/output.log does not exist.
+E       assert False
+E        +  where False = <function isfile at 0x7ac0e0314220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x7ac0e0314220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:11: AssertionError
+_________________________ test_log_contains_repo_lines _________________________
+
+    def test_log_contains_repo_lines():
+>       content = _read_log()
+
+tests/test_final_state.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log() -> str:
+>       assert os.path.isfile(LOG_FILE), f"Log file {LOG_FILE} does not exist."
+E       AssertionError: Log file /home/user/myproject/output.log does not exist.
+E       assert False
+E        +  where False = <function isfile at 0x7ac0e0314220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x7ac0e0314220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:11: AssertionError
+______________________ test_log_total_matches_repo_lines _______________________
+
+    def test_log_total_matches_repo_lines():
+>       content = _read_log()
+
+tests/test_final_state.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log() -> str:
+>       assert os.path.isfile(LOG_FILE), f"Log file {LOG_FILE} does not exist."
+E       AssertionError: Log file /home/user/myproject/output.log does not exist.
+E       assert False
+E        +  where False = <function isfile at 0x7ac0e0314220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x7ac0e0314220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:11: AssertionError
+___________________ test_agent_repos_are_subset_of_expected ____________________
+
+    def test_agent_repos_are_subset_of_expected():
+>       content = _read_log()
+
+tests/test_final_state.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log() -> str:
+>       assert os.path.isfile(LOG_FILE), f"Log file {LOG_FILE} does not exist."
+E       AssertionError: Log file /home/user/myproject/output.log does not exist.
+E       assert False
+E        +  where False = <function isfile at 0x7ac0e0314220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x7ac0e0314220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:11: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_project_uses_scalekit_sdk
+FAILED tests/test_final_state.py::test_log_file_exists_and_non_empty - Assert...
+FAILED tests/test_final_state.py::test_log_contains_repo_lines - AssertionErr...
+FAILED tests/test_final_state.py::test_log_total_matches_repo_lines - Asserti...
+FAILED tests/test_final_state.py::test_agent_repos_are_subset_of_expected - A...
+========================= 4 failed, 1 passed in 0.03s ==========================

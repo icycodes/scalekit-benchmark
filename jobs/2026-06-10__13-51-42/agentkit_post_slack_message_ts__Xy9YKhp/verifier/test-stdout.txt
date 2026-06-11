@@ -1,0 +1,112 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collected 4 items
+
+tests/test_final_state.py .FFF                                           [100%]
+
+=================================== FAILURES ===================================
+____________________ test_log_records_expected_channel_name ____________________
+
+channel_from_log = 'social', channel_name = 'agentkit-demo-zr-xy9ykhp'
+
+    def test_log_records_expected_channel_name(channel_from_log: str, channel_name: str):
+>       assert channel_from_log == channel_name, (
+            f"Expected log to record channel name '{channel_name}', got '{channel_from_log}'."
+        )
+E       AssertionError: Expected log to record channel name 'agentkit-demo-zr-xy9ykhp', got 'social'.
+E       assert 'social' == 'agentkit-demo-zr-xy9ykhp'
+E         - agentkit-demo-zr-xy9ykhp
+E         + social
+
+tests/test_final_state.py:101: AssertionError
+________________________ test_slack_channel_was_created ________________________
+
+channel_name = 'agentkit-demo-zr-xy9ykhp'
+
+    def test_slack_channel_was_created(channel_name: str) -> None:
+>       data = slack_api_get(
+            "conversations.list?limit=1000&types=public_channel,private_channel"
+        )
+
+tests/test_final_state.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = 'conversations.list?limit=1000&types=public_channel,private_channel'
+
+    def slack_api_get(path: str) -> dict:
+        token = get_slack_token()
+        url = f"https://slack.com/api/{path}"
+        result = subprocess.run(
+            ["curl", "-sS", "-H", f"Authorization: Bearer {token}", url],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0, (
+            f"curl to {url} failed: stderr={result.stderr!r} stdout={result.stdout!r}"
+        )
+        try:
+            data = json.loads(result.stdout)
+        except json.JSONDecodeError as exc:
+            raise AssertionError(
+                f"Slack API response from {url} is not valid JSON: {exc}; "
+                f"raw response: {result.stdout!r}"
+            )
+>       assert data.get("ok") is True, f"Slack API error from {url}: {data}"
+E       AssertionError: Slack API error from https://slack.com/api/conversations.list?limit=1000&types=public_channel,private_channel: {'ok': False, 'error': 'invalid_auth'}
+E       assert False is True
+E        +  where False = <built-in method get of dict object at 0x7155a59de900>('ok')
+E        +    where <built-in method get of dict object at 0x7155a59de900> = {'error': 'invalid_auth', 'ok': False}.get
+
+tests/test_final_state.py:52: AssertionError
+________________________ test_slack_message_was_posted _________________________
+
+channel_name = 'agentkit-demo-zr-xy9ykhp'
+marker = 'scalekit-agentkit-ts zr-xy9ykhp'
+message_ts_from_log = '1781074171.704489'
+
+    def test_slack_message_was_posted(
+        channel_name: str, marker: str, message_ts_from_log: str
+    ) -> None:
+>       list_data = slack_api_get(
+            "conversations.list?limit=1000&types=public_channel,private_channel"
+        )
+
+tests/test_final_state.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = 'conversations.list?limit=1000&types=public_channel,private_channel'
+
+    def slack_api_get(path: str) -> dict:
+        token = get_slack_token()
+        url = f"https://slack.com/api/{path}"
+        result = subprocess.run(
+            ["curl", "-sS", "-H", f"Authorization: Bearer {token}", url],
+            capture_output=True,
+            text=True,
+        )
+        assert result.returncode == 0, (
+            f"curl to {url} failed: stderr={result.stderr!r} stdout={result.stdout!r}"
+        )
+        try:
+            data = json.loads(result.stdout)
+        except json.JSONDecodeError as exc:
+            raise AssertionError(
+                f"Slack API response from {url} is not valid JSON: {exc}; "
+                f"raw response: {result.stdout!r}"
+            )
+>       assert data.get("ok") is True, f"Slack API error from {url}: {data}"
+E       AssertionError: Slack API error from https://slack.com/api/conversations.list?limit=1000&types=public_channel,private_channel: {'ok': False, 'error': 'invalid_auth'}
+E       assert False is True
+E        +  where False = <built-in method get of dict object at 0x7155a5b98840>('ok')
+E        +    where <built-in method get of dict object at 0x7155a5b98840> = {'error': 'invalid_auth', 'ok': False}.get
+
+tests/test_final_state.py:52: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_log_file_exists
+FAILED tests/test_final_state.py::test_log_records_expected_channel_name - As...
+FAILED tests/test_final_state.py::test_slack_channel_was_created - AssertionE...
+FAILED tests/test_final_state.py::test_slack_message_was_posted - AssertionEr...
+========================= 3 failed, 1 passed in 2.40s ==========================

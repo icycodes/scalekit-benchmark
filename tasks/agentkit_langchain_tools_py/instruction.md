@@ -1,0 +1,43 @@
+# Enumerate Scalekit Tools Through the LangChain Adapter (Python)
+
+## Background
+Scalekit AgentKit ships native framework adapters that hand you tool objects in the exact shape your framework expects, with no manual JSON-Schema reshaping. The Python LangChain adapter (`scalekit.actions.langchain.get_tools(...)`) returns objects that can be dropped straight into a LangChain agent.
+
+In this task you will use the Scalekit Python SDK and its LangChain framework adapter to discover every GitHub tool that the test user `zealt-user01` is authorized to call through the pre-configured `github-test` connection, then persist a deterministic catalog of those tools.
+
+The Scalekit credentials (`SCALEKIT_CLIENT_ID`, `SCALEKIT_CLIENT_SECRET`, `SCALEKIT_ENV_URL`) are already present in the environment. The `github-test` connection and the `zealt-user01` connected account are already `ACTIVE`, so no OAuth flow is required.
+
+## Requirements
+- Write the program at `/home/user/myproject/run.py`.
+- The program MUST use the Scalekit Python SDK (`scalekit-sdk-python`) **and** its LangChain framework adapter — specifically `scalekit_client.actions.langchain.get_tools(...)`. It MUST NOT call `actions.tools.list_scoped_tools(...)` directly nor reshape the raw protobuf result by hand; the value of this task is exercising the adapter.
+- The returned objects MUST be native LangChain tools (i.e., instances of `langchain_core.tools.BaseTool`). Your program should rely on those attributes (`.name`, `.description`) rather than digging into the underlying Scalekit definition.
+- Use the identifier `zealt-user01` and hardcode the connection name `github-test` (do NOT introduce new environment variables for them).
+- Make sure the call surfaces every available GitHub tool (the default page size will hide tools for the larger connectors, so request enough per page).
+- Persist the resulting tool catalog as JSON and a human-readable summary as a log file.
+
+## Implementation Hints
+- Initialize the SDK with `ScalekitClient(env_url, client_id, client_secret)` and reach the adapter via `scalekit_client.actions.langchain.get_tools(...)`.
+- The adapter accepts `identifier`, `connection_names`, and `page_size` arguments. Pick a `page_size` large enough to cover every GitHub tool in a single page.
+- Read each tool's `name` and `description` via the LangChain `BaseTool` attributes; do not call the tool, do not invoke an LLM.
+- Write the catalog file with `json.dumps(catalog, indent=2, sort_keys=True)` so the output is deterministic and easy to inspect.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Script path: /home/user/myproject/run.py
+- Log file: /home/user/myproject/output.log
+- Catalog file: /home/user/myproject/tools.json
+- Ensure the script is actually executed against the live Scalekit environment so that the catalog and log artifacts exist after the run (no mocks, no stubs, no direct HTTP calls to the Scalekit API).
+- `tools.json` MUST be a valid JSON object with the top-level keys `connection`, `identifier`, `count`, and `tools`:
+  - `connection` MUST equal `"github-test"`.
+  - `identifier` MUST equal `"zealt-user01"`.
+  - `count` MUST be an integer equal to the length of `tools`.
+  - `tools` MUST be a JSON array of objects, each containing the fields `name` (string) and `description` (string), sorted in ascending order by `name`.
+- Every tool `name` in `tools` MUST start with the prefix `github_`.
+- The `tools` array MUST contain more than 5 distinct entries.
+- `output.log` MUST contain on separate lines:
+  - `Adapter: langchain`
+  - `Connection: github-test`
+  - `Identifier: zealt-user01`
+  - `Tool count: <count>`
+  where `<count>` is the same integer as `count` in `tools.json`.
+

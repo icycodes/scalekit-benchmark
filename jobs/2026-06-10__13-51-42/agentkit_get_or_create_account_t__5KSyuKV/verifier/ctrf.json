@@ -1,0 +1,95 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-06-10T06:37:02.613132+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 7,
+            "passed": 6,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1781073418865,
+            "stop": 1781073422613
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_npm_start_succeeds",
+                "status": "passed",
+                "duration": 3392,
+                "start": 1781073418879,
+                "stop": 1781073422271,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_exists",
+                "status": "passed",
+                "duration": 2,
+                "start": 1781073422272,
+                "stop": 1781073422274,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_status_active",
+                "status": "passed",
+                "duration": 2,
+                "start": 1781073422274,
+                "stop": 1781073422276,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_connection_name",
+                "status": "passed",
+                "duration": 2,
+                "start": 1781073422277,
+                "stop": 1781073422279,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_identifier",
+                "status": "passed",
+                "duration": 2,
+                "start": 1781073422280,
+                "stop": 1781073422282,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_connected_account_id",
+                "status": "passed",
+                "duration": 2,
+                "start": 1781073422282,
+                "stop": 1781073422284,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_account_active_via_sdk",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 325,
+                "start": 1781073422285,
+                "stop": 1781073422610,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "npm_start_result = CompletedProcess(args=['npm', 'run', 'start'], returncode=0, stdout='\\n> scalekit-agentkit-verifier@1.0.0 start\\n> tsc...ACTIVE\\nConnection: github-test\\nIdentifier: zealt-user01\\nConnected Account ID: ca_127046882881963526\\n\\n', stderr='')\n\n    def test_account_active_via_sdk(npm_start_result):\n        \"\"\"Independently verify against Scalekit using the Python SDK.\"\"\"\n        from scalekit import ScalekitClient\n>       from scalekit.v1.actions.actions_pb2 import GetOrCreateConnectedAccountRequest\nE       ModuleNotFoundError: No module named 'scalekit.v1.actions'\n\ntests/test_final_state.py:86: ModuleNotFoundError",
+                "message": "The test failed in the call phase"
+            }
+        ]
+    }
+}

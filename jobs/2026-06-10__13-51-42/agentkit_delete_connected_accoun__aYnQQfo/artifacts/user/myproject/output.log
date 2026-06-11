@@ -1,0 +1,4 @@
+Created account: connection=github-test identifier=zealt-cleanup-zr-aynqqfo status=PENDING_AUTH
+Listed before delete: present=true identifier=zealt-cleanup-zr-aynqqfo
+Deleted account: connection=github-test identifier=zealt-cleanup-zr-aynqqfo
+Listed after delete: present=false identifier=zealt-cleanup-zr-aynqqfo
