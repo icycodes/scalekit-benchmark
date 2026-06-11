@@ -1,7 +1,0 @@
-{
-  "library_name": "Scalekit",
-  "task_name": "agentkit_create_github_branch_ts",
-  "complexity_level": "multi-step sequential command set",
-  "research_plan_path": "plan.md",
-  "output_dir": "tasks/"
-}

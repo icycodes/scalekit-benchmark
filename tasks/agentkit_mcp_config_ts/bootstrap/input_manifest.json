@@ -1,7 +1,0 @@
-{
-  "library_name": "scalekit",
-  "task_name": "agentkit_mcp_config_ts",
-  "complexity_level": "multi-step sequential command set",
-  "research_plan_path": "plan.md",
-  "output_dir": "tasks/"
-}

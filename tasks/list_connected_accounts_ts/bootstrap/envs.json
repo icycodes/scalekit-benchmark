@@ -1,4 +1,0 @@
-{
-    "task": ["SCALEKIT_ENV_URL", "SCALEKIT_CLIENT_ID", "SCALEKIT_CLIENT_SECRET"],
-    "verifier": []
-}

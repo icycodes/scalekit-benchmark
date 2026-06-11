@@ -1,7 +1,0 @@
-{
-  "library_name": "Scalekit",
-  "task_name": "agentkit_post_slack_message_py",
-  "complexity_level": "simple set of 2-5 commands",
-  "research_plan_path": "plan.md",
-  "output_dir": "tasks/"
-}
