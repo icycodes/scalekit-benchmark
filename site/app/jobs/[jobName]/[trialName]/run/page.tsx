@@ -127,7 +127,7 @@ function buildTaskDirUrl(taskName: string) {
 }
 
 function getServerBaseUrl() {
-  return process.env.CLIPS_BASE_URL || 'https://fletch.getpochi.com';
+  return process.env.CLIPS_BASE_URL || 'https://fletch.codes-icy.workers.dev';
 }
 
 function getGithubOwnerRepo(): string {
